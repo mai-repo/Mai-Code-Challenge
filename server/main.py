@@ -1,21 +1,22 @@
-from flask import flask, jsonify, request
+from flask import Flask, jsonify, request
 from GPT import generateCodeChallenge, evaluateProblem
+import json
 
 app = Flask(__name__)
 
-@app.get("/generateChallenge", methods=["GET"])
+@app.get("/generateChallenge")
 def getChallenge():
     try:
         codeChallenge = generateCodeChallenge()
         if codeChallenge:
-            response = jsonify(codeChallenge), 200
+            response = json.loads(codeChallenge), 200
             return response
         else:
             return jsonify({"error": "Failed to generate challenge"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.post("/evaluateAnswer", methods=["POST"])
+@app.post("/evaluateAnswer")
 def evaluateAnswer():
     try:
         data = request.get_json()
@@ -26,10 +27,11 @@ def evaluateAnswer():
             return jsonify({"error": "Missing either challenge or answer"})
 
         evaluation = evaluateProblem(challenge, answer)
-        return jsonify(evaluation), 200
+        return json.loads(evaluation), 200
     except Exception as e:
         return jsonify ({"error": str(e) }), 500
 
+app.run(host="0.0.0.0", port=80)
 
 
 
