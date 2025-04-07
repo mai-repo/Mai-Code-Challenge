@@ -1,2 +1,4 @@
 from openai import OpenAI
-client = OpenAI()
+from dotenv import load_dotenv
+
+load_dotenv()
