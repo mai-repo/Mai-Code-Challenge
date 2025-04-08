@@ -28,8 +28,7 @@ def getChallenge():
     try:
         codeChallenge = generateCodeChallenge()
         if codeChallenge:
-            response = json.loads(codeChallenge), 200
-            return response
+            return jsonify(codeChallenge), 200
         else:
             return jsonify({"error": "Failed to generate challenge"}), 400
     except Exception as e:
@@ -43,16 +42,15 @@ def evaluateAnswer():
         answer = data.get("answer")
 
         if not challenge or not answer:
-            return jsonify({"error": "Missing either challenge or answer"})
+            return jsonify({"error": "Missing either challenge or answer"}), 400
 
         evaluation = evaluateProblem(challenge, answer)
-        return json.loads(evaluation), 200
+        return jsonify(evaluation), 200
     except Exception as e:
-        return jsonify ({"error": str(e) }), 500
+        return jsonify({"error": str(e)}), 500
 
-
-
-app.run(host="0.0.0.0", port=8080)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
 
 
 
