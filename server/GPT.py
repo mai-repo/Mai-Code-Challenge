@@ -1,5 +1,6 @@
 from openai import OpenAI
 from dotenv import load_dotenv
+import json
 import os
 
 load_dotenv()
@@ -46,7 +47,7 @@ def generateCodeChallenge():
 
     codeChallenge = completion.choices[0].message.content
     print(codeChallenge)
-    return codeChallenge
+    return json.loads(codeChallenge)
 
 def evaluateProblem(challenge, answer):
 
@@ -87,4 +88,4 @@ def evaluateProblem(challenge, answer):
     )
     evaluation = completion.choices[0].message.content
     print (evaluation)
-    return evaluation
+    return json.loads(evaluation)
