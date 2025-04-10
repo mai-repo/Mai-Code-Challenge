@@ -1,9 +1,11 @@
 from flask import Flask, jsonify, request
 from GPT import generateCodeChallenge, evaluateProblem
-from questionsTable import questions
+from questions import questions
+from users import users
 
 app = Flask(__name__)
 app.register_blueprint(questions)
+app.register_blueprint(users)
 
 @app.get("/generateChallenge")
 def getChallenge():
