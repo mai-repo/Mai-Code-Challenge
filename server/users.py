@@ -34,8 +34,8 @@ def getUser():
         cursor.close()
         connection.close()
 
-@users.put('/updateUser')
-def updateUser():
+@users.put('/updateUsername')
+def updateUsername():
     data = request.get_json()
     user_id = data.get("user_id")
     username = data.get("username").lower()
@@ -64,5 +64,33 @@ def updateUser():
         cursor.close()
         connection.close()
 
+@users.put('/updatePassword')
+def updatePassword ():
+    data = request.get_json()
+    password = data.get("password").lower()
+    user_id = data.get("user_id")
 
+    if not password:
+        return jsonify({"error": "Please input a password."}), 400
+
+    try:
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        UPDATE USERS
+                        SET PASSWORD = %s
+                        WHERE ID = %s
+                        ''', (password, user_id))
+        connection.commit()
+
+        if cursor.rowcount == 0:
+            return jsonify({"error": "No user found to update."}), 404
+        return jsonify({"message": "User password updated successfully."})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        connection.close()
 
