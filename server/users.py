@@ -23,11 +23,46 @@ def getUser():
                     ''', (user_id))
 
         response = cursor.fetchone()
-        
+
         if response:
             return jsonify({"name": response[0], "email": response[1]})
         else:
             return jsonify({"error": "No user found."}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        connection.close()
+
+@users.put('/updateUser')
+def updateUser():
+    data = request.get_json()
+    user_id = data.get("user_id")
+    username = data.get("username").lower()
+
+    if not all([user_id, username]):
+        return jsonify({"error":"Missing field information"}), 400
+
+    try:
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        UPDATE USERS
+                        SET NAME = %s
+                        WHERE ID = %s
+                        ''', (username, user_id))
+        connection.commit()
+
+        if cursor.rowcount == 0:
+            return jsonify({"error": "No user found to update."}), 404
+
+        return jsonify({"message": "User updated successfully."})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        connection.close()
+
+
 
