@@ -90,8 +90,8 @@ def updateRejected():
         cursor.execute('''
                         UPDATE QUESTIONS
                         SET NAME = %s
-                        WHERE ID = %s
-                        ''', (name, question_id))
+                        WHERE ID = %s and USER_ID = %s
+                        ''', (name, question_id, user_id))
         connection.commit()
         return jsonify({"message": "Successfully updated name."}), 200
     except Exception as e:
