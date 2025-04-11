@@ -28,5 +28,28 @@ def addFavorite():
             cursor.close()
             connection.close()
 
+@favorite.get('/getFavorite')
+def getFavorite():
+    data = request.get_json()
+    user_id = data.get('user_id')
 
+    if not user_id:
+        return jsonify({"error": "Missing field information"}), 400
+
+    try:
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        SELECT * FROM FAVORITES
+                        WHERE USER_ID = %s
+                       ''', (user_id,))
+
+        response = cursor.fetchall()
+        return jsonify(response), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        connection.close()
 
