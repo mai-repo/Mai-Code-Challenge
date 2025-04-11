@@ -48,9 +48,9 @@ Submit Solution – Submits the code and runs it against predefined test cases.
     source .venv/bin/activate
     ```
 
-## Setup OpenAI API Key
+## Setup API Keys
 1. Create a `.env` file in the server folder
-2. Add your OpenAI API Key:
+2. Add your API Keys:
    ```
    OPENAI_API_KEY=your-api-key
    DATABASE_HOST=
@@ -58,7 +58,20 @@ Submit Solution – Submits the code and runs it against predefined test cases.
    DATABASE_NAME=
    DATABASE_USER=
    DATABASE_PASSWORD=
+   BACKEND_KEY=
    ```
+
+## Set Up Google Applications and Keys
+
+Follow the instructions to set up Google applications and obtain the necessary keys for authentication.
+
+### Google Application Setup and `.env` Configuration
+
+#### 1. Create a Google Cloud Project
+- Go to the [Google Cloud Console](https://console.cloud.google.com/).
+- Create a new project and enable the following APIs:
+  - Google Identity Services API
+  - reCAPTCHA API
 
 ## Create local Database
 

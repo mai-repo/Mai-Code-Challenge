@@ -1,4 +1,5 @@
 from db_connection import connectDatabase
+from user_question_status import addStatus, updateStatus
 from flask import Blueprint, jsonify, request
 import logging
 
@@ -47,13 +48,18 @@ def addProblem():
         cursor.execute('''
                         INSERT INTO QUESTIONS (USER_ID, NAME, PROBLEM, IS_CORRECT)
                         VALUES (%s, %s, %s, %s)
+                        RETURNING id
                     ''', (user_id, name, problem, is_correct))
+        question_id = cursor.fetchone()[0]
         connection.commit()
+
+        status = "COMPLETED" if is_correct == True else "REJECTED"
+        addStatus(user_id, question_id, status)
+
         return jsonify({"message": "Problem added successfully"}), 201
     except Exception as e:
         return jsonify({"error":str(e)}), 500
     finally:
-        if cursor and connection:
             cursor.close()
             connection.close()
 
@@ -61,17 +67,18 @@ def addProblem():
 def updateProblem():
     data = request.get_json()
 
-    id = data.get("questions_id")
+    id = data.get("id")
     user_id = data.get("user_id")
-    name = data.get("name").lower()
+    name = data.get("name")
     is_correct = data.get("is_correct")
-
-    if not all([id, user_id, name, is_correct]):
-        return jsonify({"error": "Missing field information"}), 400
 
     try:
         connection = connectDatabase()
         cursor = connection.cursor()
+
+        cursor.execute('''
+                        SELECT
+                       ''')
 
         cursor.execute('''
                         UPDATE QUESTIONS
@@ -79,6 +86,10 @@ def updateProblem():
                         WHERE ID = %s AND USER_ID = %s
                     ''', (name, is_correct, id, user_id))
         connection.commit()
+
+        status = "COMPLETED" if is_correct == True else "REJECTED"
+        updateStatus(user_id, id, status)
+
         return jsonify({"message": "Problem updated successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
