@@ -1,5 +1,8 @@
 from db_connection import connectDatabase
 from flask import jsonify, Blueprint, request
+import logging
+
+logger = logging.getLogger(__name__)
 
 favorite = Blueprint("favorite", __name__)
 
