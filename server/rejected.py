@@ -100,3 +100,28 @@ def updateRejected():
         cursor.close()
         connection.close()
 
+@rejected.delete('/deleteRejected')
+def deleteRejected():
+    data = request.get_json()
+    user_id = data.get("user_id")
+    rejected_id = data.get("rejected_id")
+
+    if not all ([user_id, rejected_id]):
+        return jsonify({"error": "Missing field information."})
+
+    try:
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        DELETE FROM REJECTED
+                        WHERE ID = %s and USER_ID = %s
+                        ''', (rejected_id, user_id))
+        connection.commit()
+        return jsonify({"message": "Successfully deleted problem"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        connection.close()
+
