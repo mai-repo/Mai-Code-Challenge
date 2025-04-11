@@ -42,7 +42,6 @@ def getCompleted():
         return jsonify({"error": str(e)}), 500
 
     finally:
-        if connection:
             cursor.close()
             connection.close()
 
@@ -68,6 +67,9 @@ def addCompleted():
         return jsonify({"message": "Completed Problem added successfully"}), 201
     except Exception as e:
         return jsonify({"error": str(e)})
+    finally:
+            cursor.close()
+            connection.close()
 
 @completed.put('/updateCompleted')
 def updateCompleted():
@@ -101,3 +103,31 @@ def updateCompleted():
         return jsonify({"error": "Successfully updating name."})
     except Exception as e:
         return jsonify({"error": str(e)})
+    finally:
+        cursor.close()
+        connection.close()
+
+@completed.delete('/deleteCompleted')
+def deleteCompleted():
+    data = request.get_json()
+    user_id = data.get('user_id')
+    completed_id = data.get('completed_id')
+
+    if not all([user_id, completed_id]):
+        return jsonify({"error": "Missing field information."})
+
+    try:
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        DELETE FROM COMPLETED
+                        WHERE ID = %s and USER_ID = %s
+                       ''', (completed_id, user_id))
+        connection.commit()
+        return jsonify({"message": "Successfully deleted problem"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        connection.close()
