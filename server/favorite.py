@@ -53,3 +53,38 @@ def getFavorite():
         cursor.close()
         connection.close()
 
+@favorite.put('/updateFavorite')
+def updateFavorite():
+    data = request.get_json()
+    user_id = data.get('user_id')
+    favorite_id = data.get('favorite_id')
+    name = data.get('name')
+
+    if not all([user_id, favorite_id, name]):
+        return jsonify({"error": "Missing field information."}), 400
+
+    try:
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        SELECT FAVORITE_PROBLEMS FROM FAVORITES
+                        WHERE ID = %s AND USER_ID = %s
+                        ''', (favorite_id, user_id))
+        result = cursor.fetchone()
+        question_id = result[0]
+
+        cursor.execute('''
+                        UPDATE QUESTIONS
+                        SET NAME = %s
+                        WHERE ID = %s and USER_ID = %s
+                        ''', (name, question_id, user_id))
+        connection.commit()
+        return jsonify({"message": "Favorite updated successfully."}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        connection.close()
+
+
