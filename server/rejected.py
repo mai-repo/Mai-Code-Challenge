@@ -65,3 +65,38 @@ def addRejected():
         cursor.close()
         connection.close()
 
+@rejected.put('/updateRejected')
+def updateRejected():
+    data = request.get_json()
+    user_id = data.get("user_id")
+    rejected_id = data.get("rejected_id")
+    name = data.get('name').lower()
+
+    if not all ([user_id, rejected_id, name]):
+        return jsonify({"error":"Missing field information"}), 400
+
+    try:
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        SELECT REJECTED_PROBLEMS
+                        FROM REJECTED
+                        WHERE ID = %s and USER_ID = %s
+                        ''', (rejected_id, user_id))
+        result = cursor.fetchone()
+        question_id = result[0]
+
+        cursor.execute('''
+                        UPDATE QUESTIONS
+                        SET NAME = %s
+                        WHERE ID = %s
+                        ''', (name, question_id))
+        connection.commit()
+        return jsonify({"message": "Successfully updated name."}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        connection.close()
+
