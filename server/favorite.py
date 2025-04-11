@@ -87,4 +87,29 @@ def updateFavorite():
         cursor.close()
         connection.close()
 
+@favorite.delete('/deleteFavorite')
+def deleteFavorite():
+    data = request.get_json()
+    user_id = data.get('user_id')
+    favorite_id = data.get('favorite_id')
+
+    if not all ([user_id, favorite_id]):
+        return jsonify({"error": "Missing field information."}), 400
+
+    try:
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        DELETE FROM FAVORITES
+                        WHERE ID = %s AND USER_ID = %s
+                        ''', (favorite_id, user_id))
+
+        connection.commit()
+        return jsonify({"message": "Favorite deleted successfully."}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        connection.close()
 
