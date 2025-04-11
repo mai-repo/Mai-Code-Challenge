@@ -65,7 +65,7 @@ def updateUsername():
         connection.close()
 
 @users.put('/updatePassword')
-def updatePassword ():
+def updatePassword():
     data = request.get_json()
     password = data.get("password").lower()
     user_id = data.get("user_id")
@@ -88,6 +88,36 @@ def updatePassword ():
             return jsonify({"error": "No user found to update."}), 404
         return jsonify({"message": "User password updated successfully."})
 
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        connection.close()
+
+
+@users.delete('/deleteUser')
+def deleteUser():
+    data = request.get_json()
+    user_id = data.get("user_id")
+
+    if not user_id:
+        return jsonify({"error": "Missing user id"}), 400
+
+    try:
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        DELETE
+                        FROM USERS
+                        WHERE ID = %s
+                       ''', (user_id,))
+        connection.commit()
+
+        if cursor.rowcount == 0:
+            return jsonify({"error": "No user found to delete."}), 404
+
+        return jsonify({"message": "User deleted successfully."})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     finally:
