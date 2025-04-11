@@ -35,7 +35,7 @@ def addProblem():
     problem = data.get("problem").lower()
     is_correct = data.get("is_correct")
 
-    if not all([user_id, name, problem, is_correct]):
+    if None in([user_id, name, problem, is_correct]):
         return jsonify({"error": "Missing field information"})
     try:
         connection = connectDatabase()
@@ -50,8 +50,9 @@ def addProblem():
     except Exception as e:
         return jsonify({"error":str(e)}), 500
     finally:
-        cursor.close()
-        connection.close()
+        if cursor and connection:
+            cursor.close()
+            connection.close()
 
 @questions.put("/updateProblem")
 def updateProblem():
