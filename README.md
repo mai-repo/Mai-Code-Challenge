@@ -61,6 +61,18 @@ Submit Solution – Submits the code and runs it against predefined test cases.
    BACKEND_KEY=
    ```
 
+## Set Up Google Applications and Keys
+
+Follow the instructions to set up Google applications and obtain the necessary keys for authentication.
+
+### Google Application Setup and `.env` Configuration
+
+#### 1. Create a Google Cloud Project
+- Go to the [Google Cloud Console](https://console.cloud.google.com/).
+- Create a new project and enable the following APIs:
+  - Google Identity Services API
+  - reCAPTCHA API
+
 ## Create local Database
 
 1. Log in to PostgreSQL and create the codeChallenge database:
