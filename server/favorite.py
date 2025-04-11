@@ -1,0 +1,118 @@
+from db_connection import connectDatabase
+from flask import jsonify, Blueprint, request
+import logging
+
+logger = logging.getLogger(__name__)
+
+favorite = Blueprint("favorite", __name__)
+
+@favorite.post("/addFavorite")
+def addFavorite():
+    data = request.get_json()
+    user_id = data.get('user_id')
+    favorite_problems = data.get('favorite_problems')
+
+    if not all ([user_id, favorite_problems]):
+        return jsonify({"error": "Missing field information."}), 400
+
+    try:
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        INSERT INTO FAVORITES (USER_ID, FAVORITE_PROBLEMS)
+                        VALUES(%s, %s)
+                       ''', (user_id, favorite_problems))
+        connection.commit()
+        return jsonify({"message": "Favorite added successfully."}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+            cursor.close()
+            connection.close()
+
+@favorite.get('/getFavorite')
+def getFavorite():
+    data = request.get_json()
+    user_id = data.get('user_id')
+
+    if not user_id:
+        return jsonify({"error": "Missing field information"}), 400
+
+    try:
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        SELECT * FROM FAVORITES
+                        WHERE USER_ID = %s
+                       ''', (user_id,))
+
+        response = cursor.fetchall()
+        return jsonify(response), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        connection.close()
+
+@favorite.put('/updateFavorite')
+def updateFavorite():
+    data = request.get_json()
+    user_id = data.get('user_id')
+    favorite_id = data.get('favorite_id')
+    name = data.get('name')
+
+    if not all([user_id, favorite_id, name]):
+        return jsonify({"error": "Missing field information."}), 400
+
+    try:
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        SELECT FAVORITE_PROBLEMS FROM FAVORITES
+                        WHERE ID = %s AND USER_ID = %s
+                        ''', (favorite_id, user_id))
+        result = cursor.fetchone()
+        question_id = result[0]
+
+        cursor.execute('''
+                        UPDATE QUESTIONS
+                        SET NAME = %s
+                        WHERE ID = %s and USER_ID = %s
+                        ''', (name, question_id, user_id))
+        connection.commit()
+        return jsonify({"message": "Favorite updated successfully."}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        connection.close()
+
+@favorite.delete('/deleteFavorite')
+def deleteFavorite():
+    data = request.get_json()
+    user_id = data.get('user_id')
+    favorite_id = data.get('favorite_id')
+
+    if not all ([user_id, favorite_id]):
+        return jsonify({"error": "Missing field information."}), 400
+
+    try:
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        DELETE FROM FAVORITES
+                        WHERE ID = %s AND USER_ID = %s
+                        ''', (favorite_id, user_id))
+
+        connection.commit()
+        return jsonify({"message": "Favorite deleted successfully."}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        connection.close()
+

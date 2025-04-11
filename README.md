@@ -53,6 +53,11 @@ Submit Solution – Submits the code and runs it against predefined test cases.
 2. Add your OpenAI API Key:
    ```
    OPENAI_API_KEY=your-api-key
+   DATABASE_HOST=
+   DATABASE_PORT=
+   DATABASE_NAME=
+   DATABASE_USER=
+   DATABASE_PASSWORD=
    ```
 
 ## Create local Database
