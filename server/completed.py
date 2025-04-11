@@ -68,3 +68,36 @@ def addCompleted():
         return jsonify({"message": "Completed Problem added successfully"}), 201
     except Exception as e:
         return jsonify({"error": str(e)})
+
+@completed.put('/updateCompleted')
+def updateCompleted():
+    data = request.get_json()
+    user_id = data.get('user_id')
+    name = data.get('name')
+    completed_id = data.get('completed_id')
+
+    if not all([user_id, name, completed_id]):
+        return jsonify({"error": "Missing field information."})
+
+    try:
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        SELECT ID
+                        FROM COMPLETED
+                        WHERE ID = %s and USER_ID = %s
+                       ''', (completed_id, user_id))
+
+        result = cursor.fetchone()
+        questions_id = result[0]
+
+        cursor.execute('''
+                        UPDATE QUESTIONS
+                        SET NAME = %s
+                        WHERE USER_ID = %s and ID = %s
+                       ''', (name, user_id, questions_id))
+        connection.commit()
+        return jsonify({"error": "Successfully updating name."})
+    except Exception as e:
+        return jsonify({"error": str(e)})
