@@ -1,5 +1,8 @@
 from db_connection import connectDatabase
 from flask import Blueprint, jsonify, request
+import logging
+
+logger = logging.getLogger(__name__)
 
 completed = Blueprint("completed", __name__)
 
