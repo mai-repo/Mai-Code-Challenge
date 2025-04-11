@@ -48,9 +48,9 @@ Submit Solution – Submits the code and runs it against predefined test cases.
     source .venv/bin/activate
     ```
 
-## Setup OpenAI API Key
+## Setup API Keys
 1. Create a `.env` file in the server folder
-2. Add your OpenAI API Key:
+2. Add your API Keys:
    ```
    OPENAI_API_KEY=your-api-key
    DATABASE_HOST=
@@ -58,6 +58,7 @@ Submit Solution – Submits the code and runs it against predefined test cases.
    DATABASE_NAME=
    DATABASE_USER=
    DATABASE_PASSWORD=
+   BACKEND_KEY=
    ```
 
 ## Create local Database
