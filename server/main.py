@@ -30,7 +30,7 @@ def evaluateAnswer():
         answer = data.get("answer")
 
         if not challenge or not answer:
-            return jsonify({"error": "Missing either challenge or answer"}), 400
+            return jsonify({"message": "Missing either challenge or answer"}), 400
 
         evaluation = evaluateProblem(challenge, answer)
         return jsonify(evaluation), 200
