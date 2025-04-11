@@ -3,11 +3,13 @@ from GPT import generateCodeChallenge, evaluateProblem
 from questions import questions
 from users import users
 from rejected import rejected
+from completed import completed
 
 app = Flask(__name__)
 app.register_blueprint(questions)
 app.register_blueprint(users)
 app.register_blueprint(rejected)
+app.register_blueprint(completed)
 
 @app.get("/generateChallenge")
 def getChallenge():
