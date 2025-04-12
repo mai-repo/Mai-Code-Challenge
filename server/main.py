@@ -31,8 +31,12 @@ limiter = Limiter(
 load_dotenv()
 BACKEND_KEY = os.getenv("BACKEND_KEY")
 
+@app.route("/")
+def index():
+    return jsonify({"message": "Welcome to the Code Challenge API!"}), 200
+
 @app.get("/generateChallenge")
-@limiter.limit("10+ per minute")
+@limiter.limit("10 per minute")
 def getChallenge():
     try:
         codeChallenge = generateCodeChallenge()
