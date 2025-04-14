@@ -170,4 +170,4 @@ def searchCompleted():
         
         return jsonify({"error": "No search found."}), 404
     except Exception as e:
-        return jsonify({"error": str(e)})
+        return jsonify({"error": str(e)}), 500
