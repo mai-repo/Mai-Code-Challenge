@@ -63,7 +63,7 @@ def evaluateAnswer():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route('/verifyUser', methods=['POST'])
+@app.post('/verifyUser')
 def verify_user():
     try:
         data = request.get_json()
@@ -85,7 +85,7 @@ def verify_user():
             return jsonify({"message":'Failed to verify reCAPTCHA.'}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
+    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5432)
 
