@@ -134,7 +134,7 @@ def searchFavorite():
                         ''', (user_id,))
         favorite_problems = cursor.fetchall()
 
-        problem_ids = [[row[0]] for row in favorite_problems]
+        problem_ids = [row[0] for row in favorite_problems]
 
         cursor.execute('''
             SELECT *
