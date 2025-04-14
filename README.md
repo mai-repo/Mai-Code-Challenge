@@ -93,3 +93,23 @@ Follow the instructions to set up Google applications and obtain the necessary k
    ```bash
    \i database.sql
    ```
+
+## Firebase Setup Instructions
+
+## Step 1: Obtain the Firebase JSON File
+1. Go to the [Firebase Console](https://console.firebase.google.com/).
+2. Select your project.
+3. Navigate to **Project Settings** (gear icon in the top left).
+4. Under the **Service Accounts** tab, click **Generate new private key**.
+5. Download the JSON file and save it as `firebase.json` in the `server` directory of your project.
+
+## Step 2: Add Firebase Authentication
+1. In the Firebase Console, go to the **Authentication** section.
+2. Enable the desired sign-in methods (e.g., Email/Password).
+3. Ensure the `firebase.json` file is correctly placed in the `server` directory.
+
+## Step 3: Secure the Firebase JSON File
+1. Add `firebase.json` to your `.gitignore` file to prevent it from being committed to version control:
+   ```
+   firebase.json
+   ```
