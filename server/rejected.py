@@ -162,4 +162,4 @@ def searchRejected():
                 return jsonify({"id": question[0], "name": question[2]}), 200
         return jsonify({"error": "No search found."}), 404
     except Exception as e:
-        jsonify({"error": str(e)})
+        return jsonify({"error": str(e)}), 500
