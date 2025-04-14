@@ -160,7 +160,6 @@ def searchRejected():
         for question in questions:
             if search_term == question[2]:
                 return jsonify({"id": question[0], "name": question[2]}), 200
-            else:
-                return jsonify({"error": "No search found."})
+        return jsonify({"error": "No search found."}), 404
     except Exception as e:
         jsonify({"error": str(e)})
