@@ -74,17 +74,14 @@ def updateUsername():
 def updatePassword():
     data = request.get_json()
     uid = data.get("uid")
-    password = data.get("password")
+    email = data.get("email")
 
-    if not all([uid, password]):
+    if not all([uid, email]):
         return jsonify({"error": "Missing field information."}), 400
 
     try:
-        auth.update_user(
-            uid,
-            password=password
-        )
-        return jsonify({"message": "Password updated successfully", "password": password}), 200
+        link = auth.generate_password_reset_link(email)
+        return jsonify({"reset_link": link}), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
