@@ -134,3 +134,40 @@ def deleteCompleted():
     finally:
         cursor.close()
         connection.close()
+
+
+@completed.get('/searchCompleted')
+def searchCompleted():
+    data = request.get_json()
+    user_id = data.get("user_id")
+    search_term = data.get("search_term").lower()
+
+    try:
+
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        SELECT COMPLETED_PROBLEMS
+                        FROM COMPLETED
+                        WHERE USER_ID = %s
+                        ''', (user_id,))
+        completed_problems = cursor.fetchall()
+
+        problem_ids = [[row[0]] for row in completed_problems]
+
+        cursor.execute('''
+            SELECT *
+            FROM QUESTIONS
+            WHERE ID = ANY(%s)
+            ''', (problem_ids,))
+
+        questions = cursor.fetchall()
+
+        for question in questions:
+            if search_term == question[2]:
+                return jsonify({"id": question[0], "name": question[2]}), 200
+            else:
+                return jsonify({"error": "No search found."})
+    except Exception as e:
+        jsonify({"error": str(e)})
