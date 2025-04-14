@@ -154,7 +154,7 @@ def searchCompleted():
                         ''', (user_id,))
         completed_problems = cursor.fetchall()
 
-        problem_ids = [[row[0]] for row in completed_problems]
+        problem_ids = [row[0] for row in completed_problems]
 
         cursor.execute('''
             SELECT *
