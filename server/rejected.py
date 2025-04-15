@@ -25,7 +25,7 @@ def getRejected():
                         ''', (user_id,))
         rejected_problems = cursor.fetchall()
 
-        problem_ids = [[row[0]] for row in rejected_problems]
+        problem_ids = [row[0] for row in rejected_problems]
 
 
         cursor.execute('''
@@ -128,3 +128,38 @@ def deleteRejected():
         cursor.close()
         connection.close()
 
+@rejected.get('/searchRejected')
+def searchRejected():
+    data = request.get_json()
+    user_id = data.get("user_id")
+    search_term = data.get("search_term").lower()
+
+    try:
+
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        SELECT REJECTED_PROBLEMS
+                        FROM REJECTED
+                        WHERE USER_ID = %s
+                        ''', (user_id,))
+        rejected_problems = cursor.fetchall()
+
+        problem_ids = [row[0] for row in rejected_problems]
+
+
+        cursor.execute('''
+            SELECT *
+            FROM QUESTIONS
+            WHERE ID = ANY(%s)
+            ''', (problem_ids,))
+
+        questions = cursor.fetchall()
+
+        for question in questions:
+            if search_term == question[2]:
+                return jsonify({"id": question[0], "name": question[2]}), 200
+        return jsonify({"error": "No search found."}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

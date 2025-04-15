@@ -9,11 +9,13 @@ import requests
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from dotenv import load_dotenv
+from flask_cors import CORS
 import os
 import logging
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
 
 app = Flask(__name__)
 app.register_blueprint(questions)
@@ -21,6 +23,8 @@ app.register_blueprint(users)
 app.register_blueprint(rejected)
 app.register_blueprint(completed)
 app.register_blueprint(favorite)
+
+CORS(app, resources={r"/login": {"origins": "*"}})
 
 limiter = Limiter(
     get_remote_address,
@@ -31,8 +35,12 @@ limiter = Limiter(
 load_dotenv()
 BACKEND_KEY = os.getenv("BACKEND_KEY")
 
+@app.route("/")
+def index():
+    return jsonify({"message": "Welcome to the Code Challenge API!"}), 200
+
 @app.get("/generateChallenge")
-@limiter.limit("10+ per minute")
+@limiter.limit("10 per minute")
 def getChallenge():
     try:
         codeChallenge = generateCodeChallenge()
@@ -59,7 +67,7 @@ def evaluateAnswer():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route('/verifyUser', methods=['POST'])
+@app.post('/verifyUser')
 def verify_user():
     try:
         data = request.get_json()

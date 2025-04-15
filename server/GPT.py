@@ -23,7 +23,6 @@ def generateCodeChallenge():
 
                     Here’s an example of how the response should be structured in JSON format:
 
-                    ```json
                     {
                     "Challenge": "Write a function that takes in a list of integers and returns a new list with only the even numbers from the original list.",
                     "Name": "Filter Even Numbers - Array",
@@ -37,8 +36,8 @@ def generateCodeChallenge():
                         {"test_case": "evenNumbers([]), expected: []"}
                     ]
                     }
-                    ```
-                    Please ensure that the generated JSON file.
+
+                    Please ensure that the generated JSON file. Return only raw JSON, no markdown, no preamble, no explanation
 
                 """
             }
