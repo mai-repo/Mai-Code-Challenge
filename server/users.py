@@ -146,3 +146,39 @@ def createUser():
     finally:
         cursor.close()
         connection.close()
+
+@users.post("/login")
+def login():
+
+    id_token = request.headers.get("Authorization").split(" ")[1]
+
+    if not id_token:
+        return jsonify({"error": "Missing ID token"}), 401
+
+    try:
+        decoded_token = auth.verify_id_token(id_token)
+        uid = decoded_token['uid']
+
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                        SELECT * FROM USERS
+                        WHERE UID = %s
+                       ''', (uid,))
+
+        user = cursor.fetchone()
+        if user:
+            return jsonify({
+                "id": user[0],
+                "name": user[1],
+                "uid": uid
+            }), 200
+        else:
+            return jsonify({"error": "User not found in database."}), 404
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 401
+    finally:
+        cursor.close()
+        connection.close()
