@@ -37,7 +37,7 @@ def generateCodeChallenge():
                     ]
                     }
 
-                    Please ensure that the generated JSON file.
+                    Please ensure that the generated JSON file. Return only raw JSON, no markdown, no preamble, no explanation
 
                 """
             }
