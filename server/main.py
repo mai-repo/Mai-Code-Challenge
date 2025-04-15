@@ -9,11 +9,13 @@ import requests
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from dotenv import load_dotenv
+from flask_cors import CORS
 import os
 import logging
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
 
 app = Flask(__name__)
 app.register_blueprint(questions)
@@ -21,6 +23,8 @@ app.register_blueprint(users)
 app.register_blueprint(rejected)
 app.register_blueprint(completed)
 app.register_blueprint(favorite)
+
+CORS(app, resources={r"/login": {"origins": "*"}})
 
 limiter = Limiter(
     get_remote_address,
@@ -85,7 +89,7 @@ def verify_user():
             return jsonify({"message":'Failed to verify reCAPTCHA.'}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5432)
 
