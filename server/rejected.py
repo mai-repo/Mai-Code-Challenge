@@ -25,7 +25,7 @@ def getRejected():
                         ''', (user_id,))
         rejected_problems = cursor.fetchall()
 
-        problem_ids = [[row[0]] for row in rejected_problems]
+        problem_ids = [row[0] for row in rejected_problems]
 
 
         cursor.execute('''
