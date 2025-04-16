@@ -3,12 +3,22 @@ from flask import Blueprint, request, jsonify
 import firebase_admin
 from firebase_admin import credentials, auth
 import logging
+import json
+import base64, os
+from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
 users = Blueprint('users', __name__)
 
+load_dotenv()
+FIREBASE_KEY = os.getenv("FIREBASE_KEY")
+
+serviceAccountKey = json.loads(
+    base64.b64decode(FIREBASE_KEY).decode("utf-8")
+)
+
 if not firebase_admin._apps:
-    cred = credentials.Certificate('firebase.json')
+    cred = credentials.Certificate(serviceAccountKey)
     firebase_admin.initialize_app(cred)
 
 
@@ -27,27 +37,30 @@ def getUser():
         cursor.execute('''
                         SELECT * FROM USERS
                         WHERE ID = %s
-                    ''', (user_id))
+                        ''', (user_id,))
 
         response = cursor.fetchone()
+
+        cursor.close()
+        connection.close()
+
         if response:
             return jsonify({"name": response[0], "email": response[1]})
         else:
             return jsonify({"error": "No user found."}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-        connection.close()
 
 @users.put('/updateUsername')
 def updateUsername():
     data = request.get_json()
     user_id = data.get("user_id")
-    username = data.get("username").lower()
+    username = data.get("username")
 
     if not all([user_id, username]):
         return jsonify({"error":"Missing field information"}), 400
+
+    username = username.lower()
 
     try:
         connection = connectDatabase()
@@ -63,12 +76,12 @@ def updateUsername():
         if cursor.rowcount == 0:
             return jsonify({"error": "No user found to update."}), 404
 
+        cursor.close()
+        connection.close()
+
         return jsonify({"message": "User updated successfully."})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-        connection.close()
 
 @users.put('/updatePassword')
 def updatePassword():
@@ -97,7 +110,6 @@ def deleteUser():
         return jsonify({"error": "Missing user id"}), 400
 
     try:
-        auth.delete_user(uid)
         connection = connectDatabase()
         cursor = connection.cursor()
 
@@ -111,22 +123,24 @@ def deleteUser():
         if cursor.rowcount == 0:
             return jsonify({"error": "No user found to delete."}), 404
 
-        return jsonify({"message": "User deleted successfully."})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-    finally:
         cursor.close()
         connection.close()
+        auth.delete_user(uid)
+        return jsonify({"message": "User deleted successfully."}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @users.post('/createUser')
 def createUser():
     data = request.get_json()
     email = data.get("email")
-    name = data.get("name").lower()
+    name = data.get("name")
     password = data.get("password")
 
     if not all([email, name, password]):
         return jsonify({"error": "Missing field information."}), 400
+
+    name = name.lower()
 
     try:
         user = auth.create_user(email=email, password=password)
@@ -140,12 +154,13 @@ def createUser():
                         ''', (uid, email, name)
         )
         connection.commit()
+        cursor.close()
+        connection.close()
+
         return jsonify({"message": "User created."}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-        connection.close()
+
 
 @users.post("/login")
 def login():
@@ -168,6 +183,9 @@ def login():
                        ''', (uid,))
 
         user = cursor.fetchone()
+        cursor.close()
+        connection.close()
+
         if user:
             return jsonify({
                 "id": user[0],
@@ -178,7 +196,4 @@ def login():
             return jsonify({"error": "User not found in database."}), 404
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 401
-    finally:
-        cursor.close()
-        connection.close()
+        return jsonify({"error": str(e)}), 500
