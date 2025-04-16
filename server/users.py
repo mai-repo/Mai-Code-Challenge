@@ -157,7 +157,7 @@ def createUser():
         cursor.close()
         connection.close()
 
-@users.post("/login")
+@users.post("/authentication/login")
 def login():
 
     id_token = request.headers.get("Authorization").split(" ")[1]
