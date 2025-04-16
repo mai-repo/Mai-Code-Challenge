@@ -5,6 +5,7 @@ from users import users
 from rejected import rejected
 from completed import completed
 from favorite import favorite
+from user_question_status import status
 import requests
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -23,7 +24,7 @@ app.register_blueprint(users)
 app.register_blueprint(rejected)
 app.register_blueprint(completed)
 app.register_blueprint(favorite)
-
+app.register_blueprint(status)
 CORS(app)
 
 limiter = Limiter(
