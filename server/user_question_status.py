@@ -1,6 +1,8 @@
 from db_connection import connectDatabase
 from flask import Blueprint, jsonify, request
+import logging
 
+logger = logging.getLogger(__name__)
 status = Blueprint('status', __name__)
 
 @status.get("/getStatus")
