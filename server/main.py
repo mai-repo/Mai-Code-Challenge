@@ -24,7 +24,7 @@ app.register_blueprint(rejected)
 app.register_blueprint(completed)
 app.register_blueprint(favorite)
 
-CORS(app, resources={r"/login": {"origins": "*"}})
+CORS(app)
 
 limiter = Limiter(
     get_remote_address,

@@ -3,12 +3,22 @@ from flask import Blueprint, request, jsonify
 import firebase_admin
 from firebase_admin import credentials, auth
 import logging
+import json
+import base64, os
+from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
 users = Blueprint('users', __name__)
 
+load_dotenv()
+FIREBASE_KEY = os.getenv("FIREBASE_KEY")
+
+serviceAccountKey = json.loads(
+    base64.b64decode(FIREBASE_KEY).decode("utf-8")
+)
+
 if not firebase_admin._apps:
-    cred = credentials.Certificate('firebase.json')
+    cred = credentials.Certificate(serviceAccountKey)
     firebase_admin.initialize_app(cred)
 
 
