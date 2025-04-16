@@ -1,7 +1,8 @@
-import Login from "./login"
+import NavBar from "./NavBar"
+
 export default function Home() {
   return (
-    <Login/>
+    <NavBar/>
   )
 
 }
