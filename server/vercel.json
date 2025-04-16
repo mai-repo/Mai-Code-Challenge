@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
       {
-        "src": "server/main.py",
+        "src": "main.py",
         "use": "@vercel/python",
         "config": {
           "maxDuration": 60
@@ -12,7 +12,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "server/main.py"
+        "dest": "main.py"
       }
     ]
   }
