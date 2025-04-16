@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "flowbite-react patch"
   },
   "dependencies": {
     "firebase": "^11.6.0",
+    "flowbite-react": "^0.11.7",
     "next": "15.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
