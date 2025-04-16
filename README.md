@@ -135,3 +135,17 @@ In addition to a local database, this project uses **Supabase** to deploy the SQ
    ```
    firebase.json
    ```
+
+## Running the Application with Gunicorn
+
+To run the Flask application in a production-ready environment, you can use **Gunicorn**, a WSGI HTTP server.
+
+### Prerequisites
+Ensure you have Gunicorn installed. If not, install it using:
+```bash
+pip install gunicorn
+```
+Use the following command to start the application with Gunicorn:
+```bash
+gunicorn -w 4 -b 0.0.0.0:5432 main:app
+```
