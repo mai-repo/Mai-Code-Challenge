@@ -73,7 +73,7 @@ Follow the instructions to set up Google applications and obtain the necessary k
   - Google Identity Services API
   - reCAPTCHA API
 
-## Create local Database
+## Create Local Database
 
 1. Log in to PostgreSQL and create the codeChallenge database:
 
@@ -93,6 +93,28 @@ Follow the instructions to set up Google applications and obtain the necessary k
    ```bash
    \i database.sql
    ```
+
+## Supabase Deployment
+
+In addition to a local database, this project uses **Supabase** to deploy the SQL database for production. Supabase provides a fully managed PostgreSQL database with built-in authentication and API support.
+
+### Steps to Set Up Supabase:
+
+1. Go to the [Supabase Console](https://supabase.com/).
+2. Create a new project and configure your database.
+3. Import your database schema:
+   - Navigate to the **SQL Editor** in the Supabase dashboard.
+   - Upload and run your `database.sql` file to set up the schema.
+4. Update your `.env` file with the Supabase connection details:
+   ```
+   DATABASE_HOST={your-supabase-host}
+   DATABASE_PORT=5432
+   DATABASE_NAME={your-database-name}
+   DATABASE_USER={your-database-user}
+   DATABASE_PASSWORD={your-database-password}
+   ```
+
+5. Use the Supabase API or client libraries to interact with your database in production.
 
 ## Firebase Setup Instructions
 
