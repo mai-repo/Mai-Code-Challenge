@@ -40,7 +40,7 @@ export default function UpdatePassword() {
                         </div>
                         <div className="flex flex-row justify-between">
                             <Button type="submit">Submit</Button>
-                            <Button type="submit" href="/authentication/login">Cancel</Button>
+                            <Button type="button" href="/authentication/login">Cancel</Button>
                         </div>
                     </section>
                 </form>
