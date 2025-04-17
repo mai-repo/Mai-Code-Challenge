@@ -26,7 +26,7 @@ export default function Register(){
             setError(error.message);
         }
     }
-    
+
 
 
     return (
