@@ -2,13 +2,15 @@
 
 import { getIdToken, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "lib/firebase";
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { Label, TextInput, Button } from "flowbite-react";
+import Link from "next/link";
+import { useAppContext } from "../../context"
 
 export default function login(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
+    const {  setId,  setUid, id} = useAppContext()
 
     async function getSignIn (email, password) {
 
@@ -29,35 +31,37 @@ export default function login(){
             })
 
             const data = await request.json()
-            console.log(data);
-            if (data.success) {
-                alert("User successfully logged in.");
-            } else {
-                alert(data.error);
-            }
+            console.log(data.id, data.uid);
+            setEmail('')
+            setPassword('')
+            setId(data.id)
+            setUid(data.uid)
+            console.log(id)
+            alert("User successfully logged in.");
         } catch (error) {
             console.error(error.message)
-            setError(error)
-        } finally{
-            setEmail.clear()
-            setPassword.clear()
         }
-
     }
 
     return (
 
         <form className="flex flex-col justify-center px-150 gap-4" aria-label="sign-in form" onSubmit ={ (e) => {e.preventDefault(); getSignIn(email, password);}}>
             <section className="m-50 p-20 border-2 border-black bg-white">
-                <div className="mb-2">
+                <div className="mb-4">
                     <Label htmlFor="email"> Email </Label>
                     <TextInput  id="email" type="email"  addon="@" placeholder="name@gmail.com" value={email} onChange={ (e) => setEmail(e.target.value)} required shadow/>
                 </div>
-                <div className="mb-2">
+                <div className="mb-4">
                     <Label htmlFor="password" >Password</Label>
                     <TextInput id= "password" type="password" placeholder="user-password" value={password} onChange={ (e) => setPassword(e.target.value)} required shadow/>
                 </div>
+                <div className="mb-4">
                 <Button type="submit"> Sign-In </Button>
+                </div>
+                <div className="flex flex-row justify-between">
+                    <Link href="/authentication/forgot">Forgot password</Link>
+                    <Link href="/authentication/register">Register</Link>
+                </div>
             </section>
         </form>
 
