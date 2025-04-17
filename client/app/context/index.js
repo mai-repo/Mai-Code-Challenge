@@ -9,7 +9,7 @@ export function AppWrapper({ children }) {
 
     return (
         <AppContext.Provider value={{ id, setId, uid, setUid }}>
-        {children}
+            {children}
         </AppContext.Provider>
     );
     }
