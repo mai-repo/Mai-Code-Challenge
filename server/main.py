@@ -24,7 +24,17 @@ app.register_blueprint(rejected)
 app.register_blueprint(completed)
 app.register_blueprint(favorite)
 app.register_blueprint(status)
-CORS(app)
+
+CORS(app, resources={
+    r"/*": {
+        "origins": [
+            "http://localhost:3000",
+            "http://192.168.1.203:3000",
+            "https://backendcodechallenge.vercel.app"
+        ],
+        "supports_credentials": True
+    }
+})
 
 limiter = Limiter(
     get_remote_address,

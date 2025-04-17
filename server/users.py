@@ -86,10 +86,9 @@ def updateUsername():
 @users.put('/updatePassword')
 def updatePassword():
     data = request.get_json()
-    uid = data.get("uid")
     email = data.get("email")
 
-    if not all([uid, email]):
+    if (not email):
         return jsonify({"error": "Missing field information."}), 400
 
     try:
@@ -162,7 +161,7 @@ def createUser():
         return jsonify({"error": str(e)}), 500
 
 
-@users.post("/login")
+@users.post("/authentication/login")
 def login():
 
     id_token = request.headers.get("Authorization").split(" ")[1]
