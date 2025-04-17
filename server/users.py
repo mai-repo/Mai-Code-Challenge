@@ -83,10 +83,9 @@ def updateUsername():
 @users.put('/updatePassword')
 def updatePassword():
     data = request.get_json()
-    uid = data.get("uid")
     email = data.get("email")
 
-    if not all([uid, email]):
+    if not all([email]):
         return jsonify({"error": "Missing field information."}), 400
 
     try:
