@@ -47,15 +47,15 @@ export default function login(){
 
     return (
 
-        <form className="flex flex-col justify-center gap-4" aria-label="sign-in form" onSubmit ={ (e) => {e.preventDefault(); getSignIn(email, password);}}>
-            <section className="m-50">
+        <form className="flex flex-col justify-center px-150 gap-4" aria-label="sign-in form" onSubmit ={ (e) => {e.preventDefault(); getSignIn(email, password);}}>
+            <section className="m-50 p-20 border-2 border-black bg-white">
                 <div className="mb-2">
                     <Label htmlFor="email"> Email </Label>
-                    <TextInput className="w-1/2" id="email" type="email"  addon="@" placeholder="name@gmail.com" value={email} onChange={ (e) => setEmail(e.target.value)} required shadow/>
+                    <TextInput  id="email" type="email"  addon="@" placeholder="name@gmail.com" value={email} onChange={ (e) => setEmail(e.target.value)} required shadow/>
                 </div>
                 <div className="mb-2">
                     <Label htmlFor="password" >Password</Label>
-                    <TextInput className="w-1/2" id= "password" type="password" placeholder="user-password" value={password} onChange={ (e) => setPassword(e.target.value)} required shadow/>
+                    <TextInput id= "password" type="password" placeholder="user-password" value={password} onChange={ (e) => setPassword(e.target.value)} required shadow/>
                 </div>
                 <Button type="submit"> Sign-In </Button>
             </section>
