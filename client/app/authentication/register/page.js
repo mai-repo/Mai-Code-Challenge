@@ -41,7 +41,7 @@ export default function Register(){
             <section className="m-50 p-20 border-2 border-black bg-white">
                     <div className="mb-4">
                         <Label htmlFor="name">Name</Label>
-                        <TextInput id="name" type="name" placeholder="e.g. Bad Bunny" onChange={(e) => setName(e.target.value)} value ={name}required/>
+                        <TextInput id="name" type="text" placeholder="e.g. Bad Bunny" onChange={(e) => setName(e.target.value)} value ={name}required/>
                     </div>
                     <div className="mb-4">
                         <Label htmlFor="email">Email</Label>
