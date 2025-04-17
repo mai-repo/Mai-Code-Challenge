@@ -56,7 +56,7 @@ def addProblem():
         status = "COMPLETED" if is_correct == True else "REJECTED"
         addStatus(user_id, question_id, status)
 
-        return jsonify({"message": "Problem added successfully"}), 201
+        return jsonify({"message": "Problem added successfully", "question_id": question_id}), 200
     except Exception as e:
         return jsonify({"error":str(e)}), 500
     finally:
@@ -75,11 +75,6 @@ def updateProblem():
     try:
         connection = connectDatabase()
         cursor = connection.cursor()
-
-        cursor.execute('''
-                        SELECT
-                       ''')
-
         cursor.execute('''
                         UPDATE QUESTIONS
                         SET NAME = %s, IS_CORRECT = %s
