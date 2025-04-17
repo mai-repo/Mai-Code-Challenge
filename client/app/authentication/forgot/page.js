@@ -23,9 +23,7 @@ export default function UpdatePassword() {
             setEmail('')
             setSuccess(true)
         } catch (error) {
-            console.log(data.error)
-        }
-
+            console.log(error.message)
 
     }
 
