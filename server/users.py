@@ -85,7 +85,7 @@ def updatePassword():
     data = request.get_json()
     email = data.get("email")
 
-    if not all([email]):
+    if (not email):
         return jsonify({"error": "Missing field information."}), 400
 
     try:
