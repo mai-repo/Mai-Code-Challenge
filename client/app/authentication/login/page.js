@@ -6,11 +6,12 @@ import React, { useState, useEffect} from "react";
 import { Label, TextInput, Button } from "flowbite-react";
 import Link from "next/link";
 import { useAppContext } from "../../context"
+import { useRouter } from "next/router";
 
 export default function login(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const {  setId,  setUid, id} = useAppContext()
+    const {  setId,  setUid} = useAppContext()
 
     async function getSignIn (email, password) {
 
@@ -19,7 +20,6 @@ export default function login(){
             const user = userCredentials.user
 
             const id_token = await user.getIdToken()
-            console.log("Firebase Token:", id_token)
 
             const request = await fetch ('https://backendcodechallenge.vercel.app/authentication/login', {
                 method: "POST",
@@ -31,12 +31,11 @@ export default function login(){
             })
 
             const data = await request.json()
-            console.log(data.id, data.uid);
             setEmail('')
             setPassword('')
             setId(data.id)
             setUid(data.uid)
-            console.log(id)
+            router.push('/challenge')
             alert("User successfully logged in.");
         } catch (error) {
             console.error(error.message)
