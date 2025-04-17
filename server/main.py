@@ -17,7 +17,6 @@ import logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-
 app = Flask(__name__)
 app.register_blueprint(questions)
 app.register_blueprint(users)
@@ -61,7 +60,7 @@ def evaluateAnswer():
         answer = data.get("answer")
 
         if not challenge or not answer:
-            return jsonify({"message": "Missing either challenge or answer"}), 400
+            return jsonify({"error": "Missing either challenge or answer"}), 400
 
         evaluation = evaluateProblem(challenge, answer)
         return jsonify(evaluation), 200
@@ -90,6 +89,8 @@ def verify_user():
             return jsonify({"message":'Failed to verify reCAPTCHA.'}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+application = app
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5432)
