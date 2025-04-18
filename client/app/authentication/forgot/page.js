@@ -24,6 +24,7 @@ export default function UpdatePassword() {
             setSuccess(true)
         } catch (error) {
             console.log(error.message)
+        }
 
     }
 
@@ -43,7 +44,7 @@ export default function UpdatePassword() {
                     </section>
                 </form>
             ):
-           (
+            (
                 <section className="flex flex-col justify-center px-150 gap-4">
                     <div className="m-50 p-20 border-2 border-black bg-white">
                         <Label>Click here the button to reset your password</Label>
