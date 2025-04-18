@@ -49,7 +49,7 @@ def getCompleted():
             connection.close()
 
 
-def addCompleted():
+def addCompleted(data):
     data = request.get_json()
     user_id = data.get('user_id')
     questions_id = data.get('question_id')
