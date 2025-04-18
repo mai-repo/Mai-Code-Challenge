@@ -1,9 +1,9 @@
 "use client"
-import Login from "./Login"
+import UserLogin from "./UserLogin"
 export default function Home() {
   return (
       <>
-      <Login/>
+      <UserLogin/>
       </>
 
   )

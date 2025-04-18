@@ -2,12 +2,12 @@
 
 import { getIdToken, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "lib/firebase";
-import React, { useState, useEffect} from "react";
+import React, { useState} from "react";
 import { Label, TextInput, Button } from "flowbite-react";
 import Link from "next/link";
 import { useAppContext } from "./context"
 
-export default function Login(){
+export default function UserLogin(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { setId,  setUid} = useAppContext()
