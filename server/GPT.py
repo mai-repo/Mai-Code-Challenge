@@ -24,12 +24,12 @@ def generateCodeChallenge():
                     Here’s an example of how the response should be structured in JSON format:
 
                     {
-                    "Challenge": "Write a function that takes in a list of integers and returns a new list with only the even numbers from the original list.",
-                    "Name": "Filter Even Numbers - Array",
+                    "Challenge": "{insert Challenge}",
+                    "Name": "{insert name}",
                     "Type": "Array"
-                    "Input": "A list of integers.",
-                    "Output": "A list containing only the even integers from the input list.",
-                    "Constraints": "The input list can be empty or contain only odd numbers",
+                    "Input": "{insert input}.",
+                    "Output": "{insert output}",
+                    "Constraints": "{insert constraints}",
                     "Test Cases": [
                         {"test_case": "evenNumbers([1, 2, 3, 4, 5, 6]), expected:[2, 4, 6]"},
                         {"test_case": "evenNumbers([10, 15, 20, 25]), expected:[10, 20]"},

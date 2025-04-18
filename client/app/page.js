@@ -1,8 +1,9 @@
-import NavBar from "./NavBar"
-
+import Login from "./Login"
 export default function Home() {
   return (
-    <NavBar/>
-  )
+      <>
+      <Login/>
+      </>
 
+  )
 }
