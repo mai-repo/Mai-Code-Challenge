@@ -125,6 +125,6 @@ def scrape():
         return jsonify({"error": f"Failed to retrieve the webpage. Status code: {response.status_code}"}), 500
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3033)
+    app.run(host="0.0.0.0", port=5432)
 
 
