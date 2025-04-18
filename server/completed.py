@@ -48,11 +48,11 @@ def getCompleted():
             cursor.close()
             connection.close()
 
-@completed.post('/addCompleted')
+
 def addCompleted():
     data = request.get_json()
     user_id = data.get('user_id')
-    questions_id = data.get('questions_id')
+    questions_id = data.get('question_id')
 
     if not all ([user_id and questions_id]):
         return (jsonify({"error": "Missing field information."}))
@@ -167,7 +167,7 @@ def searchCompleted():
         for question in questions:
             if search_term == question[2]:
                 return jsonify({"id": question[0], "name": question[2]}), 200
-        
+
         return jsonify({"error": "No search found."}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
