@@ -44,12 +44,12 @@ def getRejected():
         cursor.close()
         connection.close()
 
-def addRejected():
+def addRejected(data):
     data = request.get_json()
     user_id = data.get("user_id")
-    questions_id = data.get("question_id")
+    question_id = data.get("question_id")
 
-    if not all ([user_id and questions_id]):
+    if not all ([user_id and question_id]):
         return jsonify({"error": "Missing field information."}), 400
     try:
         connection = connectDatabase()
@@ -58,7 +58,7 @@ def addRejected():
         cursor.execute('''
                         INSERT INTO REJECTED (USER_ID, REJECTED_PROBLEMS)
                         VALUES (%s, %s)
-                        ''', (user_id, questions_id))
+                        ''', (user_id, question_id))
         connection.commit()
         cursor.close()
         connection.close()
