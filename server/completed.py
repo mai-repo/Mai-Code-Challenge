@@ -49,12 +49,9 @@ def getCompleted():
             connection.close()
 
 
-def addCompleted(data):
-    data = request.get_json()
-    user_id = data.get('user_id')
-    questions_id = data.get('question_id')
+def addCompleted(user_id, question_id):
 
-    if not all ([user_id and questions_id]):
+    if not all ([user_id and question_id]):
         return (jsonify({"error": "Missing field information."}))
 
     try:
@@ -64,7 +61,7 @@ def addCompleted(data):
         cursor.execute('''
                         INSERT INTO COMPLETED (USER_ID, COMPLETED_PROBLEMS)
                         VALUES (%s, %s)
-                       ''', (user_id, questions_id))
+                       ''', (user_id, question_id))
 
         connection.commit()
         return jsonify({"message": "Completed Problem added successfully"}), 201
