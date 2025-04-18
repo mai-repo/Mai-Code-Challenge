@@ -58,19 +58,12 @@ def addProblem():
         status = "COMPLETED" if is_correct == True else "REJECTED"
         addStatus(user_id, question_id, status)
 
-        data = {
-            "user_id": user_id,
-            "question_id": question_id
-        }
-
         if is_correct == True:
-            addCompleted(data)
+            addCompleted(user_id, question_id)
         else:
-            addRejected(data)
+            addRejected(user_id, question_id)
 
-
-
-        return jsonify({"message": "Problem added successfully", "question_id": question_id}), 200
+        return jsonify({"message": "Problem added successfully", "question_id": question_id, "is_correct": is_correct}), 200
     except Exception as e:
         return jsonify({"error":str(e)}), 500
     finally:
