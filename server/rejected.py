@@ -44,11 +44,10 @@ def getRejected():
         cursor.close()
         connection.close()
 
-@rejected.post("/addRejected")
 def addRejected():
     data = request.get_json()
     user_id = data.get("user_id")
-    questions_id = data.get("questions_id")
+    questions_id = data.get("question_id")
 
     if not all ([user_id and questions_id]):
         return jsonify({"error": "Missing field information."}), 400
@@ -61,12 +60,13 @@ def addRejected():
                         VALUES (%s, %s)
                         ''', (user_id, questions_id))
         connection.commit()
+        cursor.close()
+        connection.close()
         return jsonify({"message":"Successfully added problem"})
     except Exception as e:
         return jsonify({"error": str(e)})
-    finally:
-        cursor.close()
-        connection.close()
+
+
 
 @rejected.put('/updateRejected')
 def updateRejected():
