@@ -1,11 +1,12 @@
 "use client"
 import { Editor } from "@monaco-editor/react"
-import { useState } from "react"
 import { Button } from "flowbite-react"
+import { useAppContext } from "components/context"
+import Answer from "./Answer"
 
 
 export default function CodeEditor() {
-    const [value, setValue] = useState("")
+    const {value, setValue} = useAppContext()
 
     const evaluate = async () => {
 
@@ -27,6 +28,8 @@ export default function CodeEditor() {
             const result = await response.json()
             console.log("Execution Result:", result.run.output)
             alert(result.run.output)
+
+            navigator.clipboard.writeText(value)
         } catch (error) {
             console.error("Error evaluating code:", error)
         }
@@ -42,8 +45,9 @@ export default function CodeEditor() {
                 value ={value}
                 onChange={(newValue) => setValue(newValue)}
             />
-            <div className="mt-4">
+            <div className="flex flex-row  justify-between mt-4">
                 <Button className="text-lg" onClick={evaluate}>Run Code</Button>
+                <Answer/>
             </div>
         </section>
     )
