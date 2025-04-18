@@ -58,10 +58,15 @@ def addProblem():
         status = "COMPLETED" if is_correct == True else "REJECTED"
         addStatus(user_id, question_id, status)
 
+        data = {
+            "user_id": user_id,
+            "question_id": question_id
+        }
+
         if is_correct == True:
-            addCompleted(user_id=user_id, question_id=question_id)
+            addCompleted(data)
         else:
-            addRejected(user_id=user_id, question_id=question_id)
+            addRejected(data)
 
 
 
