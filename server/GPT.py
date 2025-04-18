@@ -37,7 +37,7 @@ def generateCodeChallenge():
                     ]
                     }
 
-                    Please ensure that the generated JSON file. Return only raw JSON, no markdown, no preamble, no explanation
+                    Please ensure that the generated JSON file. Return only raw JSON, no markdown, no preamble, no explanation.
 
                 """
             }
@@ -45,7 +45,6 @@ def generateCodeChallenge():
     )
 
     codeChallenge = completion.choices[0].message.content
-    print(codeChallenge)
     return json.loads(codeChallenge)
 
 def evaluateProblem(challenge, answer):
@@ -86,5 +85,4 @@ def evaluateProblem(challenge, answer):
         ]
     )
     evaluation = completion.choices[0].message.content
-    print (evaluation)
     return json.loads(evaluation)
