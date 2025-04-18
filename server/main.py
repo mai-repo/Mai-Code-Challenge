@@ -34,7 +34,7 @@ CORS(app, resources={
             "http://localhost:3000",
             "http://192.168.1.203:3000",
             "https://backendcodechallenge.vercel.app",
-            "https://mai-code-challenges.vercel.app/"
+            "https://mai-code-challenges.vercel.app"
         ],
         "supports_credentials": True
     }
