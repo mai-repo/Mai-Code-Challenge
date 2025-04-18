@@ -18,6 +18,7 @@ export function AppWrapper({ children }) {
         if (storedId) setId(Number(storedId));
         if (storedUid) setUid(storedUid);
         if (storedValue) setValue(storedValue);
+        if (storedData) setValue(storedData)
     }, []);
 
     useEffect(() => {
