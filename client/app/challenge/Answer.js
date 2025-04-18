@@ -47,6 +47,7 @@ export default function Answer() {
             })
             const response = await res.json()
             console.log(response)
+            alert('Problem saved.')
         } catch (error) {
             console.error(error.message)
         }
