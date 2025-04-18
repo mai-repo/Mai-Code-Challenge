@@ -1,5 +1,7 @@
 from db_connection import connectDatabase
 from user_question_status import addStatus, updateStatus
+from rejected import addRejected
+from completed import addCompleted
 from flask import Blueprint, jsonify, request
 import logging
 
@@ -55,6 +57,13 @@ def addProblem():
 
         status = "COMPLETED" if is_correct == True else "REJECTED"
         addStatus(user_id, question_id, status)
+
+        if is_correct == True:
+            addCompleted(user_id=user_id, question_id=question_id)
+        else:
+            addRejected(user_id=user_id, question_id=question_id)
+
+
 
         return jsonify({"message": "Problem added successfully", "question_id": question_id}), 200
     except Exception as e:
