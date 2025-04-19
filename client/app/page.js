@@ -1,8 +1,10 @@
-import NavBar from "./NavBar"
-
+"use client"
+import UserLogin from "./UserLogin"
 export default function Home() {
   return (
-    <NavBar/>
-  )
+      <>
+      <UserLogin/>
+      </>
 
+  )
 }

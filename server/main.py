@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+import requests
 from GPT import generateCodeChallenge, evaluateProblem
 from questions import questions
 from users import users
@@ -13,6 +14,8 @@ from dotenv import load_dotenv
 from flask_cors import CORS
 import os
 import logging
+from bs4 import BeautifulSoup
+import random
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -30,7 +33,8 @@ CORS(app, resources={
         "origins": [
             "http://localhost:3000",
             "http://192.168.1.203:3000",
-            "https://backendcodechallenge.vercel.app"
+            "https://backendcodechallenge.vercel.app",
+            "https://mai-code-challenges.vercel.app"
         ],
         "supports_credentials": True
     }
@@ -100,10 +104,28 @@ def verify_user():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-application = app
+@app.get('/scrape')
+def scrape():
+    random_problem = random.randint(0, 19)
+
+    url = f"https://projecteuler.net/problem={random_problem}"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.content, "html.parser")
+        problem = soup.find('div', class_='problem_content', role="problem")
+
+        if problem:
+            paragraphs = problem.find_all('p')
+            paragraphs_text = [para.get_text(strip=True) for para in paragraphs]
+
+            return jsonify({'problem_content': paragraphs_text})
+        else:
+            return jsonify({"error": "Problem content not found."}), 404
+    else:
+        return jsonify({"error": f"Failed to retrieve the webpage. Status code: {response.status_code}"}), 500
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5432)
-
 
 

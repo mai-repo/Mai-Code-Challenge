@@ -52,7 +52,7 @@ export default function Register(){
                         <TextInput id="password" type="password" placeholder="********" onChange={(e) => setPassword(e.target.value)} value={password} required/>
                     </div>
                     <Button className="mb-4" type="submit">Register</Button>
-                    <Link href="/authentication/login">
+                    <Link href="/UserLogin">
                         Got an account? Sign-in!
                     </Link>
             </section>

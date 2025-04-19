@@ -10,6 +10,7 @@
     "postinstall": "flowbite-react patch"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
     "firebase": "^11.6.0",
     "flowbite-react": "^0.11.7",
     "next": "15.3.0",

@@ -135,7 +135,6 @@ In addition to a local database, this project uses **Supabase** to deploy the SQ
    ```
    firebase.json
    ```
-
 ## Running the Application with Gunicorn
 
 To run the Flask application in a production-ready environment, you can use **Gunicorn**, a WSGI HTTP server.
