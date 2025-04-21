@@ -9,10 +9,9 @@ export default function NavBar(){
     const router = useRouter();
 
     useEffect(() => {
-        if (id) {
-            router.push("/challenge");
+        if (id && uid) {
         }
-    }, [id]);
+    }, [id, uid]);
 
     if (!id) {
     return (
@@ -30,14 +29,22 @@ export default function NavBar(){
                 <NavbarBrand as={Link} href="/">
                     <img src="/mai_code_challenge_logo.png" className="pl-8 w-1/3" alt="mai_code_challenge_logo"/>
                 </NavbarBrand>
+            { id && (
+            <section>
                 <NavbarToggle/>
-                    <NavbarCollapse>
-                        <section className="flex flex-row justify-center items-center gap-5 pr-9">
-                            <NavbarLink href="/user_settings">Settings</NavbarLink>
-                            <NavbarLink href="/" onClick={(e) => { setId(null); setUid(null); setValue(null); setData(null)}}>Sign out</NavbarLink>
-                            <Avatar alt="User Profile Image" img="/Profile.png"/>
-                        </section>
-                    </NavbarCollapse>
+                <NavbarCollapse>
+                    <section className="flex flex-row justify-center items-center gap-5 pr-9">
+                        <Link href="/userSettings"  passHref>
+                            <NavbarLink>Settings</NavbarLink>
+                        </Link>
+                        <Link href="/" onClick={(e) => { setId(null); setUid(null); setValue(null); setData(null)}}  passHref>
+                            <NavbarLink> Sign out </NavbarLink>
+                        </Link>
+                        <Avatar alt="User Profile Image" img="/Profile.png"/>
+                    </section>
+                </NavbarCollapse>
+            </section>
+            )}
             </Navbar>
         </main>
     )
