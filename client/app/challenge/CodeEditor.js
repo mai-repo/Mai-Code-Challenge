@@ -42,10 +42,15 @@ export default function CodeEditor() {
                 theme="vs-dark"
                 defaultLanguage="javascript"
                 defaultValue={`// Welcome to Mai Code Challenge\n// Once you submit your answer, it will disappear but automatically be copied so you can save it elsewhere.`}
-                value ={value}
+                value={value}
                 onChange={(newValue) => setValue(newValue)}
+                options={{
+                    fontSize: 25,
+                    padding: { top: 15 },
+                    wordWrap: "on"
+                }}
             />
-            <div className="flex flex-row  justify-between mt-4">
+            <div className="flex flex-row justify-between mt-4">
                 <Button className="text-lg" onClick={evaluate}>Run Code</Button>
                 <Answer/>
             </div>
