@@ -29,7 +29,6 @@ export default function CodeEditor() {
             console.log("Execution Result:", result.run.output)
             alert(result.run.output)
 
-            navigator.clipboard.writeText(value)
         } catch (error) {
             console.error("Error evaluating code:", error)
         }
@@ -45,7 +44,7 @@ export default function CodeEditor() {
                 value={value}
                 onChange={(newValue) => setValue(newValue)}
                 options={{
-                    fontSize: 25,
+                    fontSize: 20,
                     padding: { top: 15 },
                     wordWrap: "on"
                 }}
