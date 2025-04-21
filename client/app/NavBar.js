@@ -35,7 +35,7 @@ export default function NavBar(){
                 <NavbarCollapse>
                     <section className="flex flex-row justify-center items-center gap-5 pr-9">
                         <NavbarLink  href="/userSettings">Settings</NavbarLink>
-                        <NavbarLink  href="/" onClick={(e) => { setId(null); setUid(null); setValue(null); setData(null)}}> Sign out </NavbarLink>
+                        <NavbarLink  href="/" onClick={(e) => { setId(''); setUid(''); setValue(''); setData([])}}> Sign out </NavbarLink>
                         <Avatar alt="User Profile Image" img="/Profile.png"/>
                     </section>
                 </NavbarCollapse>
