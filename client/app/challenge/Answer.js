@@ -26,6 +26,7 @@ export default function Answer() {
             const evaluation = resultData.breakdown.join('\n');
             setValue(evaluation)
             alert("Evaluation successful.")
+            navigator.clipboard.writeText(value)
         } catch (error) {
             console.error(error.message)
         }
