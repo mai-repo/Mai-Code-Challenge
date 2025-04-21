@@ -1,5 +1,6 @@
 from db_connection import connectDatabase
 from flask import Blueprint, jsonify, request
+from pagination import paignation
 import logging
 
 logger = logging.getLogger(__name__)
@@ -39,7 +40,7 @@ def getCompleted():
 
         questions = cursor.fetchall()
 
-        return jsonify(questions)
+        return paignation(questions), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
