@@ -4,8 +4,8 @@ import { createContext, useContext, useState, useEffect } from "react";
 const AppContext = createContext(null);
 
 export function AppWrapper({ children }) {
-    const [id, setId] = useState('');
-    const [uid, setUid] = useState('');
+    const [id, setId] = useState(null);
+    const [uid, setUid] = useState(null);
     const [data, setData] = useState([])
     const [value, setValue] = useState('');
 
