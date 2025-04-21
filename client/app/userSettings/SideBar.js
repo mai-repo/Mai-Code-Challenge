@@ -1,0 +1,23 @@
+"use client"
+
+import { Sidebar, SidebarItems, SidebarItemGroup, SidebarItem } from "flowbite-react"
+
+export default function SideBar (){
+
+    return (
+    <main className="flex h-screen">
+        <Sidebar aria-label="Sidebar with content separator">
+            <SidebarItems>
+                <SidebarItemGroup>
+                    <SidebarItem> User Settings </SidebarItem>
+                    <SidebarItem> Completed Challenges </SidebarItem>
+                    <SidebarItem> Rejected Challenge </SidebarItem>
+                    <SidebarItem> Favorite Challenges </SidebarItem>
+                    <SidebarItem> Progress </SidebarItem>
+                    <SidebarItem> Search </SidebarItem>
+                </SidebarItemGroup>
+            </SidebarItems>
+        </Sidebar>
+    </main>
+    )
+}
