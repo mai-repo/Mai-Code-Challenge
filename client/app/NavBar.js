@@ -1,14 +1,43 @@
-import { Navbar, NavbarBrand} from "flowbite-react"
+"use client"
+import { Navbar, NavbarBrand, NavbarCollapse, NavbarToggle, NavbarLink, Avatar} from "flowbite-react"
 import Link from "next/link"
+import { useAppContext } from "./context"
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 export default function NavBar(){
+    const {id, uid, setId, setUid, setData, setValue} = useAppContext()
+    const router = useRouter();
+
+    useEffect(() => {
+        if (id) {
+            router.push("/challenge");
+        }
+    }, [id]);
+
+    if (!id) {
+    return (
+        <Navbar fluid rounded className="p-5 border-b-2 border-black">
+        <NavbarBrand as={Link} href="/">
+            <img src="/mai_code_challenge_logo.png" className="w-1/3" alt="mai_code_challenge_logo" />
+        </NavbarBrand>
+        </Navbar>
+    );
+    }
 
     return (
         <main>
             <Navbar fluid rounded className="p-5 border-b-2 border-black">
                 <NavbarBrand as={Link} href="/">
-                <img src="/mai_code_challenge_logo.png" className="w-1/3" alt="mai_code_challenge_logo"/>
+                    <img src="/mai_code_challenge_logo.png" className="pl-8 w-1/3" alt="mai_code_challenge_logo"/>
                 </NavbarBrand>
-
+                <NavbarToggle/>
+                    <NavbarCollapse>
+                        <section className="flex flex-row justify-center items-center gap-5 pr-9">
+                            <NavbarLink href="/user_settings">Settings</NavbarLink>
+                            <NavbarLink href="/" onClick={(e) => { setId(null); setUid(null); setValue(null); setData(null)}}>Sign out</NavbarLink>
+                            <Avatar alt="User Profile Image" img="/Profile.png"/>
+                        </section>
+                    </NavbarCollapse>
             </Navbar>
         </main>
     )
