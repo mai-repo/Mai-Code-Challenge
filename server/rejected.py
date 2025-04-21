@@ -8,8 +8,7 @@ rejected = Blueprint('rejected', __name__)
 
 @rejected.get('/getRejected')
 def getRejected():
-    data = request.get_json()
-    user_id = data.get("user_id")
+    user_id = request.args.get("user_id")
 
     if not user_id:
         return jsonify({"error": "Missing field information."}), 400
