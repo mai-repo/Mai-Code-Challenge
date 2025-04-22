@@ -3,14 +3,17 @@
 import { useAppContext } from "components/context";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button, TextInput} from "flowbite-react"
-import { PencilIcon } from '@heroicons/react'
+import { Button, TextInput, Pagination} from "flowbite-react"
 
 export default function RejectedProblem() {
     const { id, data, setData, setChallenge } = useAppContext();
     const [name, setName] = useState('');
     const [editingId, setEditingId] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPage, setTotalPage] = useState(1);
     const router = useRouter();
+
+    const onPageChange = (page) => setCurrentPage(page);
 
     useEffect(() => {
         if (!id) return;
@@ -18,7 +21,7 @@ export default function RejectedProblem() {
         const fetchRejected = async () => {
             try {
                 const response = await fetch(
-                    `https://backendcodechallenge.vercel.app/getRejected?user_id=${id}`,
+                    `http://127.0.0.1:8090/getRejected?user_id=${id}&page=${currentPage}`,
                     {
                         method: "GET",
                         headers: {
@@ -27,7 +30,8 @@ export default function RejectedProblem() {
                     }
                 );
                 const result = await response.json();
-                setData(result);
+                setData(result.data);
+                setTotalPage(result.pagination.total_pages)
                 console.log("Fetched rejected data:", result);
             } catch (error) {
                 console.error("Error fetching rejected data:", error);
@@ -35,7 +39,7 @@ export default function RejectedProblem() {
         };
 
         fetchRejected();
-    }, [id, setData]);
+    }, [id, currentPage]);
 
     function getChallenge(item) {
         setChallenge(item[3]);
@@ -92,42 +96,53 @@ export default function RejectedProblem() {
     }
 
     return (
-        <section className="bg-white mx-50 p-15 border-2 border-black">
-            {Array.isArray(data) && data.length > 0 ? (
-                data.map((item, key) => (
-                    <div key={key} className="flex flex-col md:flex-row justify-between items-center mb-4 gap-2">
-                        <a
-                            href="#"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                getChallenge(item);
-                            }}
-                            className="text-blue-600 hover:underline"
-                        >
-                            <h2>{item[2]}</h2>
-                        </a>
+        <div>
+            <section className="bg-white mx-50 p-15 border-2 border-black">
+                <h1 className="text-4xl mb-10"> Rejected Problems</h1>
+                {Array.isArray(data) && data.length > 0 ? (
+                    data.map((item, key) => (
+                        <div key={key} className="flex flex-col md:flex-row justify-between items-center mb-4 gap-2">
+                            <a href="#" onClick={(e) => { e.preventDefault(); getChallenge(item);}} className="text-xl text-blue-600 hover:underline">
+                                <h2>{item[2]}</h2>
+                            </a>
+                            <p> {item[4]}</p>
+                            {editingId === item[0] ? (
+                                <div className="flex items-center gap-2">
+                                    <TextInput
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        placeholder="Enter new name"
+                                    />
+                                    <Button onClick={() => updateRejected(name, id, item[0])}> Save </Button>
+                                    <Button color="gray" onClick={() => {setEditingId(null); setName(''); }}> Cancel </Button>
+                                </div>
+                            ) : (
+                                <div className="flex items-center gap-2">
+                                    <Button onClick={() => { setEditingId(item[0]); setName(item[2]);}}> Edit </Button>
+                                    <Button color="failure" onClick={() => deleteRejected(id, item[0])}> Delete </Button>
+                                </div>
+                            )}
+                        </div>
+                    ))
+                ) : (
+                    <p className="text-gray-500">No rejected challenges found.</p>
+                )}
+            </section>
+            <div className="flex overflow-x-auto sm:justify-center">
+                <Pagination
+                layout="paignation"
+                currentPage={currentPage}
+                totalPages={totalPage}
+                onPageChange={onPageChange}
+                previousLabel="Go back"
+                nextLabel="Go foward"
+                showIcons
+                />
 
-                        {editingId === item[0] ? (
-                            <div className="flex items-center gap-2">
-                                <TextInput
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    placeholder="Enter new name"
-                                />
-                                <Button onClick={() => updateRejected(name, id, item[0])}> Save </Button>
-                                <Button color="gray" onClick={() => {setEditingId(null); setName(''); }}> Cancel </Button>
-                            </div>
-                        ) : (
-                            <div className="flex items-center gap-2">
-                                <Button onClick={() => { setEditingId(item[0]); setName(item[2]);}}> Edit </Button>
-                                <Button color="failure" onClick={() => deleteRejected(id, item[0])}> Delete </Button>
-                            </div>
-                        )}
-                    </div>
-                ))
-            ) : (
-                <p className="text-gray-500">No rejected challenges found.</p>
-            )}
-        </section>
+
+            </div>
+
+        </div>
+
     );
 }
