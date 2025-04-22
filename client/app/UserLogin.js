@@ -6,11 +6,13 @@ import React, { useState} from "react";
 import { Label, TextInput, Button } from "flowbite-react";
 import Link from "next/link";
 import { useAppContext } from "./context"
+import ReCAPTCHA from 'react-google-recaptcha';
 
 export default function UserLogin(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { setId,  setUid} = useAppContext()
+    const [captchaToken, setCaptchaToken] = useState(null);
 
     async function getSignIn (email, password) {
 
@@ -40,27 +42,55 @@ export default function UserLogin(){
         }
     }
 
+    async function notARobot(token){
+        try {
+            setCaptchaToken(token)
+            const response = await fetch('http://127.0.0.1:8090/verifyUser', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ token }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert(data.message);
+                } else {
+                    alert(data.message);
+                }
+                } catch (error) {
+                console.error("reCAPTCHA verification failed:", error);
+                alert("An error occurred during reCAPTCHA verification.");
+            }
+    }
     return (
-
         <form className="flex flex-col justify-center px-150 gap-4" aria-label="sign-in form" onSubmit ={ (e) => {e.preventDefault(); getSignIn(email, password);}}>
-            <section className="m-50 p-20 border-2 border-black bg-white">
-                <div className="mb-4">
-                    <Label htmlFor="email"> Email </Label>
-                    <TextInput  id="email" type="email"  addon="@" placeholder="name@gmail.com" value={email} onChange={ (e) => setEmail(e.target.value)} required shadow/>
-                </div>
-                <div className="mb-4">
-                    <Label htmlFor="password" >Password</Label>
-                    <TextInput id= "password" type="password" placeholder="user-password" value={password} onChange={ (e) => setPassword(e.target.value)} required shadow/>
-                </div>
-                <div className="mb-4">
-                <Button type="submit"> Sign-In </Button>
-                </div>
-                <div className="flex flex-row justify-between">
-                    <Link href="/authentication/forgot">Forgot password</Link>
-                    <Link href="/authentication/register">Register</Link>
-                </div>
-            </section>
+        <section className="m-50 p-20 border-2 border-black bg-white">
+            <div className="mb-4">
+                <Label htmlFor="email"> Email </Label>
+                <TextInput  id="email" type="email"  addon="@" placeholder="name@gmail.com" value={email} onChange={ (e) => setEmail(e.target.value)} required shadow/>
+            </div>
+            <div className="mb-4">
+                <Label htmlFor="password" >Password</Label>
+                <TextInput id= "password" type="password" placeholder="user-password" value={password} onChange={ (e) => setPassword(e.target.value)} required shadow/>
+            </div>
+            <div className="flex flex-row justify-between">
+                <Link href="/authentication/forgot">Forgot password</Link>
+                <Link href="/authentication/register">Register</Link>
+            </div>
+            <div className="mb-4">
+                <ReCAPTCHA
+                    sitekey="6LcktyArAAAAAOsQ0QKyforePNbAvJbcXpAiXjCJ"
+                    onChange={notARobot}
+                    className="mb-4"
+                />
+            </div>
+            <div className="mb-4">
+                <Button type="submit">Sign-In</Button>
+            </div>
+        </section>
         </form>
-
     )
 }
