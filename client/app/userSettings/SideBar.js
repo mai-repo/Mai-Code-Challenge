@@ -11,7 +11,7 @@ export default function SideBar (){
                 <SidebarItemGroup>
                     <SidebarItem> User Settings </SidebarItem>
                     <SidebarItem> Completed Challenges </SidebarItem>
-                    <SidebarItem> Rejected Challenge </SidebarItem>
+                    <SidebarItem href="userSettings/rejected"> Rejected Challenge </SidebarItem>
                     <SidebarItem> Favorite Challenges </SidebarItem>
                     <SidebarItem> Progress </SidebarItem>
                     <SidebarItem> Search </SidebarItem>
