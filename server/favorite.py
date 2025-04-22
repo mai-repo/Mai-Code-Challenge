@@ -1,5 +1,6 @@
 from db_connection import connectDatabase
 from flask import jsonify, Blueprint, request
+from pagination import paignation
 import logging
 
 logger = logging.getLogger(__name__)
@@ -49,7 +50,7 @@ def getFavorite():
                        ''', (user_id,))
 
         response = cursor.fetchall()
-        return jsonify(response), 200
+        return paignation(response), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     finally:
@@ -147,7 +148,7 @@ def searchFavorite():
         for question in questions:
             if search_term == question[2]:
                 return jsonify({"id": question[0], "name": question[2]}), 200
-        
+
         return jsonify({"error": "No search found."}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
