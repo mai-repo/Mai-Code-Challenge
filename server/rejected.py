@@ -1,5 +1,6 @@
 from db_connection import connectDatabase
 from flask import Blueprint, jsonify, request
+from pagination import paignation
 import logging
 
 logger = logging.getLogger(__name__)
@@ -37,7 +38,7 @@ def getRejected():
         cursor.close()
         connection.close()
 
-        return jsonify(questions)
+        return paignation(questions)
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
