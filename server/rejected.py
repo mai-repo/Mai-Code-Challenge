@@ -104,15 +104,15 @@ def deleteRejected():
 
         cursor.execute('''
                         DELETE FROM REJECTED
-                        WHERE ID = %s and USER_ID = %s
+                        WHERE REJECTED_PROBLEMS = %s and USER_ID = %s
                         ''', (rejected_id, user_id))
         connection.commit()
+        cursor.close()
+        connection.close()
+
         return jsonify({"message": "Successfully deleted problem"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-        connection.close()
 
 @rejected.get('/searchRejected')
 def searchRejected():
