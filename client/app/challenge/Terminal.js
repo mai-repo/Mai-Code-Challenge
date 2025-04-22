@@ -4,7 +4,7 @@ import CodeButton from "./CodeButton"
 import { useAppContext } from "components/context";
 
 export default function Terminal(){
-        const { id, data, setData } = useAppContext()
+        const { id, data, setData, challenge} = useAppContext()
 
         async function GPTGenerate() {
 
@@ -57,6 +57,10 @@ export default function Terminal(){
                             <p><strong>Problem:</strong> {data.problem_content}</p>
                         </div>
                     ):
+                    challenge ? (
+                        <p className="text-2xl"> {challenge} </p>
+                    )
+                    :
                     (<p className="text-white text-2xl italic">Click "Generate Again to Load a Problem"</p>)
                     }
                 </div>
