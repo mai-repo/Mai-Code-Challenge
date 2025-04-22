@@ -26,7 +26,7 @@ export default function NavBar(){
     return (
         <main>
             <Navbar fluid rounded className="p-5 border-b-2 border-black">
-                <NavbarBrand href="/" onClick={(e) => { setId(null); setUid(null); setValue(null); setData(null)}}>
+                <NavbarBrand href="/" onClick={(e) => { setId(null); setUid(null); setValue(''); setData([])}}>
                     <img src="/mai_code_challenge_logo.png" className="pl-8 w-1/3" alt="mai_code_challenge_logo"/>
                 </NavbarBrand>
             { id && (
@@ -35,7 +35,7 @@ export default function NavBar(){
                 <NavbarCollapse>
                     <section className="flex flex-row justify-center items-center gap-5 pr-9">
                         <NavbarLink  href="/userSettings">Settings</NavbarLink>
-                        <NavbarLink  href="/" onClick={(e) => { setId(''); setUid(''); setValue(''); setData([])}}> Sign out </NavbarLink>
+                        <NavbarLink  href="/" onClick={(e) => { setId(null); setUid(null); setValue(''); setData([])}}> Sign out </NavbarLink>
                         <Avatar alt="User Profile Image" img="/Profile.png"/>
                     </section>
                 </NavbarCollapse>
