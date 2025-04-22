@@ -5,7 +5,7 @@ import { useAppContext } from "./context"
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 export default function NavBar(){
-    const {id, uid, setId, setUid, setData, setValue} = useAppContext()
+    const {id, uid, setId, setUid, setData, setValue, setChallenge} = useAppContext()
     const router = useRouter();
 
     useEffect(() => {
@@ -35,7 +35,7 @@ export default function NavBar(){
                 <NavbarCollapse>
                     <section className="flex flex-row justify-center items-center gap-5 pr-9">
                         <NavbarLink  href="/userSettings">Settings</NavbarLink>
-                        <NavbarLink  href="/" onClick={(e) => { setId(null); setUid(null); setValue(''); setData([])}}> Sign out </NavbarLink>
+                        <NavbarLink  href="/" onClick={(e) => { setId(null); setUid(null); setValue(''); setData([]); setChallenge('')}}> Sign out </NavbarLink>
                         <Avatar alt="User Profile Image" img="/Profile.png"/>
                     </section>
                 </NavbarCollapse>
