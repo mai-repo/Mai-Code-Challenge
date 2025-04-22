@@ -7,12 +7,15 @@ import { Label, TextInput, Button } from "flowbite-react";
 import Link from "next/link";
 import { useAppContext } from "./context"
 import ReCAPTCHA from 'react-google-recaptcha';
+import { useAppContext } from "./context";
+import { useRouter } from 'next/navigation'
 
 export default function UserLogin(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { setId,  setUid} = useAppContext()
     const [captchaToken, setCaptchaToken] = useState(null);
+    const router = useRouter()
 
     async function getSignIn (email, password) {
 
@@ -37,6 +40,7 @@ export default function UserLogin(){
             setId(data.id)
             setUid(data.uid)
             alert("User successfully logged in.");
+            router.push("/challenge")
         } catch (error) {
             console.error(error.message)
         }
