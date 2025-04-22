@@ -27,7 +27,6 @@ def getRejected():
 
         problem_ids = [row[0] for row in rejected_problems]
 
-
         cursor.execute('''
             SELECT *
             FROM QUESTIONS
@@ -38,7 +37,7 @@ def getRejected():
         cursor.close()
         connection.close()
 
-        return paignation(questions)
+        return paignation(questions), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
