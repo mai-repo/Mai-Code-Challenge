@@ -7,7 +7,6 @@ import { Label, TextInput, Button } from "flowbite-react";
 import Link from "next/link";
 import { useAppContext } from "./context"
 import ReCAPTCHA from 'react-google-recaptcha';
-import { useAppContext } from "./context";
 import { useRouter } from 'next/navigation'
 
 export default function UserLogin(){
