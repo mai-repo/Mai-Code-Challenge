@@ -29,7 +29,6 @@ export default function CodeEditor() {
             console.log("Execution Result:", result.run.output)
             alert(result.run.output)
 
-            navigator.clipboard.writeText(value)
         } catch (error) {
             console.error("Error evaluating code:", error)
         }
@@ -42,10 +41,15 @@ export default function CodeEditor() {
                 theme="vs-dark"
                 defaultLanguage="javascript"
                 defaultValue={`// Welcome to Mai Code Challenge\n// Once you submit your answer, it will disappear but automatically be copied so you can save it elsewhere.`}
-                value ={value}
+                value={value}
                 onChange={(newValue) => setValue(newValue)}
+                options={{
+                    fontSize: 20,
+                    padding: { top: 15 },
+                    wordWrap: "on"
+                }}
             />
-            <div className="flex flex-row  justify-between mt-4">
+            <div className="flex flex-row justify-between mt-4">
                 <Button className="text-lg" onClick={evaluate}>Run Code</Button>
                 <Answer/>
             </div>
