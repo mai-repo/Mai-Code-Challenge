@@ -9,10 +9,9 @@ export default function NavBar(){
     const router = useRouter();
 
     useEffect(() => {
-        if (id) {
-            router.push("/challenge");
+        if (id && uid) {
         }
-    }, [id]);
+    }, [id, uid]);
 
     if (!id) {
     return (
@@ -27,17 +26,21 @@ export default function NavBar(){
     return (
         <main>
             <Navbar fluid rounded className="p-5 border-b-2 border-black">
-                <NavbarBrand as={Link} href="/">
+                <NavbarBrand href="/" onClick={(e) => { setId(null); setUid(null); setValue(null); setData(null)}}>
                     <img src="/mai_code_challenge_logo.png" className="pl-8 w-1/3" alt="mai_code_challenge_logo"/>
                 </NavbarBrand>
+            { id && (
+            <section>
                 <NavbarToggle/>
-                    <NavbarCollapse>
-                        <section className="flex flex-row justify-center items-center gap-5 pr-9">
-                            <NavbarLink href="/user_settings">Settings</NavbarLink>
-                            <NavbarLink href="/" onClick={(e) => { setId(null); setUid(null); setValue(null); setData(null)}}>Sign out</NavbarLink>
-                            <Avatar alt="User Profile Image" img="/Profile.png"/>
-                        </section>
-                    </NavbarCollapse>
+                <NavbarCollapse>
+                    <section className="flex flex-row justify-center items-center gap-5 pr-9">
+                        <NavbarLink  href="/userSettings">Settings</NavbarLink>
+                        <NavbarLink  href="/" onClick={(e) => { setId(null); setUid(null); setValue(null); setData(null)}}> Sign out </NavbarLink>
+                        <Avatar alt="User Profile Image" img="/Profile.png"/>
+                    </section>
+                </NavbarCollapse>
+            </section>
+            )}
             </Navbar>
         </main>
     )
