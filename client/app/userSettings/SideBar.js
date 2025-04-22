@@ -5,7 +5,7 @@ import { Sidebar, SidebarItems, SidebarItemGroup, SidebarItem } from "flowbite-r
 export default function SideBar (){
 
     return (
-    <main className="flex h-screen">
+    <main className="flex h-screen border-r-2 border-black">
         <Sidebar aria-label="Sidebar with content separator">
             <SidebarItems>
                 <SidebarItemGroup>
