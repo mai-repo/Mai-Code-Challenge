@@ -21,7 +21,7 @@ export default function RejectedProblem() {
         const fetchRejected = async () => {
             try {
                 const response = await fetch(
-                    `http://127.0.0.1:8090/getRejected?user_id=${id}&page=${currentPage}`,
+                    `https://backendcodechallenge.vercel.app/?user_id=${id}&page=${currentPage}`,
                     {
                         method: "GET",
                         headers: {
