@@ -25,17 +25,18 @@ export default function NavBar(){
 
     return (
         <main>
-            <Navbar fluid rounded className="p-5 border-b-2 border-black">
-                <NavbarBrand href="/" onClick={(e) => { setId(null); setUid(null); setValue(''); setData([])}}>
-                    <img src="/mai_code_challenge_logo.png" className="pl-8 w-1/3" alt="mai_code_challenge_logo"/>
+            <Navbar fluid rounded className="flex justify-between p-5 border-b-2 border-black flex-nowrap">
+                <NavbarBrand href="/" onClick={(e) => { setId(null); setUid(null); setValue(''); setData([])}} className="w-1/3">
+                    <img src="/mai_code_challenge_logo.png" className="pl-8 w-full flex-shrink-0" alt="mai_code_challenge_logo"/>
                 </NavbarBrand>
             { id && (
             <section>
                 <NavbarToggle/>
                 <NavbarCollapse>
-                    <section className="flex flex-row justify-center items-center gap-5 pr-9">
-                        <NavbarLink  href="/userSettings">Settings</NavbarLink>
-                        <NavbarLink  href="/" onClick={(e) => { setId(null); setUid(null); setValue(''); setData([]); setChallenge('')}}> Sign out </NavbarLink>
+                    <section className="flex items-center gap-5">
+                        <NavbarLink href="/challenge" className="text-lg">Code Challenge</NavbarLink>
+                        <NavbarLink  href="/userSettings" className="text-lg">Settings</NavbarLink>
+                        <NavbarLink  href="/" onClick={(e) => { setId(null); setUid(null); setValue(''); setData([]); setChallenge('')}} className="text-lg"> Sign out </NavbarLink>
                         <Avatar alt="User Profile Image" img="/Profile.png"/>
                     </section>
                 </NavbarCollapse>
