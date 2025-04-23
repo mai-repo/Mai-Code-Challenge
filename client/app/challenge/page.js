@@ -6,7 +6,7 @@ export default function codeChallenge(){
 
     return (
         <section className="p-20">
-            <div className="flex flex-row  justify-center gap-8">
+            <div className="flex flex-row justify-center gap-8">
                 <div className="flex-1">
                     <Terminal/>
                 </div>
