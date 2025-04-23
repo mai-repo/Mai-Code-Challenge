@@ -85,7 +85,7 @@ export default function UserSettings(){
                 </section>
                 <section className="mb-6 w-full">
                     <Label className="text-lg">Change Password</Label>
-                    <TextInput id="password" type="input" placeholder="Password" value={email} onChange={(e) => setEmail(e.target.value)} className=" mb-3"/>
+                    <TextInput id="password" type="input" placeholder="Password" value={email} onChange={(e) => setEmail(e.target.value)} className=" mb-3" required/>
                     <Button onClick={() => ResetPassword(email)} className="mb-6 bg-teal-500">Reset</Button>
                     <Button onClick={() => DeleteUser(id, uid)} className="w-full bg-red-800">Delete</Button>
                 </section>
