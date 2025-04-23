@@ -9,8 +9,7 @@ completed = Blueprint("completed", __name__)
 
 @completed.get("/getCompleted")
 def getCompleted():
-    data = request.get_json()
-    user_id = data.get("user_id")
+    user_id = request.args.get("user_id")
 
     if not user_id:
         return jsonify({"error": "Missing field information."}), 400
@@ -29,9 +28,6 @@ def getCompleted():
 
         problem_ids = [row[0] for row in results]
 
-        if not problem_ids:
-            return jsonify([])
-
         cursor.execute('''
                         SELECT *
                         FROM QUESTIONS
@@ -39,16 +35,13 @@ def getCompleted():
                         ''', (problem_ids,))
 
         questions = cursor.fetchall()
+        cursor.close()
+        connection.close()
 
         return paignation(questions), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-    finally:
-            cursor.close()
-            connection.close()
-
 
 def addCompleted(user_id, question_id):
 
@@ -80,33 +73,23 @@ def updateCompleted():
     completed_id = data.get('completed_id')
 
     if not all([user_id, name, completed_id]):
-        return jsonify({"error": "Missing field information."})
+        return jsonify({"error": "Missing field information."}), 400
 
     try:
         connection = connectDatabase()
         cursor = connection.cursor()
 
         cursor.execute('''
-                        SELECT ID
-                        FROM COMPLETED
-                        WHERE ID = %s and USER_ID = %s
-                       ''', (completed_id, user_id))
-
-        result = cursor.fetchone()
-        questions_id = result[0]
-
-        cursor.execute('''
                         UPDATE QUESTIONS
                         SET NAME = %s
                         WHERE USER_ID = %s and ID = %s
-                       ''', (name, user_id, questions_id))
+                       ''', (name, user_id, completed_id))
         connection.commit()
-        return jsonify({"error": "Successfully updating name."})
-    except Exception as e:
-        return jsonify({"error": str(e)})
-    finally:
         cursor.close()
         connection.close()
+        return jsonify({"message": "Successfully updating name."}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @completed.delete('/deleteCompleted')
 def deleteCompleted():
@@ -123,16 +106,14 @@ def deleteCompleted():
 
         cursor.execute('''
                         DELETE FROM COMPLETED
-                        WHERE ID = %s and USER_ID = %s
+                        WHERE COMPLETED_PROBLEMS = %s and USER_ID = %s
                        ''', (completed_id, user_id))
         connection.commit()
+        cursor.close()
+        connection.close()
         return jsonify({"message": "Successfully deleted problem"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-        connection.close()
-
 
 @completed.get('/searchCompleted')
 def searchCompleted():
