@@ -6,11 +6,11 @@ export default function codeChallenge(){
 
     return (
         <section className="p-20 px-30">
-            <div className="flex flex-row w-full g-8">
-                <div className="flex-1 pr-20">
+            <div className="flex flex-row w-full gap-8">
+                <div className="flex-1">
                     <Terminal/>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 h-full">
                     <CodeEditor/>
                 </div>
             </div>
