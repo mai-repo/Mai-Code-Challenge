@@ -22,7 +22,7 @@ export default function Completed(){
         async function getCompleted() {
             console.log(id)
             try {
-                const response = await fetch(`https://backendcodechallenge.vercel.app/?user_id=${id}&page=${currentPage}`,
+                const response = await fetch(`https://backendcodechallenge.vercel.app/getCompleted?user_id=${id}&page=${currentPage}`,
                     {
                         method: "GET",
                         headers: {
