@@ -40,7 +40,7 @@ export default function Terminal(){
 
 
     return (
-        <main className="flex flex-col h-full">
+        <main className="flex flex-col h-full w-full">
             <div className="bg-black p-20 h-full mb-4 text-white overflow-auto">
                 {data && data.Challenge? (
                     <div className="mb-6 text-2xl">
