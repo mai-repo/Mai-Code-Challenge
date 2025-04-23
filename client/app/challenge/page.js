@@ -5,8 +5,8 @@ import Terminal from "./Terminal"
 export default function codeChallenge(){
 
     return (
-        <section className="p-20 px-30">
-            <div className="flex flex-row gap-8">
+        <section className="p-20">
+            <div className="flex flex-row  justify-center gap-8">
                 <div className="flex-1">
                     <Terminal/>
                 </div>
