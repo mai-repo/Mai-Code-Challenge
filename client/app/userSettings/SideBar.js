@@ -9,7 +9,7 @@ export default function SideBar (){
         <Sidebar aria-label="Sidebar with content separator">
             <SidebarItems>
                 <SidebarItemGroup>
-                    <SidebarItem> User Settings </SidebarItem>
+                    <SidebarItem href="/"> User Settings </SidebarItem>
                     <SidebarItem href="/userSettings/completed"> Completed Challenges </SidebarItem>
                     <SidebarItem href="/userSettings/rejected"> Rejected Challenge </SidebarItem>
                     <SidebarItem> Favorite Challenges </SidebarItem>
