@@ -10,7 +10,7 @@ export default function codeChallenge(){
                 <div className="flex-1">
                     <Terminal/>
                 </div>
-                <div className="flex-1 h-full">
+                <div className="flex-1">
                     <CodeEditor/>
                 </div>
             </div>
