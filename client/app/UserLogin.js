@@ -1,6 +1,6 @@
 'use client';
 
-import { getIdToken, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "lib/firebase";
 import React, { useState} from "react";
 import { Label, TextInput, Button } from "flowbite-react";
@@ -33,6 +33,9 @@ export default function UserLogin(){
             })
 
             const data = await request.json()
+            if (!response.ok) {
+                throw new Error(data.error || 'An error occurred');
+            }
             setEmail('')
             setPassword('')
             setId(data.id)
