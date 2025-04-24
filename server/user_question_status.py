@@ -17,9 +17,9 @@ def getStatus():
         cursor = connection.cursor()
 
         cursor.execute('''
-                        SELECT * FROM USER_QUESTIONS_STATUS
+                        SELECT * FROM USER_QUESTION_STATUS
                         WHERE user_id = %s
-                        ''', (user_id))
+                        ''', (user_id,))
 
         response = cursor.fetchall()
         cursor.close()
