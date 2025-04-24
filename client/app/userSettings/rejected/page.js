@@ -66,8 +66,7 @@ export default function RejectedProblem() {
             })
             const result = await response.json()
             alert(result.message)
-            setName('')
-            return console.log(result)
+            window.location.reload();
         } catch (error){
             console.log(error)
         }
@@ -88,8 +87,7 @@ export default function RejectedProblem() {
             })
             const result = await response.json()
             alert(result.message)
-            setName('')
-            return console.log(result)
+            window.location.reload();
         } catch (error) {
             console.log(error)
         }
