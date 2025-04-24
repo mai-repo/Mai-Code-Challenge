@@ -13,7 +13,7 @@ export default function UserLogin(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { setId,  setUid} = useAppContext()
-    const [captchaToken, setCaptchaToken] = useState(null);
+    const [token, setToken] = useState(null);
     const router = useRouter()
 
     async function getSignIn (email, password) {
@@ -50,7 +50,7 @@ export default function UserLogin(){
 
     async function notARobot(token){
         try {
-            setCaptchaToken(token)
+            setToken(token)
             const response = await fetch('https://backendcodechallenge.vercel.app/verifyUser', {
                 method: "POST",
                 headers: {
