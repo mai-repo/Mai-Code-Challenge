@@ -77,7 +77,7 @@ export default function UserSettings(){
         <section className="flex flex-col justify-center items-center w-1/2  mx-50 p-15 bg-white border-2 border-black ">
             <div className="flex flex-col justify-center items-center w-2/3">
                 <section className="mb-6 w-full">
-                    <Label className="text-lg" icon={HiPencil}>Name</Label>
+                    <Label className="text-lg">Name</Label>
                     <TextInput id="name" type="name" placeholder="Bad Bunny" value={username} onChange={(e) => setUsername(e.target.value)} className="mb-3"required icon={HiPencil}/>
                     <Button onClick={() => updateUsername(id, username)} className="bg-teal-500">Reset</Button>
                 </section>
