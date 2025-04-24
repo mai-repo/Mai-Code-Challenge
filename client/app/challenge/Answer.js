@@ -11,7 +11,7 @@ export default function Answer() {
 
         console.log(data.Challenge, value)
         try {
-            const res = await fetch ("https://backendcodechallenge.vercel.app/evaluateAnswer", {
+            const response = await fetch ("https://backendcodechallenge.vercel.app/evaluateAnswer", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -21,7 +21,7 @@ export default function Answer() {
                     answer: value
                 })
             })
-            const resultData = await res.json()
+            const resultData = await response.json()
             if (!response.ok) {
                 throw new Error(data.error || 'An error occurred');
             }
@@ -52,6 +52,7 @@ export default function Answer() {
             const response = await res.json()
             setData(response)
             alert(response.message)
+
             if (!response.ok) {
                 throw new Error(data.error || 'An error occurred');
             }
@@ -60,7 +61,6 @@ export default function Answer() {
             console.error(error.message)
         }
     }
-
     return (
         <>
             <Button  className="text-lg bg-purple-950" onClick={getAnswer}> Evaluate </Button>
