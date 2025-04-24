@@ -4,7 +4,7 @@ import { useAppContext } from 'components/context'
 import { Button } from 'flowbite-react'
 
 export default function Answer() {
-    const { id, data, value, setValue } = useAppContext()
+    const { id, data, value, setValue, setData } = useAppContext()
     const [result, setResult] = useState([])
 
     const getAnswer = async() => {
@@ -47,8 +47,9 @@ export default function Answer() {
                 })
             })
             const response = await res.json()
+            setData(response)
             console.log(response)
-            alert('Problem saved.')
+            alert(response.message)
         } catch (error) {
             console.error(error.message)
         }
