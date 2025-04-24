@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAppContext } from "components/context";
 import { Label, TextInput, Button } from "flowbite-react";
 import { HiMail, HiOutlineKey, HiPencil } from "react-icons/hi";
@@ -10,12 +10,16 @@ import { isValidEmail, isStrongPassword } from "utlis/validation";
 
 export default function UserSettings(){
 
-    const { id, uid, load, setLoading, error, setError, data } = useAppContext()
+    const { id, uid, load, setLoading, error, setError, data, setValue } = useAppContext()
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [link, setLink] = useState('')
     const [newEmail, setNewEmail] = useState('')
     const [currentPassword, setCurrentPassword] = useState('');
+
+    useEffect(() => {
+        setValue('');
+    }, []);
 
     async function updateUsername(id, username) {
 
