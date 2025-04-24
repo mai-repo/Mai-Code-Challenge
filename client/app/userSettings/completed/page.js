@@ -35,7 +35,7 @@ export default function Completed(){
                 setTotalPage(result.pagination ? result.pagination.total_pages : 1);
                 console.log(result.data)
             } catch (error) {
-                console.error("Error fetching completed data:", error);
+                alert("Error fetching completed data:", error);
             }
         }
         getCompleted();
