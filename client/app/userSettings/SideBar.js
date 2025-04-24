@@ -10,12 +10,12 @@ export default function SideBar (){
         <Sidebar aria-label="Sidebar with content separator">
             <SidebarItems>
                 <SidebarItemGroup>
-                    <SidebarItem href="/userSettings" icon={HiOutlineCog}> User Settings </SidebarItem>
-                    <SidebarItem href="/userSettings/completed" icon={HiOutlineSparkles}> Completed Challenges </SidebarItem>
-                    <SidebarItem href="/userSettings/rejected" icon={HiOutlineEmojiSad}> Rejected Challenge </SidebarItem>
-                    <SidebarItem icon={HiOutlineHeart}> Favorite Challenges </SidebarItem>
-                    <SidebarItem icon={HiOutlineChartPie}> Progress </SidebarItem>
-                    <SidebarItem icon={HiOutlineSearch}> Search </SidebarItem>
+                    <SidebarItem href="/userSettings" icon={HiOutlineCog} className="text-lg"> User Settings </SidebarItem>
+                    <SidebarItem href="/userSettings/completed" icon={HiOutlineSparkles} className="text-lg"> Completed Challenges </SidebarItem>
+                    <SidebarItem href="/userSettings/rejected" icon={HiOutlineEmojiSad} className="text-lg"> Rejected Challenge </SidebarItem>
+                    <SidebarItem icon={HiOutlineHeart} className="text-lg"> Favorite Challenges </SidebarItem>
+                    <SidebarItem icon={HiOutlineChartPie} className="text-lg"> Progress </SidebarItem>
+                    <SidebarItem icon={HiOutlineSearch} className="text-lg"> Search </SidebarItem>
                 </SidebarItemGroup>
             </SidebarItems>
         </Sidebar>
