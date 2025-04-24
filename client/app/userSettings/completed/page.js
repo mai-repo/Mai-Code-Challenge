@@ -33,7 +33,7 @@ export default function Completed(){
                 const result = await response.json();
                 setData(result.data);
                 setTotalPage(result.pagination ? result.pagination.total_pages : 1);
-                console.log(result.data)
+                window.location.reload();
             } catch (error) {
                 alert("Error fetching completed data:", error);
             }
@@ -66,7 +66,7 @@ export default function Completed(){
             })
             const result = await response.json()
             alert(result.message)
-            return console.log(result)
+            window.location.reload();
         } catch (error){
             console.log(error)
         }
@@ -88,6 +88,7 @@ export default function Completed(){
             const result = await response.json()
             alert(result.message)
             setName('')
+            window.location.reload();
             return console.log(result)
         } catch (error) {
             console.log(error)
