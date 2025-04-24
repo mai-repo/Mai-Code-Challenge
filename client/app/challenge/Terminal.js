@@ -1,13 +1,10 @@
 "use client"
-import { useState } from "react";
 import CodeButton from "./CodeButton"
 import { useAppContext } from "components/context";
 import { addFavorites } from "utlis/validation";
 
 export default function Terminal(){
         const { id, data, setData, challenge, setChallenge} = useAppContext()
-        const [favorite_problems, setFavoriteProblems] = useState()
-
         async function GPTGenerate() {
 
             try {
