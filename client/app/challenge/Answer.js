@@ -50,7 +50,7 @@ export default function Answer() {
                 })
             })
             const response = await res.json()
-            if (!response.ok) {
+            if (!res.ok) {
                 throw new Error(data.error || 'An error occurred');
             }
             alert('Problem saved.')
