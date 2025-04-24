@@ -12,14 +12,12 @@ export default function Completed(){
     const [totalPage, setTotalPage] = useState(1);
     const router = useRouter();
 
-
     const onPageChange = (page) => setCurrentPage(page);
 
     useEffect(() => {
         if (!id) return;
 
         async function getCompleted() {
-            console.log(id)
             try {
                 const response = await fetch(`https://backendcodechallenge.vercel.app/getCompleted?user_id=${id}&page=${currentPage}`,
                     {
