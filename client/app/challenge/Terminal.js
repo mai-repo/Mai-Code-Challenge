@@ -13,10 +13,12 @@ export default function Terminal(){
                     "https://backendcodechallenge.vercel.app/generateChallenge"
                 );
                 const result = await response.json();
-                console.log(result)
+                if (!response.ok) {
+                    throw new Error(data.error || 'An error occurred');
+                }
                 setData(result);
             } catch (error) {
-                console.error("Error fetching data:", error);
+                alert("Error fetching data:", error);
             }
         }
 
@@ -27,10 +29,12 @@ export default function Terminal(){
                     "https://backendcodechallenge.vercel.app/scrape"
                 )
                 const result = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || 'An error occurred');
+                }
                 setData(result);
-                console.log(result);
             } catch (error) {
-                console.error ("Error fetch data:", error)
+                alert("Error fetch data:", error)
             }
         }
 
