@@ -47,7 +47,6 @@ def getFavorite():
                         WHERE USER_ID = %s
                        ''', (user_id,))
         favorite_problems = cursor.fetchall()
-        print (favorite_problems)
         problem_ids = [row[2] for row in favorite_problems]
 
         cursor.execute('''
@@ -57,7 +56,6 @@ def getFavorite():
             ''', (problem_ids,))
 
         response = cursor.fetchall()
-        print (response)
         cursor.close()
         connection.close()
         return paignation(response), 200
