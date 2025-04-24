@@ -19,6 +19,9 @@ export default function UpdatePassword() {
                 body: JSON.stringify({email})
             })
             const data = await request.json()
+            if (!response.ok) {
+                throw new Error(data.error || 'An error occurred');
+            }
             setLink(data.reset_link)
             setEmail('')
             setSuccess(true)
