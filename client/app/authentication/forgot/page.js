@@ -10,7 +10,7 @@ export default function UpdatePassword() {
     async function UpdatePassword(email) {
 
         try {
-            const request = await fetch ('https://backendcodechallenge.vercel.app/updatePassword',
+            const response = await fetch ('https://backendcodechallenge.vercel.app/updatePassword',
             {
                 method: "PUT",
                 headers: {
@@ -18,7 +18,7 @@ export default function UpdatePassword() {
                 },
                 body: JSON.stringify({email})
             })
-            const data = await request.json()
+            const data = await response.json()
             if (!response.ok) {
                 throw new Error(data.error || 'An error occurred');
             }
