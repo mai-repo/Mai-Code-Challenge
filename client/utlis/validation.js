@@ -17,9 +17,10 @@ export async function addFavorites(id, favorite_problems){
             },
             body:JSON.stringify({user_id:id, favorite_problems:favorite_problems})
         })
-        const result = response.json()
-        alert("Sucessfully added!")
+        const result = await response.json();
+        console.log("Result:", result);
+        alert("Successfully added!");
     } catch (error) {
-        alert(error)
+        console.log(error)
     }
 }
