@@ -25,7 +25,6 @@ def getCompleted():
                         ''', (user_id,))
 
         results = cursor.fetchall()
-
         problem_ids = [row[0] for row in results]
 
         cursor.execute('''
@@ -55,15 +54,15 @@ def addCompleted(user_id, question_id):
         cursor.execute('''
                         INSERT INTO COMPLETED (USER_ID, COMPLETED_PROBLEMS)
                         VALUES (%s, %s)
-                       ''', (user_id, question_id))
+                        ''', (user_id, question_id))
 
         connection.commit()
+        cursor.close()
+        connection.close()
+
         return jsonify({"message": "Completed Problem added successfully"}), 201
     except Exception as e:
         return jsonify({"error": str(e)})
-    finally:
-            cursor.close()
-            connection.close()
 
 @completed.put('/updateCompleted')
 def updateCompleted():
@@ -83,7 +82,7 @@ def updateCompleted():
                         UPDATE QUESTIONS
                         SET NAME = %s
                         WHERE USER_ID = %s and ID = %s
-                       ''', (name, user_id, completed_id))
+                        ''', (name, user_id, completed_id))
         connection.commit()
         cursor.close()
         connection.close()
@@ -107,7 +106,7 @@ def deleteCompleted():
         cursor.execute('''
                         DELETE FROM COMPLETED
                         WHERE COMPLETED_PROBLEMS = %s and USER_ID = %s
-                       ''', (completed_id, user_id))
+                        ''', (completed_id, user_id))
         connection.commit()
         cursor.close()
         connection.close()
