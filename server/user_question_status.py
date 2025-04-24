@@ -7,11 +7,9 @@ status = Blueprint('status', __name__)
 
 @status.get("/getStatus")
 def getStatus():
-    data = request.get_json()
-    user_id = data.get("user_id")
-    status_id = data.get("status_id")
+    user_id = request.args.get("user_id")
 
-    if not all (user_id and status_id):
+    if not user_id:
         return jsonify({"error": "Missing field information."}), 400
 
     try:
@@ -20,15 +18,15 @@ def getStatus():
 
         cursor.execute('''
                         SELECT * FROM USER_QUESTIONS_STATUS
-                        WHERE user_id = %s and id = %s
-                        ''', (user_id, status_id))
+                        WHERE user_id = %s
+                        ''', (user_id))
+
         response = cursor.fetchall()
-        return jsonify(response), 200
+        cursor.close()
+        connection.close()
+        return jsonify({"message": "Successfully grabbed the information", "response": response}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    finally:
-            cursor.close()
-            connection.close()
 
 
 def addStatus(user_id, question_id, status):
