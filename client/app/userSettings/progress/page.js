@@ -5,7 +5,7 @@ import { PieChart, Pie, Cell, Legend, Tooltip, Label} from 'recharts';
 import { useAppContext } from 'components/context';
 
 export default function ProgressChart() {
-    const { id, setData, data } = useAppContext();
+    const { id, setData } = useAppContext();
     const [progressData, setProgressData] = useState([]);
     const [hasMounted, setHasMounted] = useState(false);
     const COLORS = ['#963E2C', '#000000'];
