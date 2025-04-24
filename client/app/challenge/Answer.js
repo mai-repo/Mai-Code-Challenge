@@ -23,7 +23,7 @@ export default function Answer() {
             })
             const resultData = await response.json()
             if (!response.ok) {
-                throw new Error(data.error || 'An error occurred');
+                throw new Error(data.error);
             }
             setResult(resultData.isCorrect)
             const evaluation = resultData.breakdown.join('\n');
@@ -31,7 +31,7 @@ export default function Answer() {
             alert("Evaluation successful.")
             navigator.clipboard.writeText(value)
         } catch (error) {
-            console.error(error.message)
+            alert(error+ "try again!")
         }
     }
 
@@ -56,9 +56,8 @@ export default function Answer() {
             if (!response.ok) {
                 throw new Error(data.error || 'An error occurred');
             }
-
         } catch (error) {
-            console.error(error.message)
+            alert(error)
         }
     }
     return (
