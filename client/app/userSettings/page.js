@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useAppContext } from "components/context";
 import { Label, TextInput, Button } from "flowbite-react";
+import { HiMail, HiOutlineKey, HiPencil } from "react-icons/hi";
 
 export default function UserSettings(){
 
@@ -71,25 +72,26 @@ export default function UserSettings(){
             console.log(error)
         }
     }
+
     return (
         <section className="flex flex-col justify-center items-center w-1/2  mx-50 p-15 bg-white border-2 border-black ">
             <div className="flex flex-col justify-center items-center w-2/3">
                 <section className="mb-6 w-full">
-                    <Label className="text-lg">Name</Label>
-                    <TextInput id="name" type="name" placeholder="Bad Bunny" value={username} onChange={(e) => setUsername(e.target.value)} className="mb-3"required/>
+                    <Label className="text-lg" icon={HiPencil}>Name</Label>
+                    <TextInput id="name" type="name" placeholder="Bad Bunny" value={username} onChange={(e) => setUsername(e.target.value)} className="mb-3"required icon={HiPencil}/>
                     <Button onClick={() => updateUsername(id, username)} className="bg-teal-500">Reset</Button>
                 </section>
                 <section className="mb-6 w-full">
                     <Label className="text-lg">Email</Label>
-                    <TextInput id="name" type="name" placeholder="Bad Bunny" value={username} onChange={(e)=> setUsername(e.target.value)} className="mb-3"required/>
+                    <TextInput id="email" type="email" placeholder="name@gmail.com" value={username} onChange={(e)=> setUsername(e.target.value)} className="mb-3" icon={HiMail}required/>
+                    <Button onClick={() => ResetPassword(email)} className="bg-teal-500">Reset</Button>
                 </section>
                 <section className="mb-6 w-full">
                     <Label className="text-lg">Change Password</Label>
-                    <TextInput id="password" type="input" placeholder="Password" value={email} onChange={(e) => setEmail(e.target.value)} className=" mb-3" required/>
+                    <TextInput id="password" type="input" placeholder="Password" value={email} onChange={(e) => setEmail(e.target.value)} className=" mb-3" icon={HiOutlineKey} required/>
                     <Button onClick={() => ResetPassword(email)} className="mb-6 bg-teal-500">Reset</Button>
                     <Button onClick={() => DeleteUser(id, uid)} className="w-full bg-red-800">Delete</Button>
                 </section>
-
             </div>
         </section>
     )
