@@ -25,17 +25,15 @@ def addFavorite():
                         VALUES(%s, %s)
                        ''', (user_id, favorite_problems))
         connection.commit()
+        cursor.close()
+        connection.close()
         return jsonify({"message": "Favorite added successfully."}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    finally:
-            cursor.close()
-            connection.close()
 
 @favorite.get('/getFavorite')
 def getFavorite():
-    data = request.get_json()
-    user_id = data.get('user_id')
+    user_id = request.args.get("user_id")
 
     if not user_id:
         return jsonify({"error": "Missing field information"}), 400
@@ -50,12 +48,11 @@ def getFavorite():
                        ''', (user_id,))
 
         response = cursor.fetchall()
+        cursor.close()
+        connection.close()
         return paignation(response), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-        connection.close()
 
 @favorite.put('/updateFavorite')
 def updateFavorite():
@@ -84,12 +81,11 @@ def updateFavorite():
                         WHERE ID = %s and USER_ID = %s
                         ''', (name, question_id, user_id))
         connection.commit()
+        cursor.close()
+        connection.close()
         return jsonify({"message": "Favorite updated successfully."}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-        connection.close()
 
 @favorite.delete('/deleteFavorite')
 def deleteFavorite():
@@ -110,12 +106,11 @@ def deleteFavorite():
                         ''', (favorite_id, user_id))
 
         connection.commit()
+        cursor.close()
+        connection.close()
         return jsonify({"message": "Favorite deleted successfully."}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-        connection.close()
 
 @favorite.get('/searchFavorite')
 def searchFavorite():
