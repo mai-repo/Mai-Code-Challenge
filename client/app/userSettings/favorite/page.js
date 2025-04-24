@@ -40,7 +40,6 @@ export default function favoritePage(){
         router.push("/challenge");
     }
 
-
     async function updateFavorite(name, id, favorite_id){
         if (!name.trim()) {
             alert("Please enter a name.");
