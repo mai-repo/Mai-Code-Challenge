@@ -31,7 +31,7 @@ export default function UpdatePassword() {
     return (
         <main>
             {!success ? (
-                <form className="flex flex-col justify-center px-150 gap-4" onSubmit={(e)=> {e.preventDefault(); UpdatePassword(email)}}>
+                <form className="min-h-screen flex items-center justify-center" onSubmit={(e)=> {e.preventDefault(); UpdatePassword(email)}}>
                     <section className="m-50 p-20 border-2 border-black bg-white">
                         <div className="mb-4">
                             <Label htmlFor="email">Email</Label>
