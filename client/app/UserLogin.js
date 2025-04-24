@@ -1,6 +1,6 @@
 'use client';
 
-import { getIdToken, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "lib/firebase";
 import React, { useState} from "react";
 import { Label, TextInput, Button } from "flowbite-react";
@@ -24,7 +24,7 @@ export default function UserLogin(){
 
             const id_token = await user.getIdToken()
 
-            const request = await fetch ('https://backendcodechallenge.vercel.app/authentication/login', {
+            const response = await fetch ('https://backendcodechallenge.vercel.app/authentication/login', {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${id_token}`,
@@ -33,7 +33,10 @@ export default function UserLogin(){
                 body: JSON.stringify({message: "Token sucessfully sent."})
             })
 
-            const data = await request.json()
+            const data = await response.json()
+            if (!response.ok) {
+                throw new Error(data.error || 'An error occurred');
+            }
             setEmail('')
             setPassword('')
             setId(data.id)
@@ -55,9 +58,7 @@ export default function UserLogin(){
                     },
                     body: JSON.stringify({ token }),
                 });
-
                 const data = await response.json();
-
                 if (response.ok) {
                     alert(data.message);
                 } else {

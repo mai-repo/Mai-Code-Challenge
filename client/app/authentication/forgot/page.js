@@ -10,7 +10,7 @@ export default function UpdatePassword() {
     async function UpdatePassword(email) {
 
         try {
-            const request = await fetch ('https://backendcodechallenge.vercel.app/updatePassword',
+            const response = await fetch ('https://backendcodechallenge.vercel.app/updatePassword',
             {
                 method: "PUT",
                 headers: {
@@ -18,7 +18,10 @@ export default function UpdatePassword() {
                 },
                 body: JSON.stringify({email})
             })
-            const data = await request.json()
+            const data = await response.json()
+            if (!response.ok) {
+                throw new Error(data.error || 'An error occurred');
+            }
             setLink(data.reset_link)
             setEmail('')
             setSuccess(true)
@@ -31,7 +34,7 @@ export default function UpdatePassword() {
     return (
         <main>
             {!success ? (
-                <form className="flex flex-col justify-center px-150 gap-4" onSubmit={(e)=> {e.preventDefault(); UpdatePassword(email)}}>
+                <form className="min-h-screen flex items-center justify-center" onSubmit={(e)=> {e.preventDefault(); UpdatePassword(email)}}>
                     <section className="m-50 p-20 border-2 border-black bg-white">
                         <div className="mb-4">
                             <Label htmlFor="email">Email</Label>

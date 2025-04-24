@@ -24,20 +24,20 @@ export default function Register(){
                 body: JSON.stringify({ email, name, password })
             });
             const data = await response.json();
-            console.log( data);
+            if (!response.ok) {
+                throw new Error(data.error || 'An error occurred');
+            }
             alert(data.message);
             setEmail('')
             setName('')
             setPassword('')
-
         } catch (error) {
-            console.error("Error:", error);
             alert(error.message);
         }
-    }
+        }
 
     return (
-        <form className="flex flex-col justify-center px-150 gap-4" onSubmit={ (e) => { e.preventDefault(); createUser(email, name, password);}}>
+        <form className="min-h-screen flex items-center justify-center" onSubmit={ (e) => { e.preventDefault(); createUser(email, name, password);}}>
             <section className="m-50 p-20 border-2 border-black bg-white">
                     <div className="mb-4">
                         <Label htmlFor="name">Name</Label>
@@ -52,7 +52,7 @@ export default function Register(){
                         <TextInput id="password" type="password" placeholder="********" onChange={(e) => setPassword(e.target.value)} value={password} required/>
                     </div>
                     <Button className="mb-4" type="submit">Register</Button>
-                    <Link href="/UserLogin">
+                    <Link href="/">
                         Got an account? Sign-in!
                     </Link>
             </section>
