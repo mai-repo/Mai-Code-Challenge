@@ -6,6 +6,7 @@ import { Label, TextInput, Button } from "flowbite-react";
 import { HiMail, HiOutlineKey, HiPencil } from "react-icons/hi";
 import { reauthenticateWithCredential, EmailAuthProvider, updateEmail, verifyBeforeUpdateEmail } from "firebase/auth";
 import { auth } from "lib/firebase";
+import { isValidEmail, isStrongPassword } from "utlis/validation";
 
 export default function UserSettings(){
 
@@ -35,8 +36,11 @@ export default function UserSettings(){
     }
 
     async function ResetPassword(email) {
-        const newTab = window.open("", "_blank");
-        console.log(data)
+        if (!isValidEmail(email)) {
+            alert("Invalid email format.");
+            return;
+        }
+
         try {
 
             const request = await fetch ('https://backendcodechallenge.vercel.app/updatePassword',
@@ -53,6 +57,7 @@ export default function UserSettings(){
             console.log(data.reset_link)
 
             if (data.reset_link) {
+                const newTab = window.open("", "_blank");
                 newTab.location.href = data.reset_link;
             }
         } catch (error) {
@@ -80,13 +85,24 @@ export default function UserSettings(){
 
     async function changeEmail(newEmail, currentPassword) {
 
+        if (!isValidEmail(newEmail)) {
+            setError("Invalid email format.");
+            alert("Invalid email format.");
+            return;
+        }
+
+        if (!isStrongPassword(currentPassword)) {
+            setError("Password must be at least 8 characters long and include uppercase, lowercase, and a number.");
+            alert("Weak password. Must be 8+ characters, include uppercase, lowercase, and a number.");
+            return;
+        }
+
         const user = auth.currentUser;
 
         setLoading(true);
         setError("");
 
         try {
-            console.log(newEmail)
             const credential = EmailAuthProvider.credential(user.email, currentPassword);
             await reauthenticateWithCredential(user, credential);
             await verifyBeforeUpdateEmail(user, newEmail);
