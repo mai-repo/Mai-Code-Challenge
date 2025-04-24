@@ -25,8 +25,10 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AppWrapper>
+        <div className="w-full overflow-x-hidden">
             <NavBar/>
             {children}
+        </div>
         </AppWrapper>
 
       </body>

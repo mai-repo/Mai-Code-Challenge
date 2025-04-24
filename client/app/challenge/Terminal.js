@@ -40,36 +40,34 @@ export default function Terminal(){
 
 
     return (
-        <main className="flex flex-col">
-            <section className="flex flex-col flex-1">
-                <div className="bg-black p-20 h-155 mb-4 text-white overflow-auto rounded-lg">
-                    {data && data.Challenge? (
-                        <div className="mb-6 text-2xl">
-                            <p><strong>Name:</strong> {data.Name}</p><br />
-                            <p><strong>Challenge:</strong> {data.Challenge}</p><br />
-                            <p><strong>Constraints:</strong> {data.Constraints}</p><br />
-                            <p><strong>Input:</strong> {data.Input}</p><br />
-                            <p><strong>Output:</strong> {data.Output}</p><br />
-                        </div>
-                    ) :
-                    data && data.problem_content ? (
-                        <div className="mb-6 text-2xl">
-                            <p><strong>Problem:</strong> {data.problem_content}</p>
-                        </div>
-                    ):
-                    challenge ? (
-                        <p className="text-2xl"> {challenge} </p>
-                    )
-                    :
-                    (<p className="text-white text-2xl italic">Click "Generate Again to Load a Problem"</p>)
-                    }
-                </div>
-                <CodeButton
-                    GPTGenerate={GPTGenerate}
-                    Clear={() => setData("")}
-                    Scrape={Scrape}
-                />
-            </section>
+        <main className="flex flex-col h-full w-full">
+            <div className="bg-black p-20 h-full mb-4 text-white overflow-auto">
+                {data && data.Challenge? (
+                    <div className="mb-6 text-2xl">
+                        <p><strong>Name:</strong> {data.Name}</p><br />
+                        <p><strong>Challenge:</strong> {data.Challenge}</p><br />
+                        <p><strong>Constraints:</strong> {data.Constraints}</p><br />
+                        <p><strong>Input:</strong> {data.Input}</p><br />
+                        <p><strong>Output:</strong> {data.Output}</p><br />
+                    </div>
+                ) :
+                data && data.problem_content ? (
+                    <div className="mb-6 text-2xl">
+                        <p><strong>Problem:</strong> {data.problem_content}</p>
+                    </div>
+                ):
+                challenge ? (
+                    <p className="text-2xl"> {challenge} </p>
+                )
+                :
+                (<p className="text-white text-2xl italic">Click "Generate Again to Load a Problem"</p>)
+                }
+            </div>
+            <CodeButton
+                GPTGenerate={GPTGenerate}
+                Clear={() => setData("")}
+                Scrape={Scrape}
+            />
         </main>
     )
 

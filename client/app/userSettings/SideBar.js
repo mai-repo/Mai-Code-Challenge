@@ -1,6 +1,7 @@
 "use client"
 
 import { Sidebar, SidebarItems, SidebarItemGroup, SidebarItem } from "flowbite-react"
+import { HiOutlineCog, HiOutlineChartPie, HiOutlineHeart, HiOutlineEmojiSad, HiOutlineSparkles, HiOutlineSearch} from "react-icons/hi"
 
 export default function SideBar (){
 
@@ -9,12 +10,12 @@ export default function SideBar (){
         <Sidebar aria-label="Sidebar with content separator">
             <SidebarItems>
                 <SidebarItemGroup>
-                    <SidebarItem> User Settings </SidebarItem>
-                    <SidebarItem href="/userSettings/completed"> Completed Challenges </SidebarItem>
-                    <SidebarItem href="/userSettings/rejected"> Rejected Challenge </SidebarItem>
-                    <SidebarItem> Favorite Challenges </SidebarItem>
-                    <SidebarItem> Progress </SidebarItem>
-                    <SidebarItem> Search </SidebarItem>
+                    <SidebarItem href="/userSettings" icon={HiOutlineCog} className="text-lg"> User Settings </SidebarItem>
+                    <SidebarItem href="/userSettings/completed" icon={HiOutlineSparkles} className="text-lg"> Completed Challenges </SidebarItem>
+                    <SidebarItem href="/userSettings/rejected" icon={HiOutlineEmojiSad} className="text-lg"> Rejected Challenge </SidebarItem>
+                    <SidebarItem icon={HiOutlineHeart} className="text-lg"> Favorite Challenges </SidebarItem>
+                    <SidebarItem icon={HiOutlineChartPie} className="text-lg"> Progress </SidebarItem>
+                    <SidebarItem icon={HiOutlineSearch} className="text-lg"> Search </SidebarItem>
                 </SidebarItemGroup>
             </SidebarItems>
         </Sidebar>
