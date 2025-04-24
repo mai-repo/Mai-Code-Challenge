@@ -27,7 +27,7 @@ export default function favoritePage(){
                 const result = await response.json()
                 setData(result.data)
                 setTotalPage(result.pagination ? result.pagination.total_pages : 1)
-                console.log(result)
+                alert("Successfully grab data!")
             } catch (error) {
                 alert(error)
             }
@@ -119,7 +119,7 @@ export default function favoritePage(){
                     </div>
                 ))
                 ) : (
-                    <p className="text-gray-500">No rejected challenges found.</p>
+                    <p className="text-gray-500">Loading progress data...</p>
                 )}
         </section>
         <div className="flex overflow-x-auto sm:justify-center">
