@@ -10,6 +10,7 @@
     "postinstall": "flowbite-react patch"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@monaco-editor/react": "^4.7.0",
     "firebase": "^11.6.0",
     "flowbite-react": "^0.11.7",
@@ -17,7 +18,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
-    "recharts": "^2.15.3"
+    "recharts": "^2.15.3",
+    "react-google-recaptcha": "^3.1.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
