@@ -33,7 +33,6 @@ export default function Completed(){
                 const result = await response.json();
                 setData(result.data);
                 setTotalPage(result.pagination ? result.pagination.total_pages : 1);
-                console.log(result.data)
             } catch (error) {
                 alert("Error fetching completed data:", error);
             }
@@ -65,10 +64,12 @@ export default function Completed(){
                 })
             })
             const result = await response.json()
+            if (!response.ok) {
+                throw new Error(data.error || 'An error occurred');
+            }
             alert(result.message)
-            return console.log(result)
         } catch (error){
-            console.log(error)
+            alert(error)
         }
     }
 
@@ -90,7 +91,7 @@ export default function Completed(){
             setName('')
             return console.log(result)
         } catch (error) {
-            console.log(error)
+            alert(error)
         }
     }
 
