@@ -2,12 +2,10 @@
 import { Navbar, NavbarBrand, NavbarCollapse, NavbarToggle, NavbarLink, Avatar} from "flowbite-react"
 import Link from "next/link"
 import { useAppContext } from "./context"
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function NavBar(){
     const {id, uid, setId, setUid, setData, setValue, setChallenge} = useAppContext()
-    const router = useRouter();
 
     useEffect(() => {
         if (id && uid) {
