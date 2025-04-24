@@ -60,7 +60,6 @@ export default function favoritePage(){
             })
             const result = await response.json()
             alert(result.message)
-            setName('')
             window.location.reload();
         } catch (error){
             console.log(error)
