@@ -77,17 +77,10 @@ def updateFavorite():
         cursor = connection.cursor()
 
         cursor.execute('''
-                        SELECT FAVORITE_PROBLEMS FROM FAVORITES
-                        WHERE ID = %s AND USER_ID = %s
-                        ''', (favorite_id, user_id))
-        result = cursor.fetchone()
-        question_id = result[0]
-
-        cursor.execute('''
                         UPDATE QUESTIONS
                         SET NAME = %s
                         WHERE ID = %s and USER_ID = %s
-                        ''', (name, question_id, user_id))
+                        ''', (name, favorite_id, user_id))
         connection.commit()
         cursor.close()
         connection.close()
@@ -152,6 +145,8 @@ def searchFavorite():
             if search_term == question[2]:
                 return jsonify({"id": question[0], "name": question[2]}), 200
 
+        cursor.close()
+        connection.close()
         return jsonify({"error": "No search found."}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
