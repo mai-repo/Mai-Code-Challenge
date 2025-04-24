@@ -43,7 +43,7 @@ export default function UserSettings(){
 
         try {
 
-            const request = await fetch ('https://backendcodechallenge.vercel.app/updatePassword',
+            const response = await fetch ('https://backendcodechallenge.vercel.app/updatePassword',
             {
                 method: "PUT",
                 headers: {
@@ -51,7 +51,7 @@ export default function UserSettings(){
                 },
                 body: JSON.stringify({email})
             })
-            const data = await request.json()
+            const data = await response.json()
             setLink(data.reset_link)
             setEmail('')
             console.log(data.reset_link)
