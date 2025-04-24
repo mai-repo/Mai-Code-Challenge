@@ -2,7 +2,7 @@
 import { useAppContext } from "components/context"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation";
-import { Button, TextInput} from "flowbite-react";
+import { Button, TextInput, Pagination} from "flowbite-react";
 
 export default function favoritePage(){
     const {id, data, setData, setChallenge} = useAppContext()
@@ -12,6 +12,7 @@ export default function favoritePage(){
     const router = useRouter();
     const [name, setName] = useState('');
 
+    const onPageChange = (page) => setCurrentPage(page);
 
     useEffect(() => {
         if (!id) return;
@@ -90,6 +91,7 @@ export default function favoritePage(){
 
 
     return(
+        <div>
         <section className="bg-white mx-50 p-15 border-2 border-black">
             <h1 className="text-4xl mb-10"> Favorite Problems</h1>
             {Array.isArray(data) && data.length > 0 ? (
@@ -121,5 +123,16 @@ export default function favoritePage(){
                     <p className="text-gray-500">No rejected challenges found.</p>
                 )}
         </section>
-    )
-}
+        <div className="flex overflow-x-auto sm:justify-center">
+            <Pagination
+            layout="paignation"
+            currentPage={currentPage}
+            totalPages={totalPage}
+            onPageChange={onPageChange}
+            previousLabel="Go back"
+            nextLabel="Go foward"
+            showIcons
+            />
+        </div>
+    </div>
+)}
