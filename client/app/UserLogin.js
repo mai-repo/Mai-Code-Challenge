@@ -48,7 +48,7 @@ export default function UserLogin(){
     async function notARobot(token){
         try {
             setCaptchaToken(token)
-            const response = await fetch('http://127.0.0.1:8090/verifyUser', {
+            const response = await fetch('https://backendcodechallenge.vercel.app/verifyUser', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
