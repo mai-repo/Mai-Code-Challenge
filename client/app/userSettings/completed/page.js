@@ -65,10 +65,13 @@ export default function Completed(){
                 })
             })
             const result = await response.json()
+            if (!response.ok) {
+                throw new Error(data.error || 'An error occurred');
+            }
             alert(result.message)
             window.location.reload();
         } catch (error){
-            console.log(error)
+            alert(error)
         }
     }
 
@@ -91,7 +94,7 @@ export default function Completed(){
             window.location.reload();
             return console.log(result)
         } catch (error) {
-            console.log(error)
+            alert(error)
         }
     }
 

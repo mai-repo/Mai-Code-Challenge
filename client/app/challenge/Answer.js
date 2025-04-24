@@ -22,6 +22,9 @@ export default function Answer() {
                 })
             })
             const resultData = await res.json()
+            if (!response.ok) {
+                throw new Error(data.error || 'An error occurred');
+            }
             setResult(resultData.isCorrect)
             const evaluation = resultData.breakdown.join('\n');
             setValue(evaluation)
@@ -48,8 +51,11 @@ export default function Answer() {
             })
             const response = await res.json()
             setData(response)
-            console.log(response)
             alert(response.message)
+            if (!response.ok) {
+                throw new Error(data.error || 'An error occurred');
+            }
+
         } catch (error) {
             console.error(error.message)
         }

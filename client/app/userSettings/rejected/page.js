@@ -32,9 +32,9 @@ export default function RejectedProblem() {
                 const result = await response.json();
                 setData(result.data);
                 setTotalPage(result.pagination.total_pages)
-                console.log("Fetched rejected data:", result);
+                alert("Successfully grab data!")
             } catch (error) {
-                console.error("Error fetching rejected data:", error);
+                alert("Error fetching rejected data:", error);
             }
         };
 
@@ -67,8 +67,9 @@ export default function RejectedProblem() {
             const result = await response.json()
             alert(result.message)
             window.location.reload();
+            setName('')
         } catch (error){
-            console.log(error)
+            alert(error)
         }
     }
 
@@ -88,8 +89,9 @@ export default function RejectedProblem() {
             const result = await response.json()
             alert(result.message)
             window.location.reload();
+            setName('')
         } catch (error) {
-            console.log(error)
+            alert(error)
         }
     }
 
@@ -136,11 +138,7 @@ export default function RejectedProblem() {
                 nextLabel="Go foward"
                 showIcons
                 />
-
-
             </div>
-
         </div>
-
     );
 }

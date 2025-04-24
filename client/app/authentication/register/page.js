@@ -24,17 +24,17 @@ export default function Register(){
                 body: JSON.stringify({ email, name, password })
             });
             const data = await response.json();
-            console.log( data);
+            if (!response.ok) {
+                throw new Error(data.error || 'An error occurred');
+            }
             alert(data.message);
             setEmail('')
             setName('')
             setPassword('')
-
         } catch (error) {
-            console.error("Error:", error);
             alert(error.message);
         }
-    }
+        }
 
     return (
         <form className="min-h-screen flex items-center justify-center" onSubmit={ (e) => { e.preventDefault(); createUser(email, name, password);}}>
