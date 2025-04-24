@@ -23,7 +23,7 @@ export default function UserLogin(){
 
             const id_token = await user.getIdToken()
 
-            const request = await fetch ('https://backendcodechallenge.vercel.app/authentication/login', {
+            const response = await fetch ('https://backendcodechallenge.vercel.app/authentication/login', {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${id_token}`,
@@ -32,7 +32,7 @@ export default function UserLogin(){
                 body: JSON.stringify({message: "Token sucessfully sent."})
             })
 
-            const data = await request.json()
+            const data = await response.json()
             if (!response.ok) {
                 throw new Error(data.error || 'An error occurred');
             }
