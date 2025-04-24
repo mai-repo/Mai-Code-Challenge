@@ -125,7 +125,7 @@ export default function RejectedProblem() {
                         </div>
                     ))
                 ) : (
-                    <p className="text-gray-500">No rejected challenges found.</p>
+                    <p className="text-gray-500">Loading progress data...</p>
                 )}
             </section>
             <div className="flex overflow-x-auto sm:justify-center">
