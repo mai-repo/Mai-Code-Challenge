@@ -18,7 +18,6 @@ export default function Completed(){
     useEffect(() => {
         if (!id) return;
 
-
         async function getCompleted() {
             console.log(id)
             try {
@@ -33,7 +32,6 @@ export default function Completed(){
                 const result = await response.json();
                 setData(result.data);
                 setTotalPage(result.pagination ? result.pagination.total_pages : 1);
-                window.location.reload();
             } catch (error) {
                 alert("Error fetching completed data:", error);
             }
@@ -65,9 +63,6 @@ export default function Completed(){
                 })
             })
             const result = await response.json()
-            if (!response.ok) {
-                throw new Error(data.error || 'An error occurred');
-            }
             alert(result.message)
             window.location.reload();
         } catch (error){
