@@ -37,7 +37,7 @@ export default function Register(){
     }
 
     return (
-        <form className="flex flex-col justify-center px-150 gap-4" onSubmit={ (e) => { e.preventDefault(); createUser(email, name, password);}}>
+        <form className="min-h-screen flex items-center justify-center" onSubmit={ (e) => { e.preventDefault(); createUser(email, name, password);}}>
             <section className="m-50 p-20 border-2 border-black bg-white">
                     <div className="mb-4">
                         <Label htmlFor="name">Name</Label>
