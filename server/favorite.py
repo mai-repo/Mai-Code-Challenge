@@ -110,7 +110,7 @@ def deleteFavorite():
 
         cursor.execute('''
                         DELETE FROM FAVORITES
-                        WHERE ID = %s AND USER_ID = %s
+                        WHERE FAVORITE_PROBLEMS = %s AND USER_ID = %s
                         ''', (favorite_id, user_id))
 
         connection.commit()
