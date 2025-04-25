@@ -60,11 +60,11 @@ export default function ProgressChart() {
                 <h1 className="text-4xl mb-10">Progress</h1>
                 <div className='flex justify-center'>
                     {progressData.length > 0 ? (
-                        <PieChart width={600} height={600}>
+                        <PieChart width={500} height={500}>
                             <Pie
                                 data={progressData}
-                                innerRadius={230}
-                                outerRadius={240}
+                                innerRadius={200}
+                                outerRadius={210}
                                 paddingAngle={5}
                                 dataKey="value"
                                 startAngle={180}
