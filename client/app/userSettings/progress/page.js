@@ -56,15 +56,15 @@ export default function ProgressChart() {
 
     return (
         <div>
-            <section className="bg-white mx-50 p-15 border-2 border-black w-1/2">
+            <section className="bg-white mx-20 p-15 border-2 border-black w-1/2">
                 <h1 className="text-4xl mb-10">Progress</h1>
                 <div className='flex justify-center'>
                     {progressData.length > 0 ? (
-                        <PieChart width={500} height={500}>
+                        <PieChart width={400} height={400}>
                             <Pie
                                 data={progressData}
-                                innerRadius={200}
-                                outerRadius={210}
+                                innerRadius={150}
+                                outerRadius={160}
                                 paddingAngle={5}
                                 dataKey="value"
                                 startAngle={180}
