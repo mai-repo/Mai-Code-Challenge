@@ -6,7 +6,7 @@ import { Label, TextInput, Button } from "flowbite-react";
 import { HiMail, HiOutlineKey, HiPencil } from "react-icons/hi";
 import { reauthenticateWithCredential, EmailAuthProvider, updateEmail, verifyBeforeUpdateEmail } from "firebase/auth";
 import { auth } from "lib/firebase";
-import { isValidEmail, isStrongPassword } from "utlis/validation";
+import { isValidEmail, isStrongPassword } from "utils/validation";
 
 export default function UserSettings(){
 
