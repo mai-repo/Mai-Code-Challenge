@@ -8,7 +8,6 @@ export default function UpdatePassword() {
     const [success, setSuccess] = useState(false)
 
     async function UpdatePassword(email) {
-
         try {
             const response = await fetch ('https://backendcodechallenge.vercel.app/updatePassword',
             {
@@ -26,9 +25,8 @@ export default function UpdatePassword() {
             setEmail('')
             setSuccess(true)
         } catch (error) {
-            console.log(error.message)
+            alert(error)
         }
-
     }
 
     return (
