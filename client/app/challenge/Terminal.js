@@ -43,7 +43,6 @@ export default function Terminal(){
             return text.replace(/\$(.*?)\$/g, (match, p1) => p1);
         };
 
-
     return (
         <main className="flex flex-col h-full w-full">
             <div className="bg-black p-15 h-full mb-4 text-white overflow-auto">
@@ -68,8 +67,7 @@ export default function Terminal(){
                 ):
                 challenge ? (
                     <p className="text-2xl"> {challenge} </p>
-                )
-                :
+                ):
                 (<p className="text-white text-2xl italic">Click "Generate Again to Load a Problem"</p>)
                 }
             </div>
