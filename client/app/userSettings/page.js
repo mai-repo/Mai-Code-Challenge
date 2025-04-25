@@ -119,7 +119,7 @@ export default function UserSettings(){
     }
 
     return (
-        <section className="flex flex-col justify-center items-center max-w-1/2  mx-50 p-12 bg-white border-2 border-black ">
+        <section className="flex flex-col justify-center items-center max-w-3/5  mx-35 p-12 bg-white border-2 border-black ">
             <div className="flex flex-col justify-center items-center w-full">
                 <section className="w-full">
                     <div className="text-2xl mb-2">Change Name and Password</div>
