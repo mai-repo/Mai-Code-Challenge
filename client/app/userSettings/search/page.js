@@ -43,8 +43,8 @@ export default function Search (){
 
     return (
         <div className="flex flex-col justify-center">
-            <section className="bg-white mx-20 p-15 border-2 border-black">
-                <h1 className="text-4xl mb-10">Search Question</h1>
+            <section className="bg-white mx-15 p-10 border-2 border-black">
+                <h1 className="text-4xl mb-8">Search Question</h1>
                 {Array.isArray(data) && data.length > 0 ? (
                     data.map((item, key) => (
                     <div key={key} className="flex flex-col md:flex-row justify-between items-center mb-4 gap-2">
