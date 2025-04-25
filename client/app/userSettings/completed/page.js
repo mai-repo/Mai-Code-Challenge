@@ -28,7 +28,6 @@ export default function Completed(){
                     }
                 );
                 const result = await response.json();
-                alert(result.message);
                 setData(result.data);
                 setTotalPage(result.pagination ? result.pagination.total_pages : 1);
             } catch (error) {
