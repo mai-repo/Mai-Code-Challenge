@@ -28,7 +28,6 @@ export default function UserSettings(){
                 body: JSON.stringify({ user_id: id, username:username})
             });
             const result = await response.json()
-            console.log(result.message)
             alert(result.message)
         } catch (error) {
             alert(error)
@@ -77,7 +76,7 @@ export default function UserSettings(){
                 }
             )
             const result = response.json()
-            console.log(result.message)
+            alert(result.message)
         } catch (error) {
             console.log(error)
         }

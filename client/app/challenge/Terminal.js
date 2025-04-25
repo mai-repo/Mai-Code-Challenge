@@ -1,11 +1,10 @@
 "use client"
-import { useState } from "react";
 import CodeButton from "./CodeButton"
 import { useAppContext } from "components/context";
+import { addFavorites } from "utlis/validation";
 
 export default function Terminal(){
-        const { id, data, setData, challenge} = useAppContext()
-
+        const { id, data, setData, challenge, setChallenge} = useAppContext()
         async function GPTGenerate() {
 
             try {
@@ -33,6 +32,8 @@ export default function Terminal(){
                     throw new Error(data.error || 'An error occurred');
                 }
                 setData(result);
+                alert(result.message)
+                setChallenge(result.problem_content)
             } catch (error) {
                 alert("Error fetch data:", error)
             }
@@ -45,7 +46,12 @@ export default function Terminal(){
 
     return (
         <main className="flex flex-col h-full w-full">
-            <div className="bg-black p-20 h-full mb-4 text-white overflow-auto">
+            <div className="bg-black p-15 h-full mb-4 text-white overflow-auto">
+            {data.question_id && (
+                <div className="w-full flex justify-end">
+                    <img className="w-1/20" src="/favorite.png" onClick={() => addFavorites(id, data.question_id)}/>
+                </div>
+            )}
                 {data && data.Challenge? (
                     <div className="mb-6 text-2xl">
                         <p><strong>Name:</strong> {data.Name}</p><br />

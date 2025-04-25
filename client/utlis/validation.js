@@ -7,3 +7,19 @@ export function isStrongPassword(password) {
     const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     return re.test(password);
 }
+
+export async function addFavorites(id, favorite_problems){
+    try {
+        const response = await fetch ("https://backendcodechallenge.vercel.app/addFavorite", {
+            method:"POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body:JSON.stringify({user_id:id, favorite_problems:favorite_problems})
+        })
+        const result = response.json()
+        alert("Sucessfully added!")
+    } catch (error) {
+        alert(error)
+    }
+}

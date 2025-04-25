@@ -4,14 +4,14 @@ import { useAppContext } from 'components/context'
 import { Button } from 'flowbite-react'
 
 export default function Answer() {
-    const { id, data, value, setValue } = useAppContext()
+    const { id, data, value, setValue, setData } = useAppContext()
     const [result, setResult] = useState([])
 
     const getAnswer = async() => {
 
         console.log(data.Challenge, value)
         try {
-            const res = await fetch ("https://backendcodechallenge.vercel.app/evaluateAnswer", {
+            const response = await fetch ("https://backendcodechallenge.vercel.app/evaluateAnswer", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -21,9 +21,9 @@ export default function Answer() {
                     answer: value
                 })
             })
-            const resultData = await res.json()
+            const resultData = await response.json()
             if (!response.ok) {
-                throw new Error(data.error || 'An error occurred');
+                throw new Error(data.error);
             }
             setResult(resultData.isCorrect)
             const evaluation = resultData.breakdown.join('\n');
@@ -31,7 +31,7 @@ export default function Answer() {
             alert("Evaluation successful.")
             navigator.clipboard.writeText(value)
         } catch (error) {
-            console.error(error.message)
+            alert(error+ "try again!")
         }
     }
 
@@ -50,15 +50,16 @@ export default function Answer() {
                 })
             })
             const response = await res.json()
-            if (!res.ok) {
+            setData(response)
+            alert(response.message)
+
+            if (!response.ok) {
                 throw new Error(data.error || 'An error occurred');
             }
-            alert('Problem saved.')
         } catch (error) {
-            console.error(error.message)
+            alert(error)
         }
     }
-
     return (
         <>
             <Button  className="text-lg bg-purple-950" onClick={getAnswer}> Evaluate </Button>

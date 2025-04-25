@@ -46,6 +46,14 @@ def getFavorite():
                         SELECT * FROM FAVORITES
                         WHERE USER_ID = %s
                        ''', (user_id,))
+        favorite_problems = cursor.fetchall()
+        problem_ids = [row[2] for row in favorite_problems]
+
+        cursor.execute('''
+            SELECT *
+            FROM QUESTIONS
+            WHERE ID = ANY(%s)
+            ''', (problem_ids,))
 
         response = cursor.fetchall()
         cursor.close()
@@ -69,17 +77,10 @@ def updateFavorite():
         cursor = connection.cursor()
 
         cursor.execute('''
-                        SELECT FAVORITE_PROBLEMS FROM FAVORITES
-                        WHERE ID = %s AND USER_ID = %s
-                        ''', (favorite_id, user_id))
-        result = cursor.fetchone()
-        question_id = result[0]
-
-        cursor.execute('''
                         UPDATE QUESTIONS
                         SET NAME = %s
                         WHERE ID = %s and USER_ID = %s
-                        ''', (name, question_id, user_id))
+                        ''', (name, favorite_id, user_id))
         connection.commit()
         cursor.close()
         connection.close()
@@ -102,7 +103,7 @@ def deleteFavorite():
 
         cursor.execute('''
                         DELETE FROM FAVORITES
-                        WHERE ID = %s AND USER_ID = %s
+                        WHERE FAVORITE_PROBLEMS = %s AND USER_ID = %s
                         ''', (favorite_id, user_id))
 
         connection.commit()
@@ -144,6 +145,8 @@ def searchFavorite():
             if search_term == question[2]:
                 return jsonify({"id": question[0], "name": question[2]}), 200
 
+        cursor.close()
+        connection.close()
         return jsonify({"error": "No search found."}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500

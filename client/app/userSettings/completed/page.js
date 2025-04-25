@@ -18,7 +18,6 @@ export default function Completed(){
     useEffect(() => {
         if (!id) return;
 
-
         async function getCompleted() {
             console.log(id)
             try {
@@ -64,10 +63,8 @@ export default function Completed(){
                 })
             })
             const result = await response.json()
-            if (!response.ok) {
-                throw new Error(data.error || 'An error occurred');
-            }
             alert(result.message)
+            window.location.reload();
         } catch (error){
             alert(error)
         }
@@ -89,6 +86,7 @@ export default function Completed(){
             const result = await response.json()
             alert(result.message)
             setName('')
+            window.location.reload();
             return console.log(result)
         } catch (error) {
             alert(error)
