@@ -119,9 +119,9 @@ export default function UserSettings(){
     }
 
     return (
-        <section className="flex flex-col justify-center items-center w-1/2  mx-50 p-15 bg-white border-2 border-black ">
+        <section className="flex flex-col justify-center items-center max-w-1/2  mx-50 p-12 bg-white border-2 border-black ">
             <div className="flex flex-col justify-center items-center w-full">
-                <section className="mb-6 w-full">
+                <section className="w-full">
                     <div className="text-2xl mb-2">Change Name and Password</div>
                     <Label className="text-lg">Name</Label>
                     <div className="flex justify-between gap-5">
@@ -129,22 +129,22 @@ export default function UserSettings(){
                         <Button onClick={() => updateUsername(id, username)} className="w-1/6 text-lg bg-teal-500">Reset</Button>
                     </div>
                 </section>
-                <section className="mb-6 w-full">
+                <section className="w-full">
                     <Label className="text-lg">Generate a new Password Link: Enter your email</Label>
-                    <div className="flex justify-between gap-5 mb-12">
-                        <TextInput id="input" type="input" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} className="mb-6 w-3/4" icon={HiMail} required/>
-                        <Button onClick={() => ResetPassword(email)} className="w-1/6 text-lg bg-teal-500">Reset</Button>
+                    <div className="flex justify-between mb-12 gap-5">
+                        <TextInput id="input" type="input" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-3/4" icon={HiMail} required/>
+                        <Button onClick={() => ResetPassword(email)} className="w-1/6 text-lg  bg-teal-500">Reset</Button>
                     </div>
-                    <section className="mb-6 w-full">
+                    <section className="w-full mb-12">
                         <div className="text-2xl mb-2"> Change Email </div>
                         <Label className="text-lg"> New Email</Label>
                         <TextInput id="email" type="email" placeholder="name@gmail.com" value={newEmail} onChange={(e)=> setNewEmail(e.target.value)} className="mb-3 w-3/4" icon={HiMail}required/>
                         <Label className="text-lg">Password</Label>
                         <TextInput id="password" type="password" placeholder="Enter Password" value={currentPassword} onChange={(e)=> setCurrentPassword(e.target.value)} className="mb-3 w-3/4" icon={HiOutlineKey}required/>
-                        <Button onClick={() => changeEmail(newEmail, currentPassword)} className="w-3/4 mb-12 text-lg bg-green-600">Reset</Button>
+                        <Button onClick={() => changeEmail(newEmail, currentPassword)} className="w-1/4 text-lg bg-green-600">Reset</Button>
                     </section>
-                    <div className="text-2xl mb-2"> Delete Account  </div>
-                    <Button onClick={() => DeleteUser(id, uid)} className="w-3/4 bg-red-800 text-xl">Delete</Button>
+                    <div className="text-2xl"> Delete Account  </div>
+                    <Button onClick={() => DeleteUser(id, uid)} className="w-1/4 bg-red-800 text-xl">Delete</Button>
                 </section>
             </div>
         </section>
