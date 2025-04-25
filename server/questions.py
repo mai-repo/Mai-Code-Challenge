@@ -2,35 +2,35 @@ from db_connection import connectDatabase
 from user_question_status import addStatus, updateStatus
 from rejected import addRejected
 from completed import addCompleted
+from pagination import paignation
 from flask import Blueprint, jsonify, request
 import logging
 
 logger = logging.getLogger(__name__)
-
 questions = Blueprint('questions', __name__)
 
 @questions.get("/getProblem")
 def getProblem():
+    user_id = request.args.get('user_id')
+
     connection = connectDatabase()
     cursor = connection.cursor()
 
     cursor.execute('''
-                   SELECT *
-                   FROM
-                   QUESTIONS
-                   ''')
+                   SELECT * FROM QUESTIONS
+                   WHERE USER_ID = %s
+                   ''', (user_id,))
     response = cursor.fetchall()
+    cursor.close()
+    connection.close()
+
     try:
         if response:
-            return jsonify(response)
+            return paignation(response), 200
         else:
             return jsonify({"message":"No information found"}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-        connection.close()
-
 
 @questions.post("/addProblem")
 def addProblem():
@@ -63,12 +63,11 @@ def addProblem():
         else:
             addRejected(user_id, question_id)
 
+        cursor.close()
+        connection.close()
         return jsonify({"message": "Problem added successfully", "question_id": question_id, "is_correct": is_correct}), 200
     except Exception as e:
         return jsonify({"error":str(e)}), 500
-    finally:
-            cursor.close()
-            connection.close()
 
 @questions.put("/updateProblem")
 def updateProblem():
@@ -92,12 +91,11 @@ def updateProblem():
         status = "COMPLETED" if is_correct == True else "REJECTED"
         updateStatus(user_id, id, status)
 
+        cursor.close()
+        connection.close()
         return jsonify({"message": "Problem updated successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-        connection.close()
 
 @questions.delete('/deleteProblem')
 def deleteProblem():
@@ -117,9 +115,34 @@ def deleteProblem():
                         WHERE ID = %s AND USER_ID = %s
                     ''', (id, user_id))
         connection.commit()
+        cursor.close()
+        connection.close()
         return jsonify({"message": "Successfully deleted problem"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-        connection.close()
+
+@questions.get('/searchQuestions')
+def searchQuestions():
+    user_id = request.args.get("user_id")
+    searchTerm = request.args.get("searchTerm")
+    try:
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+            SELECT *
+            FROM QUESTIONS
+            WHERE USER_ID = %s
+            ''', (user_id,))
+        questions = cursor.fetchall()
+
+        matched_questions = []
+        for question in questions:
+            question_name = question[2].lower()
+            if question_name.startswith(searchTerm[:3]):
+                matched_questions.append([question[0], question[1], question[2], question[3]])
+
+        return jsonify(matched_questions), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
