@@ -22,7 +22,6 @@ export default function UserSettings(){
     }, []);
 
     async function updateUsername(id, username) {
-
         try {
             const response = await fetch ("https://backendcodechallenge.vercel.app/updateUsername", {
                 method: "PUT",
@@ -64,7 +63,7 @@ export default function UserSettings(){
                 newTab.location.href = data.reset_link;
             }
         } catch (error) {
-            console.log(error.message)
+            console.log(error)
         }
     }
 
