@@ -4,7 +4,7 @@ import { useAppContext } from 'components/context'
 import { Button } from 'flowbite-react'
 
 export default function Answer() {
-    const { id, data, value, setValue, setData } = useAppContext()
+    const { id, data, value, setValue, setData, challenge } = useAppContext()
     const [result, setResult] = useState([])
 
     const getAnswer = async() => {
@@ -15,7 +15,7 @@ export default function Answer() {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    challenge: data.Challenge,
+                    challenge: challenge,
                     answer: value
                 })
             })
