@@ -14,7 +14,7 @@ export default function SideBar (){
                     <SidebarItem href="/userSettings/completed" icon={HiOutlineSparkles} className="text-lg"> Completed Challenges </SidebarItem>
                     <SidebarItem href="/userSettings/rejected" icon={HiOutlineEmojiSad} className="text-lg"> Rejected Challenge </SidebarItem>
                     <SidebarItem href="/userSettings/favorite" icon={HiOutlineHeart} className="text-lg"> Favorite Challenges </SidebarItem>
-                    <SidebarItem icon={HiOutlineChartPie} className="text-lg"> Progress </SidebarItem>
+                    <SidebarItem href="/userSettings/progress" icon={HiOutlineChartPie} className="text-lg"> Progress </SidebarItem>
                     <SidebarItem icon={HiOutlineSearch} className="text-lg"> Search </SidebarItem>
                 </SidebarItemGroup>
             </SidebarItems>

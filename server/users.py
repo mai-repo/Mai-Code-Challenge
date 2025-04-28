@@ -22,35 +22,6 @@ if not firebase_admin._apps:
     firebase_admin.initialize_app(cred)
 
 
-@users.get('/getUser')
-def getUser():
-    data = request.get_json()
-    user_id = data.get("user_id")
-
-    if (not user_id):
-        return jsonify({"error": "No user id present."}), 400
-
-    try:
-        connection = connectDatabase()
-        cursor = connection.cursor()
-
-        cursor.execute('''
-                        SELECT * FROM USERS
-                        WHERE ID = %s
-                        ''', (user_id,))
-
-        response = cursor.fetchone()
-
-        cursor.close()
-        connection.close()
-
-        if response:
-            return jsonify({"name": response[0], "email": response[1]})
-        else:
-            return jsonify({"error": "No user found."}), 404
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
 @users.put('/updateUsername')
 def updateUsername():
     data = request.get_json()

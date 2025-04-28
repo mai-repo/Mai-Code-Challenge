@@ -12,14 +12,12 @@ export default function Completed(){
     const [totalPage, setTotalPage] = useState(1);
     const router = useRouter();
 
-
     const onPageChange = (page) => setCurrentPage(page);
 
     useEffect(() => {
         if (!id) return;
 
         async function getCompleted() {
-            console.log(id)
             try {
                 const response = await fetch(`https://backendcodechallenge.vercel.app/getCompleted?user_id=${id}&page=${currentPage}`,
                     {
@@ -30,6 +28,7 @@ export default function Completed(){
                     }
                 );
                 const result = await response.json();
+                alert(result.message);
                 setData(result.data);
                 setTotalPage(result.pagination ? result.pagination.total_pages : 1);
             } catch (error) {
@@ -49,7 +48,6 @@ export default function Completed(){
             alert("Please enter a name.");
             return;
         }
-        console.log(name, id, completed_id)
         try {
             const response = await fetch ('https://backendcodechallenge.vercel.app/updateCompleted', {
                 method: "PUT",
@@ -123,7 +121,7 @@ export default function Completed(){
                         </div>
                     ))
                 ) : (
-                    <p className="text-gray-500">No completed challenges found.</p>
+                    <p className="text-gray-500">Loading progress data...</p>
                 )}
             </section>
             <div className="flex overflow-x-auto sm:justify-center">
