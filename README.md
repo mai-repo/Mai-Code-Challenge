@@ -1,6 +1,6 @@
 # Mai Code Challenges
 
-Mai Code Challenges simplifies coding interview prep by providing distraction-free, randomly generated coding challenges and feedback—mimicking real interview unpredictability without the clutter of traditional platforms.
+Mai Code Challenges simplifies coding interview prep by providing distraction-free, randomly generated coding challenges and feedback—mimicking real interview unpredictability without the clutter of traditional platforms. You can cheack out the site here: mai-code-challenges.vercel.app
 
 ## Project Proposal
 
@@ -12,6 +12,46 @@ Mai Code Challenges simplifies coding interview prep by providing distraction-fr
 
 ### Full Proposal:
 [Mai Code Challenge Proposal.pdf](https://github.com/user-attachments/files/19657790/Mai.Code.Challenge.Proposal.pdf)
+
+## Tech Stack
+
+### Frontend
+- **Framework**: [Next.js](https://nextjs.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components**: [Flowbite](https://flowbite.com/)
+- **Icons**: [Heroicons](https://heroicons.com/)
+
+### Backend
+- **Framework**: [Python Flask](https://flask.palletsprojects.com/)
+- **Server**: [Gunicorn](https://gunicorn.org/)
+
+### Database
+- **Local Development**: PostgreSQL
+- **Production**: [Supabase](https://supabase.com/)
+
+### Authentication
+- [Firebase Authentication](https://firebase.google.com/products/auth)
+
+### Deployment
+- **Frontend**: [Vercel](https://vercel.com/)
+- **Backend**: [Vercel](https://vercel.com/)
+
+### APIs
+- **GPT Integration**: [OpenAI API](https://platform.openai.com/)
+
+### Editor
+- [Manco Editor](https://manco-editor.com/)
+
+### Web Scraping
+- [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/)
+
+### Anti-Bot Protection
+- [Google reCAPTCHA](https://www.google.com/recaptcha/)
+
+### Testing
+- **Accessibility**: [Wave](https://wave.webaim.org/)
+- **End-to-End Testing**: [Cypress](https://www.cypress.io/)
+- **Unit Testing**: [unittest](https://docs.python.org/3/library/unittest.html)
 
 ## Features
 
@@ -148,3 +188,29 @@ Use the following command to start the application with Gunicorn:
 ```bash
 gunicorn -w 4 -b 0.0.0.0:5432 main:app
 ```
+
+## Frontend Installation
+
+1. Navigate to the `frontend` directory:
+   ```bash
+   cd frontend
+   ```
+
+2. Install the required dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+
+4. Open your browser and navigate to:
+   ```
+   http://localhost:3000
+   ```
+
+
+
+
