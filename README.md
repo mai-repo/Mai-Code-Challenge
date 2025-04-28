@@ -15,23 +15,23 @@ Mai Code Challenges simplifies coding interview prep by providing distraction-fr
 
 ## Tech Stack
 
-### Frontend
+#### Frontend
 ![Next.js](https://img.shields.io/badge/-Next.js-000000?style=flat&logo=next.js&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/-Tailwind%20CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
 ![Flowbite](https://img.shields.io/badge/-Flowbite-38B2AC?style=flat&logo=flowbite&logoColor=white)
 ![Heroicons](https://img.shields.io/badge/-Heroicons-4A5568?style=flat&logo=heroicons&logoColor=white)
 
-### Backend & APIs
+#### Backend & APIs
 ![Python Flask](https://img.shields.io/badge/-Flask-000000?style=flat&logo=flask&logoColor=white)
 ![Gunicorn](https://img.shields.io/badge/-Gunicorn-499848?style=flat&logo=gunicorn&logoColor=white)
 ![OpenAI GPT](https://img.shields.io/badge/-OpenAI%20GPT-412991?style=flat&logo=openai&logoColor=white)
 
-### Database & Authentication
+#### Database & Authentication
 ![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-336791?style=flat&logo=postgresql&logoColor=white)
 ![Supabase](https://img.shields.io/badge/-Supabase-3ECF8E?style=flat&logo=supabase&logoColor=white)
 ![Firebase](https://img.shields.io/badge/-Firebase-FFCA28?style=flat&logo=firebase&logoColor=black)
 
-### Deployment & Utilities
+#### Deployment & Utilities
 ![Vercel](https://img.shields.io/badge/-Vercel-000000?style=flat&logo=vercel&logoColor=white)
 ![Beautiful Soup](https://img.shields.io/badge/-Beautiful%20Soup-4B8BBE?style=flat&logo=python&logoColor=white)
 ![Google reCAPTCHA](https://img.shields.io/badge/-Google%20reCAPTCHA-4285F4?style=flat&logo=google&logoColor=white)
