@@ -13,45 +13,29 @@ Mai Code Challenges simplifies coding interview prep by providing distraction-fr
 ### Full Proposal:
 [Mai Code Challenge Proposal.pdf](https://github.com/user-attachments/files/19657790/Mai.Code.Challenge.Proposal.pdf)
 
-## Tech Stack 🚀
+## Tech Stack 
 
 ### Frontend
-- ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white) **Framework**: [Next.js](https://nextjs.org/)
-- ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- ![Flowbite](https://img.shields.io/badge/Flowbite-38B2AC?style=for-the-badge&logo=flowbite&logoColor=white) **UI Components**: [Flowbite](https://flowbite.com/)
-- ![Heroicons](https://img.shields.io/badge/Heroicons-4A5568?style=for-the-badge&logo=heroicons&logoColor=white) **Icons**: [Heroicons](https://heroicons.com/)
+![Next.js](https://img.shields.io/badge/-Next.js-000000?style=flat&logo=next.js&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/-Tailwind%20CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
+![Flowbite](https://img.shields.io/badge/-Flowbite-38B2AC?style=flat&logo=flowbite&logoColor=white)
+![Heroicons](https://img.shields.io/badge/-Heroicons-4A5568?style=flat&logo=heroicons&logoColor=white)
 
-### Backend
-- ![Python Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white) **Framework**: [Python Flask](https://flask.palletsprojects.com/)
-- ![Gunicorn](https://img.shields.io/badge/Gunicorn-499848?style=for-the-badge&logo=gunicorn&logoColor=white) **Server**: [Gunicorn](https://gunicorn.org/)
+### Backend & APIs
+![Python Flask](https://img.shields.io/badge/-Flask-000000?style=flat&logo=flask&logoColor=white)
+![Gunicorn](https://img.shields.io/badge/-Gunicorn-499848?style=flat&logo=gunicorn&logoColor=white)
+![OpenAI GPT](https://img.shields.io/badge/-OpenAI%20GPT-412991?style=flat&logo=openai&logoColor=white)
 
-### Database
-- ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white) **Local Development**: PostgreSQL
-- ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) **Production**: [Supabase](https://supabase.com/)
+### Database & Authentication
+![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-336791?style=flat&logo=postgresql&logoColor=white)
+![Supabase](https://img.shields.io/badge/-Supabase-3ECF8E?style=flat&logo=supabase&logoColor=white)
+![Firebase](https://img.shields.io/badge/-Firebase-FFCA28?style=flat&logo=firebase&logoColor=black)
 
-### Authentication
-- ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black) [Firebase Authentication](https://firebase.google.com/products/auth)
-
-### Deployment
-- ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) **Frontend**: [Vercel](https://vercel.com/)
-- ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) **Backend**: [Vercel](https://vercel.com/)
-
-### APIs
-- ![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white) **GPT Integration**: [OpenAI API](https://platform.openai.com/)
-
-### Editor
-- ![Manco Editor](https://img.shields.io/badge/Manco_Editor-000000?style=for-the-badge&logo=code&logoColor=white) [Manco Editor](https://manco-editor.com/)
-
-### Web Scraping
-- ![Beautiful Soup](https://img.shields.io/badge/Beautiful_Soup-4B8BBE?style=for-the-badge&logo=python&logoColor=white) [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/)
-
-### Anti-Bot Protection
-- ![Google reCAPTCHA](https://img.shields.io/badge/Google_reCAPTCHA-4285F4?style=for-the-badge&logo=google&logoColor=white) [Google reCAPTCHA](https://www.google.com/recaptcha/)
-
-### Testing
-- ![Wave](https://img.shields.io/badge/Wave-000000?style=for-the-badge&logo=accessibility&logoColor=white) **Accessibility**: [Wave](https://wave.webaim.org/)
-- ![Cypress](https://img.shields.io/badge/Cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white) **End-to-End Testing**: [Cypress](https://www.cypress.io/)
-- ![unittest](https://img.shields.io/badge/unittest-3776AB?style=for-the-badge&logo=python&logoColor=white) **Unit Testing**: [unittest](https://docs.python.org/3/library/unittest.html)
+### Deployment & Utilities
+![Vercel](https://img.shields.io/badge/-Vercel-000000?style=flat&logo=vercel&logoColor=white)
+![Beautiful Soup](https://img.shields.io/badge/-Beautiful%20Soup-4B8BBE?style=flat&logo=python&logoColor=white)
+![Google reCAPTCHA](https://img.shields.io/badge/-Google%20reCAPTCHA-4285F4?style=flat&logo=google&logoColor=white)
+![Cypress](https://img.shields.io/badge/-Cypress-17202C?style=flat&logo=cypress&logoColor=white)
 
 ## Features
 
