@@ -13,7 +13,7 @@ Mai Code Challenges simplifies coding interview prep by providing distraction-fr
 ### Full Proposal:
 [Mai Code Challenge Proposal.pdf](https://github.com/user-attachments/files/19657790/Mai.Code.Challenge.Proposal.pdf)
 
-## Tech Stack 
+## Tech Stack
 
 ### Frontend
 ![Next.js](https://img.shields.io/badge/-Next.js-000000?style=flat&logo=next.js&logoColor=white)
