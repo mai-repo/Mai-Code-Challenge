@@ -1,7 +1,8 @@
 "use client"
 import CodeButton from "./CodeButton"
 import { useAppContext } from "components/context";
-import { addFavorites } from "utlis/validation";
+import { addFavorites } from "utils/validation";
+import { useEffect } from "react";
 
 export default function Terminal(){
         const { id, data, setData, challenge, setChallenge} = useAppContext()
@@ -16,6 +17,9 @@ export default function Terminal(){
                     throw new Error(data.error || 'An error occurred');
                 }
                 setData(result);
+                console.log(result)
+                setChallenge(result.Challenge)
+                console.log(challenge)
             } catch (error) {
                 alert("Error fetching data:", error);
             }
@@ -31,25 +35,26 @@ export default function Terminal(){
                 if (!response.ok) {
                     throw new Error(data.error || 'An error occurred');
                 }
-                setData(result);
-                alert(result.message)
-                setChallenge(result.problem_content)
+                const combined = result.problem_content.join("\n");
+                setData(combined);
+                setChallenge(combined);
+                alert('Successfully grabbed the data.')
             } catch (error) {
-                alert("Error fetch data:", error)
+                alert(error)
             }
         }
+
 
         const cleanText = (text) => {
             return text.replace(/\$(.*?)\$/g, (match, p1) => p1);
         };
-
 
     return (
         <main className="flex flex-col h-full w-full">
             <div className="bg-black p-15 h-full mb-4 text-white overflow-auto">
             {data.question_id && (
                 <div className="w-full flex justify-end">
-                    <img className="w-1/20" src="/favorite.png" onClick={() => addFavorites(id, data.question_id)}/>
+                    <img className="w-1/20" src="/favorite.png" alt="heart emoji" onClick={() => addFavorites(id, data.question_id)}/>
                 </div>
             )}
                 {data && data.Challenge? (
@@ -61,15 +66,14 @@ export default function Terminal(){
                         <p><strong>Output:</strong> {data.Output}</p><br />
                     </div>
                 ) :
-                data && data.problem_content ? (
+                data && challenge ? (
                     <div className="mb-6 text-2xl">
-                        <p><strong>Problem:</strong> {data.problem_content}</p>
+                        <p><strong>Problem:</strong> {cleanText(challenge)}</p>
                     </div>
                 ):
                 challenge ? (
                     <p className="text-2xl"> {challenge} </p>
-                )
-                :
+                ):
                 (<p className="text-white text-2xl italic">Click "Generate Again to Load a Problem"</p>)
                 }
             </div>

@@ -87,7 +87,7 @@ def deleteUser():
                         DELETE
                         FROM USERS
                         WHERE ID = %s and UID = %s
-                       ''', (user_id, uid))
+                        ''', (user_id, uid))
         connection.commit()
 
         if cursor.rowcount == 0:
@@ -150,7 +150,7 @@ def login():
         cursor.execute('''
                         SELECT * FROM USERS
                         WHERE UID = %s
-                       ''', (uid,))
+                        ''', (uid,))
 
         user = cursor.fetchone()
         cursor.close()

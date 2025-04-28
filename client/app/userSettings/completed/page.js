@@ -28,7 +28,6 @@ export default function Completed(){
                     }
                 );
                 const result = await response.json();
-                alert(result.message);
                 setData(result.data);
                 setTotalPage(result.pagination ? result.pagination.total_pages : 1);
             } catch (error) {
@@ -93,7 +92,7 @@ export default function Completed(){
 
     return (
         <div>
-            <section className="bg-white mx-50 p-15 border-2 border-black">
+            <section className="bg-white mx-15 p-10 border-2 border-black">
                 <h1 className="text-4xl mb-10"> Completed Problems</h1>
                 {Array.isArray(data) && data.length > 0 ? (
                     data.map((item, key) => (

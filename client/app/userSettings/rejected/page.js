@@ -97,7 +97,7 @@ export default function RejectedProblem() {
 
     return (
         <div>
-            <section className="bg-white mx-50 p-15 border-2 border-black">
+            <section className="bg-white mx-15 p-10 border-2 border-black">
                 <h1 className="text-4xl mb-10"> Rejected Problems</h1>
                 {Array.isArray(data) && data.length > 0 ? (
                     data.map((item, key) => (

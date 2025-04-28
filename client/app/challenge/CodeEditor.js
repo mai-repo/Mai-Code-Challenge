@@ -26,11 +26,10 @@ export default function CodeEditor() {
             })
             const result = await response.json()
             if (!response.ok) {
-                throw new Error('Try again!');
+                throw new Error(' Try again!');
             }
             console.log("Execution Result:", result.run.output)
             alert(result.run.output)
-
         } catch (error) {
             console.error("Error evaluating code:", error)
         }

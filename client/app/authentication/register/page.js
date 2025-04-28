@@ -34,29 +34,26 @@ export default function Register(){
         } catch (error) {
             alert(error.message);
         }
-        }
+    }
 
     return (
         <form className="min-h-screen flex items-center justify-center" onSubmit={ (e) => { e.preventDefault(); createUser(email, name, password);}}>
             <section className="m-50 p-20 border-2 border-black bg-white">
-                    <div className="mb-4">
-                        <Label htmlFor="name">Name</Label>
-                        <TextInput id="name" type="text" placeholder="e.g. Bad Bunny" onChange={(e) => setName(e.target.value)} value ={name}required/>
-                    </div>
-                    <div className="mb-4">
-                        <Label htmlFor="email">Email</Label>
-                        <TextInput id="email" type="email" addon="@" placeholder="email@gmail.com" onChange={(e) => setEmail(e.target.value)} value={email}required/>
-                    </div>
-                    <div className="mb-4">
-                        <Label htmlFor="password">Password</Label>
-                        <TextInput id="password" type="password" placeholder="********" onChange={(e) => setPassword(e.target.value)} value={password} required/>
-                    </div>
-                    <Button className="mb-4" type="submit">Register</Button>
-                    <Link href="/">
-                        Got an account? Sign-in!
-                    </Link>
+                <div className="mb-4">
+                    <Label htmlFor="name">Name</Label>
+                    <TextInput id="name" type="text" placeholder="e.g. Bad Bunny" onChange={(e) => setName(e.target.value)} value ={name}required/>
+                </div>
+                <div className="mb-4">
+                    <Label htmlFor="email">Email</Label>
+                    <TextInput id="email" type="email" addon="@" placeholder="email@gmail.com" onChange={(e) => setEmail(e.target.value)} value={email}required/>
+                </div>
+                <div className="mb-4">
+                    <Label htmlFor="password">Password</Label>
+                    <TextInput id="password" type="password" placeholder="********" onChange={(e) => setPassword(e.target.value)} value={password} required/>
+                </div>
+                <Button className="mb-4" type="submit">Register</Button>
+                <Link href="/"> Got an account? Sign-in! </Link>
             </section>
         </form>
-
     )
 }

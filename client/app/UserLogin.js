@@ -70,8 +70,8 @@ export default function UserLogin(){
             }
     }
     return (
-        <form className="flex flex-col justify-center px-150 gap-4" aria-label="sign-in form" onSubmit ={ (e) => {e.preventDefault(); getSignIn(email, password);}}>
-        <section className="m-50 p-20 border-2 border-black bg-white">
+        <form className="flex flex-col justify-center item-center gap-4 mx-auto w-full max-w-md" aria-label="sign-in form" onSubmit ={ (e) => {e.preventDefault(); getSignIn(email, password);}}>
+        <section className="mt-20 p-20 border-2 border-black bg-white">
             <div className="mb-4">
                 <Label htmlFor="email"> Email </Label>
                 <TextInput  id="email" type="email"  addon="@" placeholder="name@gmail.com" value={email} onChange={ (e) => setEmail(e.target.value)} required shadow/>
