@@ -13,45 +13,45 @@ Mai Code Challenges simplifies coding interview prep by providing distraction-fr
 ### Full Proposal:
 [Mai Code Challenge Proposal.pdf](https://github.com/user-attachments/files/19657790/Mai.Code.Challenge.Proposal.pdf)
 
-## Tech Stack
+## Tech Stack 🚀
 
 ### Frontend
-- **Framework**: [Next.js](https://nextjs.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components**: [Flowbite](https://flowbite.com/)
-- **Icons**: [Heroicons](https://heroicons.com/)
+- ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white) **Framework**: [Next.js](https://nextjs.org/)
+- ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- ![Flowbite](https://img.shields.io/badge/Flowbite-38B2AC?style=for-the-badge&logo=flowbite&logoColor=white) **UI Components**: [Flowbite](https://flowbite.com/)
+- ![Heroicons](https://img.shields.io/badge/Heroicons-4A5568?style=for-the-badge&logo=heroicons&logoColor=white) **Icons**: [Heroicons](https://heroicons.com/)
 
 ### Backend
-- **Framework**: [Python Flask](https://flask.palletsprojects.com/)
-- **Server**: [Gunicorn](https://gunicorn.org/)
+- ![Python Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white) **Framework**: [Python Flask](https://flask.palletsprojects.com/)
+- ![Gunicorn](https://img.shields.io/badge/Gunicorn-499848?style=for-the-badge&logo=gunicorn&logoColor=white) **Server**: [Gunicorn](https://gunicorn.org/)
 
 ### Database
-- **Local Development**: PostgreSQL
-- **Production**: [Supabase](https://supabase.com/)
+- ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white) **Local Development**: PostgreSQL
+- ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) **Production**: [Supabase](https://supabase.com/)
 
 ### Authentication
-- [Firebase Authentication](https://firebase.google.com/products/auth)
+- ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black) [Firebase Authentication](https://firebase.google.com/products/auth)
 
 ### Deployment
-- **Frontend**: [Vercel](https://vercel.com/)
-- **Backend**: [Vercel](https://vercel.com/)
+- ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) **Frontend**: [Vercel](https://vercel.com/)
+- ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) **Backend**: [Vercel](https://vercel.com/)
 
 ### APIs
-- **GPT Integration**: [OpenAI API](https://platform.openai.com/)
+- ![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white) **GPT Integration**: [OpenAI API](https://platform.openai.com/)
 
 ### Editor
-- [Manco Editor](https://manco-editor.com/)
+- ![Manco Editor](https://img.shields.io/badge/Manco_Editor-000000?style=for-the-badge&logo=code&logoColor=white) [Manco Editor](https://manco-editor.com/)
 
 ### Web Scraping
-- [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/)
+- ![Beautiful Soup](https://img.shields.io/badge/Beautiful_Soup-4B8BBE?style=for-the-badge&logo=python&logoColor=white) [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/)
 
 ### Anti-Bot Protection
-- [Google reCAPTCHA](https://www.google.com/recaptcha/)
+- ![Google reCAPTCHA](https://img.shields.io/badge/Google_reCAPTCHA-4285F4?style=for-the-badge&logo=google&logoColor=white) [Google reCAPTCHA](https://www.google.com/recaptcha/)
 
 ### Testing
-- **Accessibility**: [Wave](https://wave.webaim.org/)
-- **End-to-End Testing**: [Cypress](https://www.cypress.io/)
-- **Unit Testing**: [unittest](https://docs.python.org/3/library/unittest.html)
+- ![Wave](https://img.shields.io/badge/Wave-000000?style=for-the-badge&logo=accessibility&logoColor=white) **Accessibility**: [Wave](https://wave.webaim.org/)
+- ![Cypress](https://img.shields.io/badge/Cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white) **End-to-End Testing**: [Cypress](https://www.cypress.io/)
+- ![unittest](https://img.shields.io/badge/unittest-3776AB?style=for-the-badge&logo=python&logoColor=white) **Unit Testing**: [unittest](https://docs.python.org/3/library/unittest.html)
 
 ## Features
 
