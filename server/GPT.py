@@ -29,12 +29,7 @@ def generateCodeChallenge():
                     "Type": "Array"
                     "Input": "{insert input}.",
                     "Output": "{insert output}",
-                    "Constraints": "{insert constraints}",
-                    "Test Cases": [
-                        {"test_case": "evenNumbers([1, 2, 3, 4, 5, 6]), expected:[2, 4, 6]"},
-                        {"test_case": "evenNumbers([10, 15, 20, 25]), expected:[10, 20]"},
-                        {"test_case": "evenNumbers([]), expected: []"}
-                    ]
+                    "Constraints": "{insert constraints}"
                     }
 
                     Please ensure that the generated JSON file. Return only raw JSON, no markdown, no preamble, no explanation.
