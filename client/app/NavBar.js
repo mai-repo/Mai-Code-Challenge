@@ -5,7 +5,7 @@ import { useAppContext } from "./context"
 import { useEffect } from "react";
 
 export default function NavBar(){
-    const {id, uid, setId, setUid, setData, setValue, setChallenge} = useAppContext()
+    const {id, uid, setId, setUid, setData, setValue, setChallenge, clearAll} = useAppContext()
 
     useEffect(() => {
         if (id && uid) {
@@ -35,7 +35,7 @@ export default function NavBar(){
                     <section className="flex items-center gap-5">
                         <NavbarLink href="/challenge" className="text-lg">Code Challenge</NavbarLink>
                         <NavbarLink  href="/userSettings" className="text-lg">Settings</NavbarLink>
-                        <NavbarLink  href="/" onClick={(e) => { setId(null); setUid(null); setValue(''); setData([]); setChallenge('')}} className="text-lg"> Sign out </NavbarLink>
+                        <NavbarLink  href="/" onClick={(e) => {clearAll();}} className="text-lg"> Sign out </NavbarLink>
                         <Avatar alt="User Profile Image" img="/Profile.png"/>
                     </section>
                 </NavbarCollapse>
