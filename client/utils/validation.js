@@ -55,7 +55,6 @@ export async function deleteRejected(id, rejected_id){
             })
         })
         const result = await response.json()
-        alert(result.message)
         window.location.reload();
     } catch (error) {
         alert(error)
@@ -75,7 +74,6 @@ export async function deleteCompleted(id, completed_id){
             })
         })
         const result = await response.json()
-        alert(result.message)
         window.location.reload();
         return console.log(result)
     } catch (error) {
