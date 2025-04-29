@@ -2,9 +2,10 @@
 import { useState } from 'react'
 import { useAppContext } from 'components/context'
 import { Button } from 'flowbite-react'
+import { deleteCompleted, updateQuestion, deleteRejected } from 'utils/validation'
 
 export default function Answer() {
-    const { id, data, value, setValue, setData, challenge } = useAppContext()
+    const { id, data, value, setValue, setData, challenge, status, name, problem } = useAppContext()
     const [result, setResult] = useState([])
 
     const getAnswer = async() => {
@@ -32,6 +33,19 @@ export default function Answer() {
         }
     }
 
+    const saveQuestion = async () => {
+        if (status === false && result === true) {
+            updateQuestion(id, problem, name, result);
+            deleteRejected(id, problem);
+            console.log(id, problem, name, result);
+        } else if (status === true && result === false) {
+            updateQuestion(id, problem, name, result);
+            deleteCompleted(id, problem);
+        } else if (status === undefined || status === null) {
+            addQuestion();
+        }
+    };
+
     const addQuestion = async () => {
         try {
             const res = await fetch ("https://backendcodechallenge.vercel.app/addProblem", {
@@ -56,7 +70,7 @@ export default function Answer() {
     return (
         <>
             <Button  className="text-lg bg-purple-950" onClick={getAnswer}> Evaluate </Button>
-            <Button className="text-lg bg-pink-700" onClick={addQuestion}> Save Question </Button>
+            <Button className="text-lg bg-pink-700" onClick={saveQuestion}> Save Question </Button>
         </>
     )
 }
