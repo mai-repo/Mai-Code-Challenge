@@ -5,7 +5,7 @@ import { Button } from 'flowbite-react'
 import { deleteCompleted, updateQuestion, deleteRejected } from 'utils/validation'
 
 export default function Answer() {
-    const { id, data, value, setValue, setData, challenge, status, name, problem } = useAppContext()
+    const { id, data, value, setValue, setData, challenge, status, name, problem, setStatus} = useAppContext()
     const [result, setResult] = useState([])
 
     const getAnswer = async() => {
@@ -27,6 +27,7 @@ export default function Answer() {
             setResult(resultData.isCorrect)
             const evaluation = resultData.breakdown.join('\n');
             setValue(evaluation)
+            console.log(resultData)
             alert("Evaluation successful.")
         } catch (error) {
             alert(error+ " Try again!")
@@ -37,12 +38,14 @@ export default function Answer() {
         if (status === false && result === true) {
             updateQuestion(id, problem, name, result);
             deleteRejected(id, problem);
-            console.log(id, problem, name, result);
+            setStatus('')
         } else if (status === true && result === false) {
             updateQuestion(id, problem, name, result);
             deleteCompleted(id, problem);
-        } else if (status === undefined || status === null) {
-            addQuestion();
+            setStatus('')
+        } else if (!status) {
+            addQuestion(id, data.Name, data.Challenge, result);
+        }else {
         }
     };
 
