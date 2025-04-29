@@ -17,8 +17,9 @@ def generateCodeChallenge():
                 "role": "user",
                 "content":  """
                     Generate a short and concise coding challenge suitable for a Junior or Entry-Level software engineer.
-                    The challenge should involve any data type such as integers, strings, arrays, or other common data structures.
-                    The problem should cover a variety of topics and not focus solely on strings.
+                    The challenge should involve any of the following: integers, strings, arrays, dictionaries, sets, or simple algorithms (sorting, counting, etc).
+                    Do not generate questions focused only on strings. Vary topics such as loops, conditionals, and simple algorithms.
+
 
 
                     Here’s an example of how the response should be structured in JSON format:
@@ -26,14 +27,12 @@ def generateCodeChallenge():
                     {
                     "Challenge": "{insert Challenge}",
                     "Name": "{insert name}",
-                    "Type": "Array"
                     "Input": "{insert input}.",
                     "Output": "{insert output}",
                     "Constraints": "{insert constraints}"
                     }
 
-                    Please ensure that the generated JSON file. Return only raw JSON, no markdown, no preamble, no explanation.
-
+                    Only return valid JSON. Do not include markdown formatting, comments, or extra explanation.
                 """
             }
         ]
@@ -47,8 +46,8 @@ def evaluateProblem(challenge, answer):
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{
-                "role": "developer",
-                "content": "You are the best developer and code challenge evaluator."
+                "role": "system",
+                "content": "You are a strict code challenge evaluator. Only return valid JSON. Do not use markdown or extra commentary."
             },
             {
                 "role": "user",
@@ -74,7 +73,7 @@ def evaluateProblem(challenge, answer):
                         "Step 5: Description of evaluation step 5"
                     ]
                 }}
-                Please ensure that the breakdown explains in clear steps why the answer is correct or incorrect.
+                Only return raw JSON. No markdown, no extra explanation, no preamble.
                 """
             }
         ]
