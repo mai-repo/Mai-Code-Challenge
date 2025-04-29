@@ -12,6 +12,7 @@ export function AppWrapper({ children }) {
     const [error, setError] = useState('');
     const [loading, setLoading] =useState('');
     const [search, setSearch] =useState('');
+    const [status, setStatus] = useState('');
 
 
     useEffect(() => {
@@ -23,6 +24,7 @@ export function AppWrapper({ children }) {
         const storedError = localStorage.getItem('error');
         const storedLoading = localStorage.getItem('loading');
         const storedSearch  = localStorage.getItem('search');
+        const storedStatus = localStorage.getItem('status')
         if (storedId) setId(Number(storedId));
         if (storedUid) setUid(storedUid);
         if (storedValue) setValue(storedValue);
@@ -30,7 +32,8 @@ export function AppWrapper({ children }) {
         if (storedChallenge) setChallenge(storedChallenge);
         if (storedError) setError(storedError);
         if (storedLoading) setLoading(storedLoading);
-        if (storedSearch) setLoading(storedSearch);
+        if (storedSearch) setSearch(storedSearch);
+        if (storedStatus) setStatus(storedStatus)
 
     }, []);
 
@@ -43,10 +46,11 @@ export function AppWrapper({ children }) {
         localStorage.setItem('error', error);
         localStorage.setItem('loading', loading);
         localStorage.setItem('search', search);
-    }, [id, uid, data, value, challenge, error, loading, search]);
+        localStorage.setItem('status', status);
+    }, [id, uid, data, value, challenge, error, loading, search, status]);
 
     return (
-        <AppContext.Provider value={{ id, setId, uid, setUid, data, setData, value, setValue, challenge, setChallenge, error, setError, loading, setLoading, search, setSearch}}>
+        <AppContext.Provider value={{ id, setId, uid, setUid, data, setData, value, setValue, challenge, setChallenge, error, setError, loading, setLoading, search, setSearch, status, setStatus}}>
             {children}
         </AppContext.Provider>
     );
