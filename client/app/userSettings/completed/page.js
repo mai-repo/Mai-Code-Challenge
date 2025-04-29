@@ -2,11 +2,11 @@
 import { useAppContext } from "components/context";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button, TextInput, Pagination} from "flowbite-react"
+import { Button, TextInput, Pagination} from "flowbite-react";
+import { deleteCompleted } from "utils/validation";
 
 export default function Completed(){
-    const { id, data, setData, setChallenge } = useAppContext();
-    const [name, setName] = useState('');
+    const { id, data, setData, setChallenge, setStatus, name, setName, setProblem} = useAppContext();
     const [editingId, setEditingId] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
@@ -28,6 +28,7 @@ export default function Completed(){
                     }
                 );
                 const result = await response.json();
+                console.log(result)
                 setData(result.data);
                 setTotalPage(result.pagination ? result.pagination.total_pages : 1);
             } catch (error) {
@@ -39,6 +40,10 @@ export default function Completed(){
 
     function getChallenge(item) {
         setChallenge(item[3]);
+        setStatus(true);
+        setProblem(item[0])
+        setName(item[2]);
+
         router.push("/challenge");
     }
 
@@ -67,29 +72,13 @@ export default function Completed(){
         }
     }
 
-    async function deleteCompleted(id, completed_id){
-
-        try {
-            const response = await fetch ("https://backendcodechallenge.vercel.app/deleteCompleted", {
-                method: "DELETE",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    user_id: id,
-                    completed_id: completed_id
-                })
-            })
-            const result = await response.json()
-            alert(result.message)
-            setName('')
-            window.location.reload();
-            return console.log(result)
-        } catch (error) {
-            alert(error)
-        }
+    function getChallenge(item) {
+        setChallenge(item[3]);
+        setStatus(true);
+        setProblem(item[0]);
+        setName(item[2]);
+        router.push("/challenge");
     }
-
     return (
         <div>
             <section className="bg-white mx-15 p-10 border-2 border-black">
