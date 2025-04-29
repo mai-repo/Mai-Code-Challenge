@@ -13,6 +13,8 @@ export function AppWrapper({ children }) {
     const [loading, setLoading] =useState('');
     const [search, setSearch] =useState('');
     const [status, setStatus] = useState('');
+    const [name, setName] = useState('');
+    const [problem, setProblem] = useState('');
 
 
     useEffect(() => {
@@ -24,7 +26,9 @@ export function AppWrapper({ children }) {
         const storedError = localStorage.getItem('error');
         const storedLoading = localStorage.getItem('loading');
         const storedSearch  = localStorage.getItem('search');
-        const storedStatus = localStorage.getItem('status')
+        const storedStatus = localStorage.getItem('status');
+        const storedName = localStorage.getItem('name');
+        const storedProblem = localStorage.getItem('problem');
         if (storedId) setId(Number(storedId));
         if (storedUid) setUid(storedUid);
         if (storedValue) setValue(storedValue);
@@ -33,7 +37,9 @@ export function AppWrapper({ children }) {
         if (storedError) setError(storedError);
         if (storedLoading) setLoading(storedLoading);
         if (storedSearch) setSearch(storedSearch);
-        if (storedStatus) setStatus(storedStatus)
+        if (storedStatus) setStatus(storedStatus);
+        if (storedName) setName(storedName);
+        if (storedProblem) setProblem (storedProblem);
 
     }, []);
 
@@ -47,10 +53,12 @@ export function AppWrapper({ children }) {
         localStorage.setItem('loading', loading);
         localStorage.setItem('search', search);
         localStorage.setItem('status', status);
-    }, [id, uid, data, value, challenge, error, loading, search, status]);
+        localStorage.setItem('name', name);
+        localStorage.setItem('problem', problem);
+    }, [id, uid, data, value, challenge, error, loading, search, status, name, problem]);
 
     return (
-        <AppContext.Provider value={{ id, setId, uid, setUid, data, setData, value, setValue, challenge, setChallenge, error, setError, loading, setLoading, search, setSearch, status, setStatus}}>
+        <AppContext.Provider value={{ id, setId, uid, setUid, data, setData, value, setValue, challenge, setChallenge, error, setError, loading, setLoading, search, setSearch, status, setStatus, name, setName, problem, setProblem}}>
             {children}
         </AppContext.Provider>
     );
