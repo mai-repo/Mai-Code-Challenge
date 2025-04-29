@@ -91,6 +91,11 @@ def updateProblem():
         status = "COMPLETED" if is_correct == True else "REJECTED"
         updateStatus(user_id, id, status)
 
+        if is_correct == True:
+            addCompleted(user_id, id)
+        else:
+            addRejected(user_id, id)
+
         cursor.close()
         connection.close()
         return jsonify({"message": "Problem updated successfully"}), 200
