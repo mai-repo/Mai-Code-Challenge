@@ -3,11 +3,11 @@
 import { useAppContext } from "components/context";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button, TextInput, Pagination} from "flowbite-react"
+import { Button, TextInput, Pagination} from "flowbite-react";
+import { deleteRejected } from "utils/validation";
 
 export default function RejectedProblem() {
-    const { id, data, setData, setChallenge } = useAppContext();
-    const [name, setName] = useState('');
+    const { id, data, setData, setChallenge, setStatus, setProblem, setName, name} = useAppContext();
     const [editingId, setEditingId] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
@@ -43,6 +43,9 @@ export default function RejectedProblem() {
 
     function getChallenge(item) {
         setChallenge(item[3]);
+        setStatus(false);
+        setProblem(item[0]);
+        setName(item[2]);
         router.push("/challenge");
     }
 
@@ -69,28 +72,6 @@ export default function RejectedProblem() {
             window.location.reload();
             setName('')
         } catch (error){
-            alert(error)
-        }
-    }
-
-    async function deleteRejected(id, rejected_id){
-
-        try {
-            const response = await fetch ("https://backendcodechallenge.vercel.app/deleteRejected", {
-                method: "DELETE",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    user_id: id,
-                    rejected_id: rejected_id
-                })
-            })
-            const result = await response.json()
-            alert(result.message)
-            window.location.reload();
-            setName('')
-        } catch (error) {
             alert(error)
         }
     }
