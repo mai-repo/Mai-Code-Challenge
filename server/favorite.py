@@ -4,7 +4,6 @@ from pagination import pagination
 import logging
 
 logger = logging.getLogger(__name__)
-
 favorite = Blueprint("favorite", __name__)
 
 @favorite.post("/addFavorite")
