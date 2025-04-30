@@ -4,7 +4,6 @@ from pagination import pagination
 import logging
 
 logger = logging.getLogger(__name__)
-
 completed = Blueprint("completed", __name__)
 
 @completed.get("/getCompleted")
