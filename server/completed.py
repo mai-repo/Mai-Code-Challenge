@@ -44,7 +44,7 @@ def getCompleted():
 def addCompleted(user_id, question_id):
 
     if not all ([user_id and question_id]):
-        return (jsonify({"error": "Missing field information."}))
+        return (jsonify({"error": "Missing field information."})), 400
 
     try:
         connection = connectDatabase()
@@ -59,9 +59,9 @@ def addCompleted(user_id, question_id):
         cursor.close()
         connection.close()
 
-        return jsonify({"message": "Completed Problem added successfully"}), 201
+        return jsonify({"message": "Completed Problem added successfully"}), 200
     except Exception as e:
-        return jsonify({"error": str(e)})
+        return jsonify({"error": str(e)}), 500
 
 @completed.put('/updateCompleted')
 def updateCompleted():
@@ -96,7 +96,7 @@ def deleteCompleted():
     completed_id = data.get('completed_id')
 
     if not all([user_id, completed_id]):
-        return jsonify({"error": "Missing field information."})
+        return jsonify({"error": "Missing field information."}), 400
 
     try:
         connection = connectDatabase()
@@ -110,41 +110,5 @@ def deleteCompleted():
         cursor.close()
         connection.close()
         return jsonify({"message": "Successfully deleted problem"}), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-@completed.get('/searchCompleted')
-def searchCompleted():
-    data = request.get_json()
-    user_id = data.get("user_id")
-    search_term = data.get("search_term").lower()
-
-    try:
-
-        connection = connectDatabase()
-        cursor = connection.cursor()
-
-        cursor.execute('''
-                        SELECT COMPLETED_PROBLEMS
-                        FROM COMPLETED
-                        WHERE USER_ID = %s
-                        ''', (user_id,))
-        completed_problems = cursor.fetchall()
-
-        problem_ids = [row[0] for row in completed_problems]
-
-        cursor.execute('''
-            SELECT *
-            FROM QUESTIONS
-            WHERE ID = ANY(%s)
-            ''', (problem_ids,))
-
-        questions = cursor.fetchall()
-
-        for question in questions:
-            if search_term == question[2]:
-                return jsonify({"id": question[0], "name": question[2]}), 200
-
-        return jsonify({"error": "No search found."}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
