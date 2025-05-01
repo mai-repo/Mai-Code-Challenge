@@ -57,7 +57,7 @@ def getFavorite():
         response = cursor.fetchall()
         cursor.close()
         connection.close()
-        return pagination(response), 200
+        return pagination(response)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
