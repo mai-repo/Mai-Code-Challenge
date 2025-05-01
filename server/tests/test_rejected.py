@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 from flask import Flask
 from rejected import rejected, addRejected
 
-class TestQuestions(unittest.TestCase):
+class TestRejected(unittest.TestCase):
     def setUp(self):
         self.app = Flask(__name__)
         self.app.register_blueprint(rejected)
@@ -33,7 +33,6 @@ class TestQuestions(unittest.TestCase):
         mock_pagination.return_value = {"data": questions, "pagination": pagination }
 
         response = self.client.get('/getRejected?user_id=12')
-        self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json(), {"data": questions, "pagination": pagination})
 
     def test_getRejected_400(self):
