@@ -6,14 +6,14 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function NavBar(){
-    const {id, uid, setId, setUid, setData, setValue, setChallenge, clearAll} = useAppContext()
+    const {id, uid, clearAll} = useAppContext()
     const router = useRouter();
 
     useEffect(() => {
-        if (id && uid) {
+        if (id && uid && pathname==='/') {
         router.replace("/challenge")
         }
-    }, [id, uid, router]);
+    }, [id, uid, router, pathname],);
 
     if (!id) {
     return (
