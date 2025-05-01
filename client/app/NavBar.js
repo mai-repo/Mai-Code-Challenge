@@ -8,7 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 export default function NavBar(){
     const {id, uid, clearAll} = useAppContext()
     const router = useRouter();
-    const pathname = useRouter();
+    const pathname = usePathname();
 
     useEffect(() => {
         if (id && uid && pathname==='/') {
