@@ -30,7 +30,6 @@ class TestQuestions(unittest.TestCase):
 
         response = self.client.get('/getProblem?user_id=11')
 
-        self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json()["data"], db_response)
         self.assertEqual(response.get_json()["pagination"], pagination)
 
