@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 from user_question_status import status, addStatus, updateStatus
 from flask import Flask
 
-class TestUsers(unittest.TestCase):
+class TestStatus(unittest.TestCase):
     def setUp(self):
         self.app = Flask(__name__)
         self.app.register_blueprint(status)
