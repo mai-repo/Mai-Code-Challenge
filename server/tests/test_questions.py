@@ -107,7 +107,7 @@ class TestQuestions(unittest.TestCase):
         self.assertEqual(response.get_json(), {"error": "Database failed."})
 
     @patch('questions.connectDatabase')
-    def test_deleteProblem(self, mock_connectDatabase):
+    def test_deleteProblem_200(self, mock_connectDatabase):
         mock_connection = MagicMock()
         mock_cursor = MagicMock()
 
@@ -118,20 +118,20 @@ class TestQuestions(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json(), {"message": "Successfully deleted problem"})
 
-    def test_deleteProblem(self):
+    def test_deleteProblem_400(self):
         response = self.client.delete('/deleteProblem', json={"user_id": 12})
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.get_json(), {"message": "Please input missing field."})
 
     @patch('questions.connectDatabase')
-    def test_delete(self, mock_connectDatabase):
+    def test_deleteProblem_500(self, mock_connectDatabase):
         mock_connectDatabase.side_effect = Exception("Database failed.")
         response = self.client.delete('/deleteProblem', json={"user_id": 12, "questions_id": 40})
         self.assertEqual(response.status_code, 500)
         self.assertEqual(response.get_json(), {"error": "Database failed."})
 
     @patch('questions.connectDatabase')
-    def test_searchQuestion(self, mock_connectDatabase):
+    def test_searchQuestion_200(self, mock_connectDatabase):
         mock_connection = MagicMock()
         mock_cursor = MagicMock()
 
@@ -139,13 +139,15 @@ class TestQuestions(unittest.TestCase):
         mock_connection.cursor.return_value = mock_cursor
 
         mock_cursor.fetchall.return_value = [[1, 12, "arr", "create a function that takes in an array of integers and returns a new array containing only the even numbers.", "2025-04-21", False]]
+        matched_questions = [[1, 12, "arr", "create a function that takes in an array of integers and returns a new array containing only the even numbers."]]
+        mock_cursor.fetchall.return_value = matched_questions
 
         response = self.client.get('/searchQuestions?user_id=12&searchTerm=arr')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json(), [[1, 12, "arr", "create a function that takes in an array of integers and returns a new array containing only the even numbers."]])
 
     @patch('questions.connectDatabase')
-    def test_searchQuestion(self, mock_connectDatabase):
+    def test_searchQuestion_500(self, mock_connectDatabase):
         mock_connectDatabase.side_effect = Exception("Database failed.")
         response = self.client.get("/searchQuestions?user_id=12&searchTerm=arr")
         self.assertEqual(response.status_code, 500)
