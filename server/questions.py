@@ -2,7 +2,7 @@ from db_connection import connectDatabase
 from user_question_status import addStatus, updateStatus
 from rejected import addRejected
 from completed import addCompleted
-from pagination import paignation
+from pagination import pagination
 from flask import Blueprint, jsonify, request
 import logging
 
@@ -11,22 +11,21 @@ questions = Blueprint('questions', __name__)
 
 @questions.get("/getProblem")
 def getProblem():
-    user_id = request.args.get('user_id')
-
-    connection = connectDatabase()
-    cursor = connection.cursor()
-
-    cursor.execute('''
-                   SELECT * FROM QUESTIONS
-                   WHERE USER_ID = %s
-                   ''', (user_id,))
-    response = cursor.fetchall()
-    cursor.close()
-    connection.close()
-
     try:
+        user_id = request.args.get('user_id')
+
+        connection = connectDatabase()
+        cursor = connection.cursor()
+
+        cursor.execute('''
+                    SELECT * FROM QUESTIONS
+                    WHERE USER_ID = %s
+                    ''', (user_id,))
+        response = cursor.fetchall()
+        cursor.close()
+        connection.close()
         if response:
-            return paignation(response), 200
+            return pagination(response)
         else:
             return jsonify({"message":"No information found"}), 404
     except Exception as e:
@@ -42,7 +41,7 @@ def addProblem():
     is_correct = data.get("is_correct")
 
     if None in([user_id, name, problem, is_correct]):
-        return jsonify({"error": "Missing field information"})
+        return jsonify({"error": "Missing field information"}), 400
     try:
         connection = connectDatabase()
         cursor = connection.cursor()
@@ -90,6 +89,11 @@ def updateProblem():
 
         status = "COMPLETED" if is_correct == True else "REJECTED"
         updateStatus(user_id, id, status)
+
+        if is_correct == True:
+            addCompleted(user_id, id)
+        else:
+            addRejected(user_id, id)
 
         cursor.close()
         connection.close()

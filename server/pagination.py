@@ -1,7 +1,8 @@
 from flask import request, jsonify
 import math
 
-def paignation(items, per_page=5):
+def pagination(items, per_page=5):
+
     try:
         page = request.args.get('page', 1, type=int)
         start = (page - 1) * per_page
@@ -19,6 +20,6 @@ def paignation(items, per_page=5):
                 "current_page": page,
                 "per_page": per_page
             }
-        })
+        }), 200
     except Exception as e:
-        return jsonify({"error": str(e)})
+        return jsonify({"error": str(e)}), 500

@@ -18,7 +18,7 @@ export default function favoritePage(){
         if (!id) return;
         async function getFavorites(){
             try {
-                const response = await fetch (`https://backendcodechallenge.vercel.app/getFavorite?user_id=${id}`, {
+                const response = await fetch (`https://backendcodechallenge.vercel.app/getFavorite?user_id=${id}&page=${currentPage}`, {
                     method: "GET",
                     headers: {
                         "content-type": "application/json"

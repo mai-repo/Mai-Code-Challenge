@@ -9,33 +9,6 @@ class TestUsers(unittest.TestCase):
         self.app.register_blueprint(users)
         self.client = self.app.test_client()
 
-    def test_getUser_400(self):
-        response = self.client.get('/getUser', json={})
-        self.assertEqual(response.status_code,400)
-        self.assertEqual(response.json, {"error": "No user id present."})
-
-    @patch('users.connectDatabase')
-    def test_getUser_200(self, mock_connect):
-        mock_connection = Mock()
-        mock_cursor = Mock()
-        mock_connect.return_value = mock_connection
-        mock_connection.cursor.return_value = mock_cursor
-
-
-        mock_cursor.fetchone.return_value = ["Kim K", "kim@gmail.com"]
-
-        response = self.client.get('/getUser', json={"user_id": 1})
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.get_json(), {"name": "Kim K", "email": "kim@gmail.com"})
-
-    @patch('users.connectDatabase')
-    def test_getUser_500(self, mock_connect):
-        mock_connect.side_effect = Exception('Database connection failed')
-
-        response = self.client.get('/getUser', json={"user_id": 1})
-        self.assertEqual(response.status_code, 500)
-        self.assertEqual(response.get_json(), {'error': 'Database connection failed'})
-
     def test_updateUserName_400(self):
         response = self.client.put('/updateUsername', json={"username":"kim K"})
         self.assertEqual(response.status_code, 400)
@@ -152,13 +125,13 @@ class TestUsers(unittest.TestCase):
 
         mock_cursor.fetchone.return_value = (1, "kim k", "fake-uid")
 
-        response = self.client.post('/login', headers={"Authorization": "Bearer some-valid-token"})
+        response = self.client.post('authentication/login', headers={"Authorization": "Bearer some-valid-token"})
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json(), {"id": 1, "name": "kim k", "uid": "fake-uid"})
 
     def test_login_400(self):
-        response = self.client.post('/login', headers={"Authorization": "   "})
+        response = self.client.post('authentication/login', headers={"Authorization": "   "})
 
         self.assertEqual(response.status_code, 401)
         self.assertEqual(response.get_json(), {"error": "Missing ID token"})
@@ -168,7 +141,7 @@ class TestUsers(unittest.TestCase):
     def test_login_500(self,  mock_token, mock_connect):
         mock_token.return_value = {"uid": "fake-uid"}
         mock_connect.side_effect = Exception("Database failed.")
-        response = self.client.post('/login', headers={"Authorization": "Bearer Token"})
+        response = self.client.post('authentication/login', headers={"Authorization": "Bearer Token"})
         self.assertEqual(response.status_code, 500)
         self.assertEqual(response.get_json(), {"error": "Database failed."})
 

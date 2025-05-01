@@ -1,10 +1,9 @@
 from db_connection import connectDatabase
 from flask import jsonify, Blueprint, request
-from pagination import paignation
+from pagination import pagination
 import logging
 
 logger = logging.getLogger(__name__)
-
 favorite = Blueprint("favorite", __name__)
 
 @favorite.post("/addFavorite")
@@ -58,7 +57,7 @@ def getFavorite():
         response = cursor.fetchall()
         cursor.close()
         connection.close()
-        return paignation(response), 200
+        return pagination(response)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

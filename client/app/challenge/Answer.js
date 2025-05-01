@@ -2,9 +2,10 @@
 import { useState } from 'react'
 import { useAppContext } from 'components/context'
 import { Button } from 'flowbite-react'
+import { deleteCompleted, updateQuestion, deleteRejected } from 'utils/validation'
 
 export default function Answer() {
-    const { id, data, value, setValue, setData, challenge } = useAppContext()
+    const { id, data, value, setValue, setData, challenge, status, name, problem, setStatus} = useAppContext()
     const [result, setResult] = useState([])
 
     const getAnswer = async() => {
@@ -26,11 +27,27 @@ export default function Answer() {
             setResult(resultData.isCorrect)
             const evaluation = resultData.breakdown.join('\n');
             setValue(evaluation)
+            console.log(resultData)
             alert("Evaluation successful.")
         } catch (error) {
             alert(error+ " Try again!")
         }
     }
+
+    const saveQuestion = async () => {
+        if (status === false && result === true) {
+            updateQuestion(id, problem, name, result);
+            deleteRejected(id, problem);
+            setStatus('')
+        } else if (status === true && result === false) {
+            updateQuestion(id, problem, name, result);
+            deleteCompleted(id, problem);
+            setStatus('')
+        } else if (!status) {
+            addQuestion(id, data.Name, data.Challenge, result);
+        }else {
+        }
+    };
 
     const addQuestion = async () => {
         try {
@@ -56,7 +73,7 @@ export default function Answer() {
     return (
         <>
             <Button  className="text-lg bg-purple-950" onClick={getAnswer}> Evaluate </Button>
-            <Button className="text-lg bg-pink-700" onClick={addQuestion}> Save Question </Button>
+            <Button className="text-lg bg-pink-700" onClick={saveQuestion}> Save Question </Button>
         </>
     )
 }

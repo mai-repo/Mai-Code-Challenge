@@ -1,10 +1,9 @@
 from db_connection import connectDatabase
 from flask import Blueprint, jsonify, request
-from pagination import paignation
+from pagination import pagination
 import logging
 
 logger = logging.getLogger(__name__)
-
 rejected = Blueprint('rejected', __name__)
 
 @rejected.get('/getRejected')
@@ -37,7 +36,7 @@ def getRejected():
         cursor.close()
         connection.close()
 
-        return paignation(questions), 200
+        return pagination(questions)
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -57,9 +56,9 @@ def addRejected(user_id, question_id):
         connection.commit()
         cursor.close()
         connection.close()
-        return jsonify({"message":"Successfully added problem"})
+        return jsonify({"message":"Successfully added problem"}), 200
     except Exception as e:
-        return jsonify({"error": str(e)})
+        return jsonify({"error": str(e)}), 500
 
 
 
@@ -68,11 +67,11 @@ def updateRejected():
     data = request.get_json()
     user_id = data.get("user_id")
     rejected_id = data.get("rejected_id")
-    name = data.get('name').lower()
+    name = data.get('name')
 
     if not all ([user_id, rejected_id, name]):
         return jsonify({"error":"Missing field information"}), 400
-
+    name = name.lower()
     try:
         connection = connectDatabase()
         cursor = connection.cursor()
@@ -96,7 +95,7 @@ def deleteRejected():
     rejected_id = data.get("rejected_id")
 
     if not all ([user_id, rejected_id]):
-        return jsonify({"error": "Missing field information."})
+        return jsonify({"error": "Missing field information."}), 400
 
     try:
         connection = connectDatabase()

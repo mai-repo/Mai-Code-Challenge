@@ -3,14 +3,17 @@ import { Navbar, NavbarBrand, NavbarCollapse, NavbarToggle, NavbarLink, Avatar} 
 import Link from "next/link"
 import { useAppContext } from "./context"
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function NavBar(){
-    const {id, uid, setId, setUid, setData, setValue, setChallenge} = useAppContext()
+    const {id, uid, clearAll} = useAppContext()
+    const router = useRouter();
 
     useEffect(() => {
-        if (id && uid) {
+        if (id && uid && pathname==='/') {
+        router.replace("/challenge")
         }
-    }, [id, uid]);
+    }, [id, uid, router, pathname],);
 
     if (!id) {
     return (
@@ -25,7 +28,7 @@ export default function NavBar(){
     return (
         <main>
             <Navbar fluid rounded className="flex justify-between p-5 border-b-2 border-black">
-                <NavbarBrand href="/" onClick={(e) => { setId(null); setUid(null); setValue(''); setData([])}} className="w-1/3">
+                <NavbarBrand href="/" onClick={(e) => {clearAll()}} className="w-1/3">
                     <img src="/mai_code_challenge_logo.png" className="pl-8 w-full flex-shrink-0" alt="mai_code_challenge_logo"/>
                 </NavbarBrand>
             { id && (
@@ -35,7 +38,7 @@ export default function NavBar(){
                     <section className="flex items-center gap-5">
                         <NavbarLink href="/challenge" className="text-lg">Code Challenge</NavbarLink>
                         <NavbarLink  href="/userSettings" className="text-lg">Settings</NavbarLink>
-                        <NavbarLink  href="/" onClick={(e) => { setId(null); setUid(null); setValue(''); setData([]); setChallenge('')}} className="text-lg"> Sign out </NavbarLink>
+                        <NavbarLink  href="/" onClick={(e) => {clearAll();}} className="text-lg"> Sign out </NavbarLink>
                         <Avatar alt="User Profile Image" img="/Profile.png"/>
                     </section>
                 </NavbarCollapse>

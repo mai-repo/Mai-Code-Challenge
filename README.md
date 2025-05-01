@@ -195,6 +195,41 @@ gunicorn -w 4 -b 0.0.0.0:5432 main:app
    http://localhost:3000
    ```
 
+## Testing Instructions 
 
+### Running Tests
+1. Navigate to the `server` directory:
+   ```bash
+   cd server
+   ```
 
+2. Run all tests using the following command:
+   ```bash
+   python -m unittest discover -s tests
+   ```
 
+### Generating a Coverage Report
+1. Install the `coverage` package if not already installed:
+   ```bash
+   pip install coverage
+   ```
+
+2. Run the tests with coverage:
+   ```bash
+   coverage run -m unittest discover -s tests
+   ```
+
+3. Generate a coverage report in the terminal:
+   ```bash
+   coverage report
+   ```
+
+4. Optionally, generate an HTML coverage report:
+   ```bash
+   coverage html
+   ```
+
+5. Open the HTML report in your browser:
+   ```bash
+   open htmlcov/index.html
+   ```
