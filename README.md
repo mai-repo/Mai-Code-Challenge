@@ -1,6 +1,6 @@
 # Mai Code Challenge
 
-Mai Code Challenge simplifies coding interview prep by providing distraction-free, randomly generated coding challenges and feedback—mimicking real interview unpredictability without the clutter of traditional platforms. You can check out the site here: [mai-code-challenges.vercel.app](https://mai-code-challenges.vercel.app)
+Mai Code Challenge simplifies coding interview prep by providing distraction-free, randomly generated coding challenges and feedback—mimicking real interview unpredictability without the clutter of traditional platforms. You can check out the site here: [mai-code-challenges.vercel.app](https://mai-code-challenge.vercel.app)
 
 ## Project Proposal
 
