@@ -23,8 +23,8 @@ class TestQuestions(unittest.TestCase):
         pagination = {
             "current_page": 1,
             "per_page": 5,
-            "total_items": 15,
-            "total_pages": 3
+            "total_items": 1,
+            "total_pages": 1
         }
         mock_pagination.return_value = {"data": db_response, "pagination": pagination }
 
