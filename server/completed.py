@@ -36,7 +36,7 @@ def getCompleted():
         cursor.close()
         connection.close()
 
-        return pagination(questions), 200
+        return pagination(questions)
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
