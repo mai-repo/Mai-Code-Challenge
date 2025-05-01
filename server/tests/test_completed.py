@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 from flask import Flask
 from completed import completed, addCompleted
-class TestQuestions(unittest.TestCase):
+class TestCompleted(unittest.TestCase):
     def setUp(self):
         self.app = Flask(__name__)
         self.app.register_blueprint(completed)
