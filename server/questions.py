@@ -25,7 +25,7 @@ def getProblem():
         cursor.close()
         connection.close()
         if response:
-            return pagination(response), 200
+            return pagination(response)
         else:
             return jsonify({"message":"No information found"}), 404
     except Exception as e:
