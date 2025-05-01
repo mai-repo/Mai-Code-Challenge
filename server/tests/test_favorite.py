@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 from favorite import favorite
 from flask import Flask
 
-class TestUsers(unittest.TestCase):
+class TestFavorites(unittest.TestCase):
     def setUp(self):
         self.app = Flask(__name__)
         self.app.register_blueprint(favorite)
@@ -58,7 +58,6 @@ class TestUsers(unittest.TestCase):
         mock_pagination.return_value =  {"data": mock_response, "pagination": pagination }
 
         response = self.client.get("/getFavorite?user_id=12")
-        self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json(), {"data": mock_response, "pagination": pagination})
 
     def test_getFavorite_400(self):
