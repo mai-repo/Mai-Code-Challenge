@@ -3,7 +3,7 @@
 import { useAppContext } from "components/context";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button, TextInput, Pagination} from "flowbite-react";
+import { Button, TextInput, Pagination, Spinner} from "flowbite-react";
 import { deleteRejected } from "utils/validation";
 
 export default function RejectedProblem() {
@@ -106,7 +106,9 @@ export default function RejectedProblem() {
                         </div>
                     ))
                 ) : (
-                    <p className="text-gray-500">Loading progress data...</p>
+                    <div className="text-center">
+                        <Spinner aria-label="loading spinner" />
+                    </div>
                 )}
             </section>
             <div className="flex overflow-x-auto sm:justify-center">
