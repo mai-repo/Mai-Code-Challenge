@@ -61,5 +61,65 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json(), {"data": mock_response, "pagination": pagination})
 
+    def test_getFavorite_400(self):
+        response = self.client.get("/getFavorite")
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.get_json(), {"error": "Missing field information"})
+
+    @patch("favorite.connectDatabase")
+    def test_getFavorite_500(self, mock_connectDatabase):
+        mock_connectDatabase.side_effect = Exception ("Database failed.")
+        response = self.client.get("/getFavorite?user_id=12")
+        self.assertEqual(response.status_code, 500)
+        self.assertEqual(response.get_json(), {"error": "Database failed."})
+
+    @patch("favorite.connectDatabase")
+    def test_updateFavorite_200(self, mock_connectDatabase):
+        mock_connection = MagicMock()
+        mock_cursor = MagicMock()
+
+        mock_connectDatabase.return_value = mock_connection
+        mock_connection.cursor.return_value = mock_cursor
+
+        response = self.client.put('/updateFavorite', json={"user_id": 12, "favorite_id": 20, "name": "arr"})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json(), {"message": "Favorite updated successfully."})
+
+    def test_updateFavorite_400(self):
+        response = self.client.put('/updateFavorite', json={"user_id": 12, "favorite_id": 20})
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.get_json(), {"error": "Missing field information."})
+
+    @patch("favorite.connectDatabase")
+    def test_updateFavorite_500(self, mock_connectDatabase):
+        mock_connectDatabase.side_effect = Exception("Database failed.")
+
+        response = self.client.put('/updateFavorite', json={"user_id": 12, "favorite_id": 20, "name": "arr"})
+        self.assertEqual(response.status_code, 500)
+        self.assertEqual(response.get_json(), {"error": "Database failed."})
+
+    @patch("favorite.connectDatabase")
+    def test_deleteFavorite_200(self, mock_connectDatabase):
+        mock_connection = MagicMock()
+        mock_cursor = MagicMock()
+
+        mock_connectDatabase.return_value = mock_connection
+        mock_connection.cursor.return_value = mock_cursor
+
+        response = self.client.delete('/deleteFavorite', json={"user_id": 12, "favorite_id": 20})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json(), {"message": "Favorite deleted successfully."})
+
+    def test_deleteFavorite_400(self):
+        response = self.client.delete("/deleteFavorite", json={"user_id": 12})
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.get_json(), {"error": "Missing field information."})
+
+    @patch("favorite.connectDatabase")
+    def test_deleteFavorite_500(self, mock_connectDatabase):
+        mock_connectDatabase.side_effect = Exception("Database failed.")
+        response = self.client.delete("/deleteFavorite", json={"user_id": 12, "favorite_id": 20})
+        self.assertEqual(response.status_code, 500)
+        self.assertEqual(response.get_json(), {"error": "Database failed."})
 if __name__ == "__main__":
     unittest.main()
