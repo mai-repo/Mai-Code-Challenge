@@ -76,12 +76,15 @@ export default function UserLogin(){
             }
     }
     return (
+
         <form className="flex flex-col justify-center item-center gap-4 mx-auto w-full max-w-md" aria-label="sign-in form" onSubmit ={ (e) => {e.preventDefault(); getSignIn(email, password);}}>
         <section className="mt-20 p-20 border-2 border-black bg-white">
+
         { loading && (
             <div className="text-center">
                 <Spinner aria-label="loading spinner"/>
             </div>) }
+            <h1 className="text-2xl"> Login </h1>
             <div className="mb-4">
                 <Label htmlFor="email"> Email </Label>
                 <TextInput  id="email" type="email"  addon="@" placeholder="name@gmail.com" value={email} onChange={ (e) => setEmail(e.target.value)} required shadow/>
@@ -90,15 +93,17 @@ export default function UserLogin(){
                 <Label htmlFor="password" >Password</Label>
                 <TextInput id= "password" type="password" placeholder="user-password" value={password} onChange={ (e) => setPassword(e.target.value)} required shadow/>
             </div>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between mb-4">
                 <Link href="/authentication/forgot">Forgot password</Link>
                 <Link href="/authentication/register">Register</Link>
             </div>
             <div className="mb-4">
+                <Label htmlFor="reCAPTCHA" id="reCAPTCHA-label">ReCAPTCHA</Label>
                 <ReCAPTCHA
                     sitekey="6LfMmiMrAAAAAHaEHu61G8bGw44bhmuxboKJnRI0"
                     onChange={notARobot}
                     className="mb-4"
+                    aria-labelledby="reCAPTCHA-label"
                 />
             </div>
             <div className="mb-4">

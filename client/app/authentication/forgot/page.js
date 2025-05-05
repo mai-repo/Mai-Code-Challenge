@@ -43,12 +43,13 @@ export default function UpdatePassword() {
             {!success ? (
                 <form className="min-h-screen flex items-center justify-center" onSubmit={(e)=> {e.preventDefault(); UpdatePassword(email)}}>
                     <section className="m-50 p-20 border-2 border-black bg-white">
+                        <h1 className="text-2xl mb-2">Reset Password</h1>
                         <div className="mb-4">
                             <Label htmlFor="email">Email</Label>
                             <TextInput id="email" type="email" addon="@" placeholder="email@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                         </div>
                         <div className="flex flex-row justify-between">
-                            <Button type="submit">Submit</Button>
+                            <Button className="bg-pink-800" type="submit">Submit</Button>
                             <Button type="button" href="/authentication/login">Cancel</Button>
                         </div>
                     </section>

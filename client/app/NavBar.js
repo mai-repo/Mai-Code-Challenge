@@ -11,10 +11,10 @@ export default function NavBar(){
     const pathname = usePathname();
 
     useEffect(() => {
-        if (id && uid && pathname==='/') {
+        if (id && uid && pathname ==='/') {
         router.replace("/challenge")
         }
-    }, [id, uid, router, pathname],);
+    }, [id, uid, router, pathname]);
 
     if (!id) {
     return (
