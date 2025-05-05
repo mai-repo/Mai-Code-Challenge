@@ -8,16 +8,17 @@ import Link from "next/link";
 import { useAppContext } from "./context"
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useRouter } from 'next/navigation'
+import { Spinner } from "flowbite-react";
 
 export default function UserLogin(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { setId,  setUid} = useAppContext()
+    const { setId,  setUid, setLoading, loading} = useAppContext()
     const [token, setToken] = useState(null);
     const router = useRouter()
 
     async function getSignIn (email, password) {
-
+        setLoading(true)
         try {
             const userCredentials = await signInWithEmailAndPassword(auth, email, password)
             const user = userCredentials.user
@@ -45,10 +46,13 @@ export default function UserLogin(){
             router.push("/challenge")
         } catch (error) {
             console.error(error.message)
+        } finally {
+            setLoading(false)
         }
     }
 
     async function notARobot(token){
+        setLoading(true)
         try {
             setToken(token)
             const response = await fetch('https://backendcodechallenge.vercel.app/verifyUser', {
@@ -67,11 +71,17 @@ export default function UserLogin(){
                 } catch (error) {
                 console.error("reCAPTCHA verification failed:", error);
                 alert("An error occurred during reCAPTCHA verification.");
+            }   finally {
+                setLoading (false)
             }
     }
     return (
         <form className="flex flex-col justify-center item-center gap-4 mx-auto w-full max-w-md" aria-label="sign-in form" onSubmit ={ (e) => {e.preventDefault(); getSignIn(email, password);}}>
         <section className="mt-20 p-20 border-2 border-black bg-white">
+        { loading && (
+            <div className="text-center">
+                <Spinner aria-label="loading spinner"/>
+            </div>) }
             <div className="mb-4">
                 <Label htmlFor="email"> Email </Label>
                 <TextInput  id="email" type="email"  addon="@" placeholder="name@gmail.com" value={email} onChange={ (e) => setEmail(e.target.value)} required shadow/>
