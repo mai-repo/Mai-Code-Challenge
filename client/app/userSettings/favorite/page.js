@@ -95,13 +95,13 @@ export default function favoritePage(){
             <h1 className="text-4xl mb-10"> Favorite Problems</h1>
             {Array.isArray(data) && data.length > 0 ? (
                 data.map((item, key) => (
-                    <div key={key} className="flex flex-col md:flex-row justify-between items-center mb-4 gap-2">
+                    <div key={key} className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                         <a href="#" onClick={(e) => { e.preventDefault(); getChallenge(item);}} className="text-xl text-blue-600 hover:underline">
                             <h2>{item[2]}</h2>
                         </a>
-                        <p> {item[4]}</p>
+                        <p className="flex justify-center items-center"> {new Date(item[4]).toLocaleString()}</p>
                         {editingId === item[0] ? (
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-end gap-2 justify-end">
                                 <TextInput
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
@@ -111,7 +111,7 @@ export default function favoritePage(){
                                 <Button color="gray" onClick={() => {setEditingId(null); setName(''); }}> Cancel </Button>
                             </div>
                         ) : (
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-end gap-2 justify-end">
                                 <Button onClick={() => { setEditingId(item[0]); setName(item[2]);}}> Edit </Button>
                                 <Button color="failure" onClick={() => deleteFavorite(id, item[0])}> Delete </Button>
                             </div>
