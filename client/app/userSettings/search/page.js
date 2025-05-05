@@ -51,7 +51,7 @@ export default function Search (){
                         <a href="#" onClick={(e) => { e.preventDefault(); getChallenge(item); }} className="text-xl text-blue-600 hover:underline">
                             <h2>{item[2]}</h2>
                         </a>
-                        <p>{item[4]}</p>
+                        <p>{new Date(item[4]).toLocaleString()}</p>
                     </div>
                     ))
                 ) : (
