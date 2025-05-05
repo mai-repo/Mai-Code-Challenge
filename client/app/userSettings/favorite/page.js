@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button, TextInput, Pagination, Spinner} from "flowbite-react";
 
 export default function favoritePage(){
-    const {id, data, setData, setChallenge} = useAppContext()
+    const {id, data, setData, setChallenge, setLoading} = useAppContext()
     const [editingId, setEditingId] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
@@ -37,6 +37,7 @@ export default function favoritePage(){
 
     function getChallenge(item) {
         setChallenge(item[3]);
+        setLoading(false)
         router.push("/challenge");
     }
 
