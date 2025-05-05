@@ -121,24 +121,24 @@ export default function UserSettings(){
             <div className="flex flex-col justify-center items-center w-full">
                 <section className="w-full">
                     <div className="text-lg mb-2">Change Name and Password</div>
-                    <Label className="text-md">Name</Label>
+                    <Label htmlFor="name" className="text-md">Name</Label>
                     <div className="flex justify-between gap-5">
-                        <TextInput id="name" type="name" placeholder="Bad Bunny" value={username} onChange={(e) => setUsername(e.target.value)} className="mb-3 w-3/4"required icon={HiPencil}/>
-                        <Button onClick={() => updateUsername(id, username)} className="w-1/6 text-lg bg-teal-500">Reset</Button>
+                        <TextInput id="name" type="name" placeholder="Bad Bunny" value={username} onChange={(e) => setUsername(e.target.value)} className="mb-3 w-3/4" required icon={HiPencil}/>
+                        <Button onClick={() => updateUsername(id, username)} className="w-1/6 text-lg bg-teal-700">Reset</Button>
                     </div>
                 </section>
                 <section className="w-full">
-                    <Label className="text-md">Generate a new Password Link: Enter your email</Label>
+                    <Label htmlFor="input" className="text-md">Generate a new Password Link: Enter your email</Label>
                     <div className="flex justify-between mb-8 gap-5">
                         <TextInput id="input" type="input" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-3/4" icon={HiMail} required/>
-                        <Button onClick={() => ResetPassword(email)} className="w-1/6 text-lg  bg-teal-500">Reset</Button>
+                        <Button onClick={() => ResetPassword(email)} className="w-1/6 text-lg  bg-teal-700">Reset</Button>
                     </div>
                     <section className="w-full mb-8">
                         <div className="text-lg mb-2"> Change Email </div>
-                        <Label className="text-md"> New Email</Label>
-                        <TextInput id="email" type="email" placeholder="name@gmail.com" value={newEmail} onChange={(e)=> setNewEmail(e.target.value)} className="mb-3 w-3/4" icon={HiMail}required/>
-                        <Label className="text-md">Password</Label>
-                        <TextInput id="password" type="password" placeholder="Enter Password" value={currentPassword} onChange={(e)=> setCurrentPassword(e.target.value)} className="mb-3 w-3/4" icon={HiOutlineKey}required/>
+                        <Label htmlFor="email" className="text-md"> New Email</Label>
+                        <TextInput id="email" type="email" placeholder="name@gmail.com" value={newEmail} onChange={(e)=> setNewEmail(e.target.value)} className="mb-3 w-3/4" icon={HiMail} required/>
+                        <Label htmlFor="password" className="text-md">Password</Label>
+                        <TextInput id="password" type="password" placeholder="Enter Password" value={currentPassword} onChange={(e)=> setCurrentPassword(e.target.value)} className="mb-3 w-3/4" icon={HiOutlineKey} required/>
                         <Button onClick={() => changeEmail(newEmail, currentPassword)} className="w-1/4 text-lg bg-green-600">Reset</Button>
                     </section>
                     <div className="text-lg"> Delete Account  </div>
