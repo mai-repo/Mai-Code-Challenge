@@ -7,7 +7,7 @@ import { Button, TextInput, Pagination, Spinner} from "flowbite-react";
 import { deleteRejected } from "utils/validation";
 
 export default function RejectedProblem() {
-    const { id, data, setData, setChallenge, setStatus, setProblem, setName, name} = useAppContext();
+    const { id, data, setData, setChallenge, setStatus, setProblem, setName, name, setLoading} = useAppContext();
     const [editingId, setEditingId] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
@@ -46,6 +46,7 @@ export default function RejectedProblem() {
         setStatus(false);
         setProblem(item[0]);
         setName(item[2]);
+        setLoading(false);
         router.push("/challenge");
     }
 
