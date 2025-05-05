@@ -72,6 +72,16 @@ Submit Solution – Submits the code and runs it against predefined test cases.
     source .venv/bin/activate
     ```
 
+## Install Required Python Packages
+
+Before running the application or tests, ensure you install the required Python dependencies. Run the following command in the `server` directory:
+
+```bash
+pip install -r requirements.txt
+```
+
+This will install all the necessary packages listed in the `requirements.txt` file.
+
 ## Setup API Keys
 1. Create a `.env` file in the server folder
 2. Add your API Keys:
@@ -195,7 +205,7 @@ gunicorn -w 4 -b 0.0.0.0:5432 main:app
    http://localhost:3000
    ```
 
-## Testing Instructions 
+## Testing Instructions
 
 ### Running Tests
 1. Navigate to the `server` directory:
