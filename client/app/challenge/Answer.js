@@ -58,7 +58,8 @@ export default function Answer() {
 
     const addQuestion = async () => {
 
-        if (!id || !data.Name || !data.Challenge || !result){
+        console.log(id, data.Name, data.Challenge, result)
+        if (!id || !data.Name || !data.Challenge || result === null || result === undefined){
             alert("Please click evaluate before saving.")
         }
         try {
@@ -78,7 +79,7 @@ export default function Answer() {
             setData(response)
             alert(response.message)
         } catch (error) {
-            alert(error)
+            alert(error.message)
         }
     }
     return (
