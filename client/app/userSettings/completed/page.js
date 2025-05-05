@@ -6,7 +6,7 @@ import { Button, TextInput, Pagination, Spinner} from "flowbite-react";
 import { deleteCompleted } from "utils/validation";
 
 export default function Completed(){
-    const { id, data, setData, setChallenge, setStatus, name, setName, setProblem} = useAppContext();
+    const { id, data, setData, setChallenge, setStatus, name, setName, setProblem, setLoading} = useAppContext();
     const [editingId, setEditingId] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
@@ -43,6 +43,7 @@ export default function Completed(){
         setStatus(true);
         setProblem(item[0])
         setName(item[2]);
+        setLoading(false)
 
         router.push("/challenge");
     }
@@ -72,13 +73,6 @@ export default function Completed(){
         }
     }
 
-    function getChallenge(item) {
-        setChallenge(item[3]);
-        setStatus(true);
-        setProblem(item[0]);
-        setName(item[2]);
-        router.push("/challenge");
-    }
     return (
         <div>
             <section className="bg-white mx-15 p-10 border-2 border-black">
