@@ -2,15 +2,12 @@
 import CodeButton from "./CodeButton"
 import { useAppContext } from "components/context";
 import { addFavorites } from "utils/validation";
-import { useState } from "react";
 import { Spinner } from "flowbite-react";
 
 export default function Terminal(){
-        const { id, data, setData, challenge, setChallenge} = useAppContext()
-        const [loading, setLoading] = useState('')
+        const { id, data, setData, challenge, setChallenge, loading, setLoading} = useAppContext()
         async function GPTGenerate() {
             setLoading(true);
-
             try {
                 const response = await fetch(
                     "https://backendcodechallenge.vercel.app/generateChallenge"
@@ -59,14 +56,13 @@ export default function Terminal(){
 
     return (
         <main className="flex flex-col h-full w-full">
+
             <div className="bg-black p-15 h-full mb-4 text-white overflow-auto">
-            {loading ? (
+            { loading && (
                 <div className="text-center">
-                    <Spinner aria-label="loading spinner" />
-                </div>
-            ):(
-                <>
-                {data.question_id && (
+                    <Spinner aria-label="loading spinner"/>
+                </div>) }
+            {data.question_id && (
                 <div className="w-full flex justify-end">
                     <img className="w-1/20" src="/favorite.png" alt="heart emoji" onClick={() => addFavorites(id, data.question_id)}/>
                 </div>
@@ -90,8 +86,6 @@ export default function Terminal(){
                 ):
                 (<p className="text-white text-2xl italic">Click "Generate Again to Load a Problem"</p>)
                 }
-                </>
-            )}
             </div>
             <CodeButton
                 GPTGenerate={GPTGenerate}
