@@ -3,17 +3,18 @@ import { Navbar, NavbarBrand, NavbarCollapse, NavbarToggle, NavbarLink, Avatar} 
 import Link from "next/link"
 import { useAppContext } from "./context"
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function NavBar(){
     const {id, uid, clearAll} = useAppContext()
     const router = useRouter();
+    const pathname = usePathname();
 
     useEffect(() => {
-        if (id && uid && pathname==='/') {
+        if (id && uid && pathname ==='/') {
         router.replace("/challenge")
         }
-    }, [id, uid, router, pathname],);
+    }, [id, uid, router, pathname]);
 
     if (!id) {
     return (

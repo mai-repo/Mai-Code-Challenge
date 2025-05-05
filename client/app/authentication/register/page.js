@@ -39,6 +39,7 @@ export default function Register(){
     return (
         <form className="min-h-screen flex items-center justify-center" onSubmit={ (e) => { e.preventDefault(); createUser(email, name, password);}}>
             <section className="m-50 p-20 border-2 border-black bg-white">
+                <h1 className="text-2xl"> Registeration </h1>
                 <div className="mb-4">
                     <Label htmlFor="name">Name</Label>
                     <TextInput id="name" type="text" placeholder="e.g. Bad Bunny" onChange={(e) => setName(e.target.value)} value ={name}required/>
@@ -52,7 +53,7 @@ export default function Register(){
                     <TextInput id="password" type="password" placeholder="********" onChange={(e) => setPassword(e.target.value)} value={password} required/>
                 </div>
                 <Button className="mb-4" type="submit">Register</Button>
-                <Link href="/"> Got an account? Sign-in! </Link>
+                <Link href="/" aria-label="Go to sign-in page"> Got an account? Sign-in! </Link>
             </section>
         </form>
     )
