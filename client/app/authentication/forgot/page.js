@@ -1,13 +1,16 @@
 "use client"
 import { useState } from "react"
 import { Label, TextInput, Button } from "flowbite-react"
+import { useAppContext } from "components/context"
 
 export default function UpdatePassword() {
     const [email, setEmail] = useState('')
     const [link, setLink] = useState('')
     const [success, setSuccess] = useState(false)
+    const { setLoading, loading } = useAppContext()
 
     async function UpdatePassword(email) {
+        setLoading(true)
         try {
             const response = await fetch ('https://backendcodechallenge.vercel.app/updatePassword',
             {
@@ -26,11 +29,17 @@ export default function UpdatePassword() {
             setSuccess(true)
         } catch (error) {
             alert(error)
+        } finally {
+            setLoading(false)
         }
     }
 
     return (
         <main>
+            {loading && (
+                <div className="text-center">
+                    <Spinner aria-label="loading spinner"/>
+                </div>) }
             {!success ? (
                 <form className="min-h-screen flex items-center justify-center" onSubmit={(e)=> {e.preventDefault(); UpdatePassword(email)}}>
                     <section className="m-50 p-20 border-2 border-black bg-white">
