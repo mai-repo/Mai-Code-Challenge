@@ -33,4 +33,5 @@ test('user should be able to input email and password', async ({ page }) => {
   await page.locator('button[type="submit"]').click();
 
   await expect(page).toHaveURL(/challenge/);
+
 });
