@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function NavBar(){
-    const {id, uid, clearAll} = useAppContext()
+    const {id, uid, clearAll, setLoading, setChallenge, setValue, setEditorValue, setStatus} = useAppContext()
     const router = useRouter();
     const pathname = usePathname();
 
@@ -37,8 +37,8 @@ export default function NavBar(){
                 <NavbarToggle/>
                 <NavbarCollapse>
                     <section className="flex items-center gap-5">
-                        <NavbarLink href="/challenge" className="text-lg">Code Challenge</NavbarLink>
-                        <NavbarLink  href="/userSettings" className="text-lg">Settings</NavbarLink>
+                        <NavbarLink href="/challenge" onClick={(e) => { setChallenge(''); setStatus(false); setLoading(false); setValue(''); setEditorValue('')}} className="text-lg">Code Challenge</NavbarLink>
+                        <NavbarLink href="/userSettings" className="text-lg">Settings</NavbarLink>
                         <NavbarLink  href="/" onClick={(e) => {clearAll();}} className="text-lg"> Sign out </NavbarLink>
                         <Avatar alt="User Profile Image" img="/Profile.png"/>
                     </section>

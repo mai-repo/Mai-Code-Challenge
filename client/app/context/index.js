@@ -10,7 +10,8 @@ export function AppWrapper({ children }) {
     const [value, setValue] = useState('');
     const [challenge, setChallenge] = useState('');
     const [error, setError] = useState('');
-    const [loading, setLoading] =useState('');
+    const [loading, setLoading] =useState(false);
+    const [editorLoading, setEditorLoading] = useState(false)
     const [search, setSearch] =useState('');
     const [status, setStatus] = useState('');
     const [name, setName] = useState('');
@@ -24,7 +25,6 @@ export function AppWrapper({ children }) {
         const storedValue = localStorage.getItem('value');
         const storedChallenge = localStorage.getItem('challenge')
         const storedError = localStorage.getItem('error');
-        const storedLoading = localStorage.getItem('loading');
         const storedSearch  = localStorage.getItem('search');
         const storedStatus = localStorage.getItem('status');
         const storedName = localStorage.getItem('name');
@@ -35,7 +35,6 @@ export function AppWrapper({ children }) {
         if (storedData) setData(storedData);
         if (storedChallenge) setChallenge(storedChallenge);
         if (storedError) setError(storedError);
-        if (storedLoading) setLoading(storedLoading);
         if (storedSearch) setSearch(storedSearch);
         if (storedStatus) setStatus(storedStatus);
         if (storedName) setName(storedName);
@@ -50,12 +49,11 @@ export function AppWrapper({ children }) {
         localStorage.setItem('value', value);
         localStorage.setItem('challenge', challenge);
         localStorage.setItem('error', error);
-        localStorage.setItem('loading', loading);
         localStorage.setItem('search', search);
         localStorage.setItem('status', status);
         localStorage.setItem('name', name);
         localStorage.setItem('problem', problem);
-    }, [id, uid, data, value, challenge, error, loading, search, status, name, problem]);
+    }, [id, uid, data, value, challenge, error, search, status, name, problem]);
 
     const clearAll = () => {
         setId(null);
@@ -64,7 +62,8 @@ export function AppWrapper({ children }) {
         setValue('');
         setChallenge('');
         setError('');
-        setLoading('');
+        setLoading(false);
+        setEditorLoading(false);
         setSearch('');
         setStatus('');
         setName('');
@@ -76,7 +75,6 @@ export function AppWrapper({ children }) {
         localStorage.removeItem('value');
         localStorage.removeItem('challenge');
         localStorage.removeItem('error');
-        localStorage.removeItem('loading');
         localStorage.removeItem('search');
         localStorage.removeItem('status');
         localStorage.removeItem('name');
@@ -84,7 +82,7 @@ export function AppWrapper({ children }) {
     };
 
     return (
-        <AppContext.Provider value={{ id, setId, uid, setUid, data, setData, value, setValue, challenge, setChallenge, error, setError, loading, setLoading, search, setSearch, status, setStatus, name, setName, problem, setProblem, clearAll}}>
+        <AppContext.Provider value={{ id, setId, uid, setUid, data, setData, value, setValue, challenge, setChallenge, error, setError, loading, setLoading, search, setSearch, status, setStatus, name, setName, problem, setProblem,editorLoading, setEditorLoading, clearAll}}>
             {children}
         </AppContext.Provider>
     );

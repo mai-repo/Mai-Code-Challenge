@@ -5,10 +5,11 @@ import { Button } from 'flowbite-react'
 import { deleteCompleted, updateQuestion, deleteRejected } from 'utils/validation'
 
 export default function Answer() {
-    const { id, data, value, setValue, setData, challenge, status, name, problem, setStatus} = useAppContext()
-    const [result, setResult] = useState([])
+    const { id, data, value, setValue, setData, challenge, status, name, problem, setStatus, setEditorLoading} = useAppContext()
+    const [result, setResult] = useState(null)
 
     const getAnswer = async() => {
+        setEditorLoading(true)
         try {
             const response = await fetch ("https://backendcodechallenge.vercel.app/evaluateAnswer", {
                 method: "POST",
@@ -29,12 +30,19 @@ export default function Answer() {
             setValue(evaluation)
             console.log(resultData)
             alert("Evaluation successful.")
+            await navigator.clipboard.writeText(value);
         } catch (error) {
             alert(error+ " Try again!")
+        } finally {
+            setEditorLoading(false)
         }
     }
 
     const saveQuestion = async () => {
+        if ((status === true && result === true) || (status === false && result === false)) {
+            console.log("No action taken. Status and result match.");
+            return;
+        }
         if (status === false && result === true) {
             updateQuestion(id, problem, name, result);
             deleteRejected(id, problem);
@@ -43,13 +51,17 @@ export default function Answer() {
             updateQuestion(id, problem, name, result);
             deleteCompleted(id, problem);
             setStatus('')
-        } else if (!status) {
+        } else {
             addQuestion(id, data.Name, data.Challenge, result);
-        }else {
         }
     };
 
     const addQuestion = async () => {
+
+        console.log(id, data.Name, data.Challenge, result)
+        if (!id || !data.Name || !data.Challenge || result === null || result === undefined){
+            alert("Please click evaluate before saving.")
+        }
         try {
             const res = await fetch ("https://backendcodechallenge.vercel.app/addProblem", {
                 method: "POST",
@@ -67,7 +79,7 @@ export default function Answer() {
             setData(response)
             alert(response.message)
         } catch (error) {
-            alert(error)
+            alert(error.message)
         }
     }
     return (

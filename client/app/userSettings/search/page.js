@@ -3,7 +3,7 @@
 import { useAppContext } from "components/context";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Pagination } from "flowbite-react"
+import { Pagination, Spinner } from "flowbite-react"
 import SearchBar from "./SearchBar";
 
 export default function Search (){
@@ -51,7 +51,7 @@ export default function Search (){
                         <a href="#" onClick={(e) => { e.preventDefault(); getChallenge(item); }} className="text-xl text-blue-600 hover:underline">
                             <h2>{item[2]}</h2>
                         </a>
-                        <p>{item[4]}</p>
+                        <p>{new Date(item[4]).toLocaleString()}</p>
                     </div>
                     ))
                 ) : (
@@ -64,7 +64,9 @@ export default function Search (){
                         </div>
                     ))
                 ) : (
-                <p className="text-gray-500 text-lg mt-4">No results found.</p>
+                    <div className="text-center">
+                        <Spinner aria-label="loading spinner" />
+                    </div>
                 ))}
                 <SearchBar/>
             </section>

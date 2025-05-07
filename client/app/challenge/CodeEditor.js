@@ -3,10 +3,11 @@ import { Editor } from "@monaco-editor/react"
 import { Button } from "flowbite-react"
 import { useAppContext } from "components/context"
 import Answer from "./Answer"
-
+import { Spinner } from 'flowbite-react';
+import { useState } from "react"
 
 export default function CodeEditor() {
-    const {value, setValue} = useAppContext()
+    const {value, setValue, editorLoading} = useAppContext()
 
     const evaluate = async () => {
 
@@ -37,20 +38,27 @@ export default function CodeEditor() {
 
     return (
         <section>
-            <Editor
-                className="monaco-editor"
-                height="60vh"
-                theme="vs-dark"
-                defaultLanguage="javascript"
-                defaultValue={`// Welcome to Mai Code Challenge\n// Once you submit your answer, it will disappear but automatically be copied so you can save it elsewhere.`}
-                value={value}
-                onChange={(newValue) => setValue(newValue)}
-                options={{
-                    fontSize: 20,
-                    padding: { top: 15 },
-                    wordWrap: "on"
-                }}
-            />
+            <div className="relative">
+            { editorLoading &&
+            (
+                <div className="absolute inset-0 z-10 flex items-center justify-center bg-black bg-opacity-40">
+                    <Spinner aria-label="loading spinner" />
+                </div>
+            )}
+                <Editor
+                    height="60vh"
+                    theme="vs-dark"
+                    defaultLanguage="javascript"
+                    defaultValue={`// Welcome to Mai Code Challenge\n// Once you submit your answer, it will disappear but automatically be copied so you can save it elsewhere.`}
+                    value={value}
+                    onChange={(newValue) => setValue(newValue)}
+                    options={{
+                        fontSize: 20,
+                        padding: { top: 15 },
+                        wordWrap: "on"
+                    }}
+                />
+            </div>
             <div className="flex flex-row justify-between mt-4">
                 <Button className="text-lg" onClick={evaluate}>Run Code</Button>
                 <Answer/>

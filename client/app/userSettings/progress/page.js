@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, Legend, Tooltip, Label} from 'recharts';
 import { useAppContext } from 'components/context';
+import { Spinner } from "flowbite-react";
 
 export default function ProgressChart() {
     const { id, setData } = useAppContext();
@@ -87,7 +88,9 @@ export default function ProgressChart() {
                             <Tooltip />
                         </PieChart>
                     ) : (
-                        <p className="text-center text-gray-500">Loading progress data...</p>
+                        <div className="text-center">
+                            <Spinner aria-label="loading spinner" />
+                        </div>
                     )}
                 </div>
             </section>
