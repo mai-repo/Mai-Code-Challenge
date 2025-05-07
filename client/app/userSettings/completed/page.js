@@ -3,7 +3,7 @@ import { useAppContext } from "components/context";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button, TextInput, Pagination, Spinner} from "flowbite-react";
-import { deleteCompleted } from "utils/validation";
+import { deleteCompleted, formatDate } from "utils/validation";
 
 export default function Completed(){
     const { id, data, setData, setChallenge, setStatus, name, setName, setProblem, setLoading} = useAppContext();
@@ -83,7 +83,7 @@ export default function Completed(){
                             <a href="#" onClick={(e) => { e.preventDefault(); getChallenge(item);}} className="text-xl text-blue-600 hover:underline">
                                 <h2>{item[2]}</h2>
                             </a>
-                            <p className="flex justify-center items-center"> {new Date(item[4]).toLocaleString()}</p>
+                            <p className="flex justify-center items-center"> {formatDate(item[4])}</p>
                             {editingId === item[0] ? (
                                 <div className="flex items-end gap-2 justify-end">
                                     <TextInput
