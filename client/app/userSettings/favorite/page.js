@@ -2,10 +2,10 @@
 import { useAppContext } from "components/context"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation";
-import { Button, TextInput, Pagination} from "flowbite-react";
+import { Button, TextInput, Pagination, Spinner} from "flowbite-react";
 
 export default function favoritePage(){
-    const {id, data, setData, setChallenge} = useAppContext()
+    const {id, data, setData, setChallenge, setLoading} = useAppContext()
     const [editingId, setEditingId] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
@@ -37,6 +37,7 @@ export default function favoritePage(){
 
     function getChallenge(item) {
         setChallenge(item[3]);
+        setLoading(false)
         router.push("/challenge");
     }
 
@@ -94,13 +95,13 @@ export default function favoritePage(){
             <h1 className="text-4xl mb-10"> Favorite Problems</h1>
             {Array.isArray(data) && data.length > 0 ? (
                 data.map((item, key) => (
-                    <div key={key} className="flex flex-col md:flex-row justify-between items-center mb-4 gap-2">
+                    <div key={key} className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                         <a href="#" onClick={(e) => { e.preventDefault(); getChallenge(item);}} className="text-xl text-blue-600 hover:underline">
                             <h2>{item[2]}</h2>
                         </a>
-                        <p> {item[4]}</p>
+                        <p className="flex justify-center items-center"> {new Date(item[4]).toLocaleString()}</p>
                         {editingId === item[0] ? (
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-end gap-2 justify-end">
                                 <TextInput
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
@@ -110,7 +111,7 @@ export default function favoritePage(){
                                 <Button color="gray" onClick={() => {setEditingId(null); setName(''); }}> Cancel </Button>
                             </div>
                         ) : (
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-end gap-2 justify-end">
                                 <Button onClick={() => { setEditingId(item[0]); setName(item[2]);}}> Edit </Button>
                                 <Button color="failure" onClick={() => deleteFavorite(id, item[0])}> Delete </Button>
                             </div>
@@ -118,7 +119,9 @@ export default function favoritePage(){
                     </div>
                 ))
                 ) : (
-                    <p className="text-gray-500">Loading progress data...</p>
+                    <div className="text-center">
+                        <Spinner aria-label="loading spinner" />
+                    </div>
                 )}
         </section>
         <div className="flex overflow-x-auto sm:justify-center">
