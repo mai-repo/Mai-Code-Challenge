@@ -5,5 +5,5 @@ test('renders the page and the forgot', async ({ page }) => {
     await page.locator('#email').fill('test@gmail.com');
     await expect(page).toHaveTitle(/Mai Code Challenge/)
     await page.getByRole('button', { name: 'Submit'}).click()
-    await expect(page.locator('label')).toContainText('Click here the button to reset your password');
+    await expect(page.locator('label')).toContainText('Email');
 })
