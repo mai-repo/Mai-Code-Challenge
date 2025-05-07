@@ -38,6 +38,7 @@ export default function CodeEditor() {
     return (
         <section>
             <Editor
+                className="monaco-editor"
                 height="60vh"
                 theme="vs-dark"
                 defaultLanguage="javascript"
