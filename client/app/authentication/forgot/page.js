@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Label, TextInput, Button } from "flowbite-react"
+import { Label, TextInput, Button, Spinner } from "flowbite-react"
 import { useAppContext } from "components/context"
 
 export default function UpdatePassword() {
