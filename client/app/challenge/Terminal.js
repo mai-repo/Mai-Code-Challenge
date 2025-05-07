@@ -90,7 +90,7 @@ export default function Terminal(){
             </div>
             <CodeButton
                 GPTGenerate={GPTGenerate}
-                Clear={() => setData("")}
+                Clear={() => {  setData({}); setChallenge(''); }}
                 Scrape={Scrape}
             />
         </main>
