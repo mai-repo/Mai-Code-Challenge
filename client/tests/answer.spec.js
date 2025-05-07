@@ -12,8 +12,6 @@ test('render the answer component', async({page}) => {
 })
 
 test('mock the a user evaluation', async({page}) => {
-    const challenge = "mock challenge"
-    const value = "mock value"
 
     await page.goto('https://mai-code-challenge.vercel.app/challenge');
     await page.addInitScript(() => {
