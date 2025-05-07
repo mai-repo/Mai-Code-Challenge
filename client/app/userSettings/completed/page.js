@@ -72,13 +72,6 @@ export default function Completed(){
         }
     }
 
-    function getChallenge(item) {
-        setChallenge(item[3]);
-        setStatus(true);
-        setProblem(item[0]);
-        setName(item[2]);
-        router.push("/challenge");
-    }
     return (
         <div>
             <section className="bg-white mx-15 p-10 border-2 border-black">
