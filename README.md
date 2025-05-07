@@ -20,6 +20,8 @@ Mai Code Challenge simplifies coding interview prep by providing distraction-fre
 ![Tailwind CSS](https://img.shields.io/badge/-Tailwind%20CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
 ![Flowbite](https://img.shields.io/badge/-Flowbite-38B2AC?style=flat&logo=flowbite&logoColor=white)
 ![Heroicons](https://img.shields.io/badge/-Heroicons-4A5568?style=flat&logo=heroicons&logoColor=white)
+![Monaco Editor](https://img.shields.io/badge/Monaco%20Editor-000000?style=flat&logo=monaco)
+
 
 #### Backend & APIs
 ![Python Flask](https://img.shields.io/badge/-Flask-000000?style=flat&logo=flask&logoColor=white)
@@ -35,7 +37,7 @@ Mai Code Challenge simplifies coding interview prep by providing distraction-fre
 ![Vercel](https://img.shields.io/badge/-Vercel-000000?style=flat&logo=vercel&logoColor=white)
 ![Beautiful Soup](https://img.shields.io/badge/-Beautiful%20Soup-4B8BBE?style=flat&logo=python&logoColor=white)
 ![Google reCAPTCHA](https://img.shields.io/badge/-Google%20reCAPTCHA-4285F4?style=flat&logo=google&logoColor=white)
-![Cypress](https://img.shields.io/badge/-Cypress-17202C?style=flat&logo=cypress&logoColor=white)
+![Playwright](https://img.shields.io/badge/-Playwright-2EAD33?style=flat&logo=playwright&logoColor=white)
 
 ## Features
 
@@ -212,12 +214,14 @@ gunicorn -w 4 -b 0.0.0.0:5432 main:app
    ```bash
    cd server
    ```
-
 2. Run all tests using the following command:
    ```bash
    python -m unittest discover -s tests
    ```
-
+3. Navigate to the `client` directory:
+   ```bash
+   npm run test
+   ```
 ### Generating a Coverage Report
 1. Install the `coverage` package if not already installed:
    ```bash

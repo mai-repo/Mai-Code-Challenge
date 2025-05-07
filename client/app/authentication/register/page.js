@@ -39,7 +39,7 @@ export default function Register(){
     return (
         <form className="min-h-screen flex items-center justify-center" onSubmit={ (e) => { e.preventDefault(); createUser(email, name, password);}}>
             <section className="m-50 p-20 border-2 border-black bg-white">
-                <h1 className="text-2xl"> Registeration </h1>
+                <h1 className="text-2xl"> Registration </h1>
                 <div className="mb-4">
                     <Label htmlFor="name">Name</Label>
                     <TextInput id="name" type="text" placeholder="e.g. Bad Bunny" onChange={(e) => setName(e.target.value)} value ={name}required/>

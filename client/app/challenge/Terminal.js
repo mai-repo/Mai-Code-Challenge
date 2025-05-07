@@ -20,6 +20,7 @@ export default function Terminal(){
                 console.log(result)
                 setChallenge(result.Challenge)
                 console.log(challenge)
+                alert("Successfully generate Challenge")
             } catch (error) {
                 alert("Error fetching data:", error);
             }finally {
