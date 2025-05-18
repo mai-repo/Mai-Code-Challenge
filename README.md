@@ -249,7 +249,7 @@ gunicorn -w 4 -b 0.0.0.0:5432 main:app
    ```
 
 ### Reflections
-From the start, I knew this project would be complex and required careful planning. With over 20 APIs and 6 database tables on the backend, it was essential to keep my API calls organized and resilient, supported by thorough error handling. To stay on track, I deliberately overplanned—mapping out a detailed user flow, creating a day-by-day schedule, and using a Kanban board to monitor my progress.
+- From the start, I knew this project would be complex and required careful planning. With over 20 APIs and 6 database tables on the backend, it was essential to keep my API calls organized and resilient, supported by thorough error handling. To stay on track, I deliberately overplanned—mapping out a detailed user flow, creating a day-by-day schedule, and using a Kanban board to monitor my progress.
 
 After four intense weeks of late-night work—often until 3 a.m.—I built a user-friendly code challenge platform. It includes a fully functional IDE and two GPT-powered features: one that generates coding challenges and another that evaluates solutions. The platform also allows users to track their learning journey and manage coding problems with ease.
 
